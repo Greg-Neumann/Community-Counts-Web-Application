@@ -1,0 +1,77 @@
+﻿@model List<CommunityCounts.Models.Master.AttendanceMark>
+@{
+    ViewBag.Title = "Mark Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Mark Attendance (Timed Attendance)</h2>
+<h3>@ViewBag.ResourceName for @ViewBag.ActivityName</h3>
+<h4>@ViewBag.StartDate at @ViewBag.StartTime</h4>
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Important!</strong> All times must be entered using the 24 hours clock. This means 1pm is 13:00. If the did not attend, leave the signin/out times as zero - thanks!
+</div>
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count() > 0)
+{
+    <div class="alert alert-dismissible alert-danger">
+        @Html.ValidationSummary()
+    </div>
+} 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table-condensed">
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th align="left">
+                First Name
+            </th>
+            <th align="left">
+                Last Name
+            </th>
+            <th align="center">
+                Time In
+            </th>
+            <th align="center">
+                Time Out
+            </th>
+        </tr>
+        @{int counter = 0;}
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i.ToString("D3")&nbsp;
+                </td>
+                <td align="Left">
+                    <input name="[@counter].idAttendance" type="hidden" value="@item.idAttendance" />   @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idResource" type="hidden" value="@item.idResource" />       @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idServiceType" type="hidden" value="@item.idServiceType" /> @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idSchedules" type="hidden" value="@item.idSchedules" />     @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idClient" type="hidden" value="@item.idClient" />           @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].SessionDate" type="hidden" value="@item.SessionDate" />     @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].SessionTime" type="hidden" value="@item.SessionTime" />     @* Stack keys hidden to get them back in HTTPPOST*@
+                    @Html.DisplayFor(modelitem => item.FirstName)
+                </td>
+                <td align="left">
+                    @Html.DisplayFor(modelitem => item.LastName)
+                </td>
+                <td>
+                    @Html.TextBox("[" + counter + "].SignInTime", item.SignInTime, htmlAttributes: new { @class = "form-control", type = "time" })
+                </td>
+                <td>
+                    @Html.TextBox("[" + counter + "].SignOutTime", item.SignOutTime, htmlAttributes: new { @class = "form-control", type = "time" })
+                </td>
+            </tr>
+                    counter++;
+                    i++;
+        }
+    </table>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Save/Back" class="btn btn-warning btn-xs" />
+        </div>
+    </div>
+}

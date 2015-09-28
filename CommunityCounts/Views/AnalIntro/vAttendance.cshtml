@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Analysis - vAttendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - The Data Dictionary for vAttendance</h2>
+<p>
+    @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>There is one vAttendnace record for each session and for each Activity. As most Activities have multiple sessions (e..g. Weekly), there are multiple vBookings records for each Activity. This dataset contains no client related information. Use 
+        @Html.ActionLink("vClientAttendance", "vClientAttendance", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" }) for Client and Attendance information
+       </p>
+</div>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Data Dictionary item</th>
+        <th>Brief description</th>
+    </tr>
+    <tr>
+        <td>
+            ActivityName
+        </td>
+        <td>The Activity Name in which the Client is enrolled </td>
+    </tr>
+    <tr>
+        <td>AttendanceCount</td>
+        <td>A count of the number of attendances for this Client for this ActivityName. This field is only populated if the Attendance marking either tally-counting or normal present/absent marking is </td>
+    </tr>
+    <tr>
+        <td>AttendedTime</td>
+        <td>The duration, in seconds, of any attendance for this Client for the ActivityName. This field is only populated if the Attendance marking is in Hours and Minutes</td>
+    </tr>
+    <tr>
+        <td>FunderCode</td>
+        <td>The Funder Code assigned to the Activity to which this attendance relates.</td>
+    </tr>
+    <tr>
+        <td>idClient</td>
+        <td>The unique system identifier for this client. No other Client information is present in this data set</td>
+    </tr>
+    <tr>
+        <td>ResourceName</td>
+        <td>The resource used for / by the ActivityName. Typically this is a room name.</td>
+    </tr>
+    <tr>
+        <td>SessionDate</td>
+        <td>The Calendar date to which this Attendance (for this Client and ActivityName) applies.</td>
+    </tr>
+    <tr>
+        <td>SessionDateHalf</td>
+        <td>The half-year (service registration year, not calendar year) in which the client attended. Example '2015H2'</td>
+    </tr>
+    <tr>
+        <td>SessionDateQtr</td>
+        <td>The quarter-year (service registration year, not calendar year) in which the client attended. Example '2015Q2'</td>
+    </tr>
+    <tr>
+        <td>SessionDateYear</td>
+        <td>The year (service registration year, not calendar year) in which the client attended. Example '2015'</td>
+    </tr>
+    <tr>
+        <td>SessionDateYearMonth</td>
+        <td>The year and month (service registration year, not calendar year) in which the client attended. Example '2015-05May'</td>
+    </tr>
+    <tr>
+        <td>SessionTime</td>
+        <td>The time of day (24-hour clock) at which the session started to which the client attended.</td>
+    </tr>
+    <tr>
+        <td>SignInTime</td>
+        <td>The time of day (24-hour clock) when the client signed-in to the Session. This can be different to the <em>SessionTime</em> if the attendance type permits the recording of Hours &Aacute; minutes of attendance. Will be '00:00:00' otherwise.</td>
+    </tr>
+    <tr>
+        <td>SignOutTime</td>
+        <td>The time of day (24-hour clock) when the client signed-out of the Session. This can be different to the <em>SessionTime</em> if the attendance type permits the recording of Hours &Aacute; minutes of attendance. Will be '00:00:00' otherwise.</td>
+    </tr>
+    </table>

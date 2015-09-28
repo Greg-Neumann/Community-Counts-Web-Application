@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="col-md-12">
+    @if (@ViewBag.userHasNews)
+    {
+     
+            <table class=" alert alert-dismissible alert-danger">
+            <tr>
+                <td>
+                    <p style="font-size:x-large">You have news &nbsp;</p>
+                </td>
+                <td>
+                    @Html.ActionLink("Dismiss", "Dismiss", null, htmlAttributes: new { @class = "btn btn-success btn-sm" })&nbsp;
+                </td>
+                <td>
+                    @Html.ActionLink("Read More", "ReadMore", null, htmlAttributes: new { @class = "btn btn-info  btn-sm" }) &nbsp;
+                </td>
+            </tr>
+            </table>}
+            <img src="~/Content/Community Counts graphics artwork 1140px x 641px.jpg" />
+        </div>
+<div class="col-md-4">
+    <h2><a href="http://www.brunswickhlc.org.uk">BHLC</a></h2>
+    <p>Previously known as the Brunswick Healthy Living Centre, <a href="http://www.brunswickhlc.org.uk">BHLC</a> operates out of Shrubland street in Old Town, Leamington Spa.</p>
+</div>
+<div class="col-md-4">
+    <h2><a href="http://www.sydni.org/">The SYDNI Centre</a></h2>
+    <p><a href="http://www.sydni.org/">The SYDNI Centre</a> operates out of Cottage Square, Sydenham in Leamington Spa</p>
+</div>
+<div class="col-md-4">
+    <h2><a href="http://chainlillington.co.uk/crown.html">Crown routes</a></h2>
+    <p><a href="http://chainlillington.co.uk/crown.html">Crown routes</a> provides a number of services based in Lillington, Leamington Spa</p>
+</div>
+<div class="col-md-12">
+<h3 class="text-center">Community Counts tracks, and analyses, community member’s use of community services</h3>
+    <hr />
+    </div>

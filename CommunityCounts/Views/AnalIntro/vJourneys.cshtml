@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Analysis - vJourneys";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - The Data Dictionary for vJourneys</h2>
+<p>
+    @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>The is one vJourneys record for each Activity that has been Linked (Journeyed) into a follow-on Activity. </p>
+</div>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Data Dictionary item</th>
+        <th>Brief description</th>
+    </tr>
+    <tr>
+        <td>ActivityName(Child)</td>
+        <td>The Activity Name of the linked-to Activity (Child Activity) in which the Client is enrolled</td>
+    </tr>
+    <tr>
+        <td>ActivityName(Parent)</td>
+        <td>The Activity Name of the Linking Activity (Parent Activity) in which the Client is enrolled</td>
+    </tr>
+    <tr>
+        <td>AttendanceType(Parent)</td>
+        <td>The Type of attendance marking permitted for the Linking Activity (Parent Activity). Examples include 'Normal present/absent marking'.</td>
+    </tr>
+    <tr>
+        <td>ClientID</td>
+        <td>The unique system identifier for this client</td>
+    </tr>
+    <tr>
+        <td>EnrolledDate(Child)</td>
+        <td>The calendar date that the client enrolled in the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledDate(Parent)</td>
+        <td>The calendar date that the client enrolled in the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledHalf(Child)</td>
+        <td>The half-year (service registration year, not calendar year) that the client enrolled in the linked-to Activity (Child Activity)</td>
+    </tr>
+    
+    <tr>
+        <td>EnrolledHalf(Parent)</td>
+        <td>The half-year (service registration year, not calendar year) that the client enrolled in the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledQtr(Child)</td>
+        <td>The quarter-year (service registration year, not calendar year) that the client enrolled in the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledQtr(Parent)</td>
+        <td>The quarter-year (service registration year, not calendar year) that the client enrolled in the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledYear(Child)</td>
+        <td>The year (service registration year, not calendar year) that the client enrolled in the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledYear(Parent)</td>
+        <td>The year (service registration year, not calendar year) that the client enrolled in the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledYearMonth(Child)</td>
+        <td>The year and month (service registration year, not calendar year) that the client enrolled in the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>EnrolledYearMonth(Parent)</td>
+        <td>The year and month (service registration year, not calendar year) that the client enrolled in the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>FunderCode(Child)</td>
+        <td>The Funder Code assigned to the Activity of the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>FunderCode(Parent)</td>
+        <td>The Funder Code assigned to the Activity of the linking Activity (Parent Activity)</td>
+    </tr>
+    <tr>
+        <td>HasJourneys?(Parent)</td>
+        <td>'0' means that this Activity has not been Journeyed onto another Activity. '1' means that this Activity has been journeyed onto another Activity.</td>
+    </tr>
+    <tr>
+        <td>JourneyCatDesc(Parent)</td>
+        <td>The full descriptive text of any assigned journey category for this journey.</td>
+    </tr>
+    <tr>
+        <td>JourneyCatName(Parent)</td>
+        <td>The short name of any assigned journey category for this journey.</td>
+    </tr>
+    <tr>
+        <td>JourneyDepth(Parent)</td>
+        <td>The nesting level for the parent journey. A value of '1' means that this is the top level, a value of '2' means that this is one level lower - a child of another Activity.</td>
+    </tr>
+    <tr>
+        <td>UnEnrolledDate(Child)</td>
+        <td>If present (may be null), this is the calendar date that the client was un-enrolled from the linked-to Activity (Child Activity)</td>
+    </tr>
+    <tr>
+        <td>UnEnrolledDate(Parent)</td>
+        <td>If present (may be null), this is the calendar date that the client was un-enrolled from the linking Activity (Parent Activity)</td>
+    </tr>
+   
+</table>

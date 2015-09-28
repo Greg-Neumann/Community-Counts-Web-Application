@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "RoleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "RoleList";
+}
+
+<h2>Roles Listing </h2>
+
+<hr />
+<table class="table-striped text-primary">
+   <tr class="text-capitalize"><td width="200px">RoleName</td><td>Action</td></tr>
+<div>
+    @foreach (var role in Model)
+    {
+         <tr>
+            <td><strong> @role.Name     </strong></td>
+            <td><span onclick="return confirm('Are you sure to delete?')"><a href="/Account/RoleDelete?RoleName=@role.Name" class="delLink" style="color:red;">Delete</a></span>
+            @Html.ActionLink("Edit", "RoleEdit", new { roleName = @role.Name })</td>
+        </tr>
+    }
+</div></table>
+

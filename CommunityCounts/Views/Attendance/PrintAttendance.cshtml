@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1bookings>
+
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Print Attendance for Activity</h2>
+<h3>
+    @ViewBag.ActivityName
+</h3>
+@Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.C1resources.ResourceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.C1resources.ResourceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.ActionLink("Print", "PrintAList", new { id = item.idBookings }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+            @*    @Html.ActionLink("Print with Times", "PrintAListT", new { id = item.idBookings }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })      *@     
+            </td>
+        </tr>
+    }
+
+</table>

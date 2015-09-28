@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Help - Activities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Help</h2>
+<h3>Activities and Journeys</h3>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="text-info">
+    <p>
+        Activities are the 'things' that you do with your Clients. Without enrolling a Client into at least 1 Activity, the Client is not 'doing anything' within your Centre.
+        <br />Journeys are a path through at least one Activity. Journeys link Activities together as a <em>daisy-chain</em> and/or enable you to define an outcome category for the journey.
+    </p>
+    <dl>
+        <dt>Setup : Activities</dt>
+        <dd>This menu item, restricted to senior staff, enables you to create, modify and delete Activity definitions.</dd>
+        <dt>Setup : Journey Categories</dt>
+        <dd>This menu item, restricted to senior staff, enable you to create, modify and delete Journey Categories such as 'Employed Full Time'</dd>
+        <dt>Work With: Clients/Activities</dt>
+        <dd>This menu item enables the enrollment of Clients into the Activities defined in the previous step</dd>
+    </dl>
+</div>
+<p>
+</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Work With: Clients/Activities</h3>
+        Clients are enrolled into an Activity by pressing the <a href="#" class="btn btn-warning btn-xs">Activities</a> button next to a Client from the <em>Work With: Clients</em> menu option.
+        When you do so, you will be presented with a screen of this type. Note, the exact screen layout depends upon the Client and the enrolled Activities; this is an example.
+        <br /><br />
+        <img src="~/Content/Images/CC Anotated Activies screen showing Actions.png" title="Actions available on the standard Activities List screen" />
+        <ul>
+            <li>Press the <a href="#" class="btn btn-primary btn-xs">Back to List</a> button to cancel out of this screen and go back to the previous screen.</li>
+            <br />
+            <li>Press the <a href="#" class="btn btn-warning btn-xs">Enroll</a> button to enroll this client into an Activity that has <strong>no connection</strong> to another Activity.</li>
+            <br />
+            <li>
+                Press the <a href="#" class="btn btn-warning btn-xs">Edit</a> button to make changes to this enrollment such as
+                <ul>
+                    <li>
+                        The enrollment date<br />Note, an enrollment date can not be changed if it clashes with existing information in the system such as:
+                        <ul>
+                            <li>Attendance records. The enrollment date must be not later than the date of the first session that this client has been marked as attending</li>
+                            <li>An Unenrollment date. The enrollment date must be earlier than any unenrollment date</li>
+                            <li>
+                                Journeyed Activities. If this Activity <strong>has</strong> dependent Activities, then the enrollment date must be not later than the start date of the earliest starting dependent Activity.
+                                Similiarly, If this Activity <strong>is</strong> dependent upon an earlier Activity, then the enrollment date must be later than the start date of the Activity that this is dependent upon.
+                                <div class="alert alert-dismissible alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Note!</strong> An Activity <strong>has</strong> <em>dependents</em> if there are Activities that <em>follow it</em> - that are linked <em>from</em> that Activity.<br />Similiary, an Activity <strong>is</strong> <em>dependent</em> upon earlier Activities if other Activities link (Journey) <em>to</em> this Activity.
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><img src="~/Content/Images/CC Journey Category as unset.png" width="300" align="right" title="The Edit Activity screen showing an 'unset' Journey Category" />The unenrollment date. Use this to stop Clients appearing in Attendance List <em>after</em> this date. You cannot set it to <em>before</em> the enrollment date</li>
+                    <li>
+                        An (optional) journey Category. Consider this a way of categorising <em>where</em> the Client went after the Activity was completed. An Optional field - if you want to 'unset' this value, select the <em>- Optional Select -</em> value if you want to remove a Journey Category.
+                        <br />You <strong>do NOT</strong> have to <strong>unenroll</strong> a Client from an Activity to mark a Journey Category; In addition, only one such category can be assigned.
+                    </li>
+                </ul>
+            </li>
+            <br />
+            <li>
+                Press the <a href="#" class="btn btn-warning btn-xs">Journey</a> button to link this Activity to another (new) one.
+                <ul>
+                    <li>
+                        You can only link to Activities that are not already used by this Client:
+                        <ul>
+                            <li>Either are not listed on the Activities screen for this Client</li>
+                            <li>Or <strong>are</strong> listed but have been <strong>unenrolled</strong></li>
+                        </ul>
+                    </li>
+                    <li>The enrollment date of this new dependent Activity must be <strong>on, or after</strong> the enrollment date of the originating Activity</li>
+                </ul>
+            </li>
+            <br />
+            <li>
+                Press the <a href="#" class="btn btn-danger btn-xs">Delete</a> button to delete this enrollment from this Client. This action is not normally available to normal Staff. Use the 'Unenroll' date feature (above) to close an enrollment.
+                <ul>
+                    <li>You cannot delete an Activity if there are Attendance records present for a session from this Activity</li>
+                    <li>You cannot delete an Activity if it has dependent Activities. If you need to delete such an Activity, you must delete all dependent Activities, in order, first</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Understanding the Activities Screen and Journeys</h3>
+        <p>
+            As Activities can be 'stand-alone' (with no relationship between them) or linked together (as part of a Journey), it can be a little confusing to understand how this is displayed within Community Counts.
+        </p>
+        <img title="An exemple of a series of Activities that are both 'stand-alone' and linked together as part of a Journey" src="~/Content/Images/CC Anotated Activies screen showing Journey daisy-chaining.png" />
+        <br />In this example:
+        <ul>
+            <li>
+                The Client is enrolled in all 6 Activities:
+                <ol>
+                    <li>Digital- Coffee shop internet cafe</li>
+                    <li>Employment Club - Brunswick</li>
+                    <li>Digital - IT Basics</li>
+                    <li>Digital - Tablet course</li>
+                    <li>Volunteer Programme</li>
+                    <li>Meditation/Relaxation</li>
+                </ol>
+            </li>
+            <li>
+                3 of them have no relation to each other and were just Activities that the Client chose independent of any other Activity
+                <ol>
+                    <li>Digital- Coffee shop internet cafe</li>
+                    <li>Employment Club - Brunswick</li>
+                    <li>Meditation/Relaxation</li>
+                </ol>
+            </li>
+            <li>
+                3 of them have relationships with 1 other Activity (The Employment Club):
+                <ol>
+                    <li><em>Employment Club - Brunswick</em> was started on the 1st April of that year</li>
+                    <li><em>Digital - IT Basics</em> was started on 1st May as a <strong>direct result</strong> of attending the Employment Club. The Employment Club Activity gave rise to the need to enroll on this IT Basics Course.</li>
+                    <li><em>Digital - Tablet course</em> also started, over three weeks later on the 25th, as a <strong>direct result</strong> of attending the IT Basics course.</li>
+                    <li><em>Volunteer Programme</em> was <strong>also</strong> started on 1st May as a <strong>direct result</strong> of attending the Employment Club. Note that there is no relationship between this Volunteering Activity and any of the Digital Courses.</li>
+                </ol>
+            </li>
+        </ul>
+        <p>
+            There is no system limit to the amount of 'daisy-chaining'. You can Journey Activities on-and-on as desired. However, it may be difficult to display this amount of indentation on the computer screen, for such Activities, when more than about a dozen Activities are daisy-chained.
+        </p>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Setup: Activities</h3>
+        <p>
+            <img title="Activities are defined in Setup: Activities" width="800" align="right" src="~/Content/Images/CC Setup Activities List Screen.png" />
+            Activities are completely definable by your Manager; there is no restriction, within Community Counts, as to how many Activities can be defined to Community Counts.
+            You define these Activities to the system by using the <em>Setup: Activities</em> menu item.
+        <p>
+            You can edit any Activity, or it's detailed description, at any time - even when Clients are already enrolled to it. Finally, you can delete any Activity unless, of course, it is already assigned so.
+        </p>
+        <p>The <em>Biometric Tracked</em> marker is to signify whether this Activity is related to Biometric tracking - such as Weight Management Activities. A discussion as to the choice of <em>Attendance recording type</em> is @Html.ActionLink("here", "home", "helpAttendance", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })</p>
+        </div>
+    </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Setup: Journey Categories</h3>
+                <p>
+                    <img title="Journey Categories are defined in Setup: Journey Categories" width="800" align="right" src="~/Content/Images/CC Setup Journey Categories.png" />Journey Categories are completely definable by your Manager; there is no restriction, within Community Counts, as to what categories can be assigned to any Activity as a form of completion marker.
+                    You define these Journey Categories to the system by using the <em>Setup: Journey Categories</em> menu item.
+                <p>
+                    You can edit any Journey Category, or it's detailed description, at any time - even when it is already assigned to a Client's Activity. Finally, you can delete any Journey Category unless, of course, it is already assigned so.
+                </p>
+
+            </div>
+        </div>
+

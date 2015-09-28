@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>System Change Log</h2>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+@if (@ViewBag.userHasNews)
+{
+
+    <table class=" alert alert-dismissible alert-danger">
+        <tr>
+            <td>
+                <p style="font-size:x-large">You have news &nbsp;</p>
+            </td>
+            <td>
+                @Html.ActionLink("Dismiss", "Dismiss", null, htmlAttributes: new { @class = "btn btn-success btn-sm" })&nbsp;
+            </td>
+            <td>
+                @Html.ActionLink("Read More", "ReadMore", null, htmlAttributes: new { @class = "btn btn-info  btn-sm" }) &nbsp;
+            </td>
+        </tr>
+    </table>}
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Version
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    <tr>
+        <td>15th September 2015</td>
+        <td>1.26</td>
+        <td>Completion of the Analysis Engine <em>Data Dictionary</em></td>
+    </tr>
+    <tr>
+        <td>17th June 2015</td>
+        <td>1.25</td>
+        <td><ol>
+            <li>Permit searching for Client by Client ID AND partial name</li>
+            <li>Bug Fix relating to the identification of prior attendance when Journeying (Thanks, Hilary)</li>
+            </ol></td>
+    </tr>
+    <tr>
+        <td>10th June 2015</td>
+        <td>1.24</td>
+        <td>Bug fix to ensure that re-display of an edited Activities enrollment screen does not result in a crash</td>
+    </tr>
+    <tr>
+        <td>10th June 2015</td>
+        <td>1.23</td>
+        <td>Various changes - largely behind the scenes:
+        <ol>
+            <li>
+                Provide support for automatic management of calendar dates used by both the online Community Counts system and the forth-comming Analysis Engine
+            </li>
+            <li>
+                Provide support for Crown Routes - pending approval
+            </li>
+            <li>
+                Show Journey Category on Activities for a Client list screen
+            </li>
+        </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>26th May 2015</td>
+        <td>1.22</td>
+        <td>
+            Introduction of <strong>Journeys</strong>.<br />Journeys permit Activities to be link together in a <em>daisy-chaining</em> fashion and/or to categorise the <em>outcome</em> of such an Activity. Examples of the latter include such service-needs as marking Clients who have
+            used Employment-related Activities as now 'Employed Full Time'. 
+            
+            <ol>
+                <li>Created new option <a href="#" class="btn btn-warning btn-xs">Journey</a> on the Client's Activities list screen to permit <em>Journeys</em> to be created</li>
+                <li>Created new <strong>optional</strong> drop-down box on Client's Activities <a href="#" class="btn btn-warning btn-xs">Edit</a> screen to permit (optional) assignment of a <em>Journey Category</em></li>
+                <li>Created new menu option <em>Setup: Journey Categories</em> to permit authorised users to maintain the <em>Journey Category</em> list</li>
+                <li>Depreciated Employment Tracking by removing <em>Setup: Employment Destinations</em> and <em>Work With: Employment</em> - use Journeys instead</li>
+                <li>Help Text exists to explain this process @Html.ActionLink("Read More", "home", "helpActivity", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            10th May 2015
+        </td>
+        <td>
+            1.21
+        </td>
+        <td>
+            Anonymous survey processing.
+            <ol>
+                <li>Setup:Surveys now allows a survey to accept anonymous responses</li>
+                <li>Work with:Surveys now allows entry of responses for anonymous respondents</li>
+                <li>Extensive help text exists to help you understand, manage, and plan surveying @Html.ActionLink("More", "home", "helpSurvey", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" }) </li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            2nd May 2015
+        </td>
+        <td>
+            1.20
+        </td>
+
+        <td>
+            Attendance marking. The following forms of attendance marking are now provided:
+            <ol>
+                <li>Present/Absent. Clients who are enrolled upon an activity for a specific session (date and time) are marked as present or absent.</li>
+                <li>Tally Counting. Clients may make multiple attendances for a given session.</li>
+                <li>Timed. Clients sign-in and sign-out and the attendance records the hours (and minutes) of their attendance.</li>
+            </ol>
+            <div class="alert alert-dismissible alert-info">        
+                <strong>Heads up!</strong> This means that the system decides whether the 'Print with Times' option applies to each attendance sheet based upon how each Activity is declared for Attendance marking. You cannot chose it yourself.
+            </div>
+            You are advised to read the help text in this area @Html.ActionLink("More", "home", "helpAttendance", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+            <br />
+            Corrections and enhancement:
+            <ol>
+                <li>Attendance lists are sorted by firstname and <strong>then by</strong> lastname to ensure that surnames are alphabetical</li>
+                <li>The Day of the session date is now printed on Attendance sheets and time is displayed as HH:MM format (Seconds are omitted)</li>
+                <li>It is now possible to print, or mark, attendance sheets <strong>on the day</strong> of the session concerned</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            21st April 2015
+        </td>
+        <td>
+            1.12
+        </td>
+        <td>
+            Performance Improvements. All client sensitive data (Names, Addresses, Email address, Phone Numbers) are now scrambled in a quicker way to massively improve the responsivity of the system. Thanks for all your patience on this unforeseen issue!
+        </td>
+    </tr>
+    <tr>
+        <td>
+            17th April 2015
+        </td>
+        <td>
+            1.11
+        </td>
+        <td>
+            A 'Pick and Mix' release of several quickies ahead of bigger changes planned for the next release
+            <ul>
+                <li>Ensure that printed attendance lists only include clients who, on the <strong>session date</strong> chosen are fully enrolled. This means that the Activity enrollment start date must be earler, or equal, to the session date <strong>AND</strong> the Activity ended date is later than the session date. Put another way
+                the 'window in time' for which the client is enrolled for this activity must span - be either side - of the session date.</li>
+                <li>Ensure that printed attendance lists are sorted by ascending first name order (instead of last name)</li>
+                <li>Ensure that the term 'Preferred Language', as used on the paper forms, is correctly reflected on all online forms</li>
+                <li>Add (missing) option of entering a free-format text answer if the 'Preferred Language' is not one of the proscribed list values</li>
+                <li>Ensure that all drop-down boxes related to adding/editing Clients are in alphabetic order to ease selection</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            15th April 2015
+        </td>
+        <td>
+            1.10
+        </td>
+        <td>
+            This release is primarily to support scheduling.
+            <ul>
+                <li>
+                    Completion of all functionality to support scheduling. The Generation process now correctly produces the attendance sessions for printing. Please note that attendance marking is still to be released.
+                </li>
+                <li>
+                    Small revisions to the displaying of Clients on the list screen to stop the action buttons being squished.
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            13th April 2015
+        </td>
+        <td>
+            1.01
+        </td>
+        <td>
+            <ul>
+                <li>
+                    Introduction of "You have news" system @Html.ActionLink("More", "N01P01A", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+</li>
+                <li>
+                    Addition of "Enrollment start date on any activity"&nbsp; @Html.ActionLink("More", "N01P01B", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+                </li>
+                <li>
+                    Changes to the way that the list of Clients is presented to ensure that similar surnames are grouped together without affecting performance.
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            31st March 2015
+        </td>
+        <td>
+            1.00
+        </td>
+        <td>
+            First production release
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1qccomtype>
+
+@{
+    ViewBag.Title = "List Comment Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Quick Comment Categories</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idQCComType }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.idQCComType }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

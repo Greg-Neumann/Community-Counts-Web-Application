@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1resourcetypes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Resource Types</h2>
+
+<p>
+   @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ResourceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResourceTypeDesc)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceTypeDesc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ResourceType }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ResourceType }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

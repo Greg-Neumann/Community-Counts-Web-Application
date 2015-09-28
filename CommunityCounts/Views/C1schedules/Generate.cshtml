@@ -1,0 +1,114 @@
+﻿@model List<CommunityCounts.Models.Master.generateList>
+
+@{
+    ViewBag.Title = "Schedule Generation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Schedule Generation (@ViewBag.numSchedulesToGenerate)</h2>
+
+<p>
+    @if (@ViewBag.attendanceMsg) { 
+        @:<span class="label label-warning">You have errors to correct!</span><br />
+        @:Schedules marked in red will not generate as they are already marked attendances which cannot be undone.
+    }
+    else { 
+    @:<span class="label label-danger">Warning! Pressing the generate button (at the end) will generate the sessions for all the schedules listed below. They will be generated until the end of the current service year.</span>
+    }
+</p>
+    @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+<table class="table table-striped table-hover">
+    <tr>
+        <th width="120px">
+            Resource Name
+        </th>
+        <th width="40px">
+           Activity
+        </th>
+        <th width="40px">
+            Type
+        </th>
+        <th>
+            Rep?
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Start
+        </th>
+        <th>
+            End
+        </th>
+        <th width="60px">
+            Last Attendance Date
+        </th>
+        <th width="60px">
+            Last Attendance Time
+        </th>
+
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (!item.valid) { @:<tr class="danger">
+        }
+        if (item.valid) { @:<tr>
+        }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Resource)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceType)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleType)
+            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Repetition)
+    </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.lastAttendedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.lastAttendedTime)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.idSchedules }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.idSchedules }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+            </td>
+        @:</tr>
+    }
+</table>
+@if ((@ViewBag.numSchedulesToGenerate > 0) && !@ViewBag.attendanceMsg)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color col-md-2">
+            <input type="submit" value="Generate" class="btn btn-danger btn-xs" />
+        </div>
+    }
+}

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.refdata>
+
+@{
+    ViewBag.Title = "System Control Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>System Control Data</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null,htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.refdatatype.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefCodeValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefCodeDesc)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.refdatatype.TypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefCodeValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefCodeDesc)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.idRefData },htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+                @Html.ActionLink("Edit", "Edit", new { id=item.idRefData },htmlAttributes: new { @class = "btn btn-warning  btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id=item.idRefData },htmlAttributes: new { @class = "btn btn-danger  btn-xs" })
+            </td>
+        </tr>
+}
+
+</table>

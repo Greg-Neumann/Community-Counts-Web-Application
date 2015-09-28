@@ -1,0 +1,35 @@
+﻿@model CommunityCounts.Models.Master.C1qcsrtype
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>C1qcsrtype</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QCSRType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QCSRType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Signpost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Signpost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idQCSRType }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

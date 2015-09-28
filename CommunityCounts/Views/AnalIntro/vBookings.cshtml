@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Analysis - vBookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - The Data Dictionary for vBookings</h2>
+<p>
+    @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>There is one vBookings record for each session and for each Activity. As most Activities have multiple sessions (e..g. Weekly), there are multiple vBookings records for each Activity</p>
+</div>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Data Dictionary item</th>
+        <th>Brief description</th>
+    </tr>
+    <tr>
+        <td>
+            ActivityName
+        </td>
+        <td>The Activity Name in which the Client is enrolled </td>
+    </tr>
+    <tr>
+        <td>AttendanceType</td>
+        <td>The <em>type</em> of attendance marking performed for this bookings (from the <em>schedule data</em>). Examples include 'Normal Present/Absent marking'</td>
+    </tr>
+    <tr>
+        <td>BookingsEndDate</td>
+        <td>The Calendar date of the end of the bookings for this one session. Often this is the same as the <strong>BookingsStartDate</strong> for Activities that are held on a single day. However, it can be later if the Activity spans more than one day.</td>
+    </tr>
+    <tr>
+        <td>BookingsEndTime</td>
+        <td>The time of day (24-hour format) at which this session ends.</td>
+    </tr>
+    <tr>
+        <td>BookingsStartDate</td>
+        <td>The Calendar date of the start of the bookings for this one session.</td>
+    </tr>
+    <tr>
+        <td>BookingsStartDateHalf</td>
+        <td>The half-year (service registration year, not calendar year) of the start of the bookings for this one session.Example '2015H2'</td>
+    </tr>
+    <tr>
+        <td>BookingsStartDateQtr</td>
+        <td>The quarter-year (service registration year, not calendar year) of the start of the bookings for this one session.  Example '2015Q3'</td>
+    </tr>
+    <tr>
+        <td>BookingsStartDateYear</td>
+        <td>The year (service registration year, not calendar year) of the start of the bookings for this one session.  Example '2015'</td>
+    </tr>
+    <tr>
+        <td>BookingsStartDateYearMonth</td>
+        <td>The year and month(service registration year, not calendar year) of the start of the bookings for this one session.  Example '2015-04Apr'</td>
+    </tr>
+    <tr>
+        <td>BookingsStartTime</td>
+        <td>The time of day (24-hour format) at which this session starts.</td>
+    </tr>
+    <tr>
+        <td>FunderCode</td>
+        <td>The Funder Code assigned to the Activity to which this attendance relates.</td>
+    </tr>
+    <tr>
+        <td>LocationCode</td>
+        <td>The Geographical location code. Used with the <strong>ResourceName</strong> to uniquely identify a resource (e.g. room) used for an Activity</td>
+    </tr>
+    <tr>
+        <td>LocationName</td>
+        <td>The Geographical location full name. Used with the <strong>ResourceName</strong> to uniquely identify a resource (e.g. room) used for an Activity</td>
+    </tr>
+    <tr>
+        <td>RegistrationYear</td>
+        <td>The <strong>service year</strong> for which this client is registered. This is not (necessarily) the same as the calendar year if, for example, a service year starts on 1st April. In this case 1st April 2015 has the same registration year as 1st February 2016 (and would be '2015')</td>
+    </tr>
+    <tr>
+        <td>RegYearEndDate</td>
+        <td>The <strong>last</strong> date of the service year which contains this <strong>BookingsStartDate</strong></td>
+    </tr>
+    <tr>
+        <td>RegYearStartDate</td>
+        <td>The <strong>first</strong> date of the service year which contains this <strong>BookingsStartDate</strong></td>
+    </tr>
+    <tr>
+        <td>ResourceName</td>
+        <td>The resource used for / by the ActivityName. Typically this is a room name.</td>
+    </tr>
+    <tr>
+        <td>ResourceType</td>
+        <td>Usually 'Room': This indicates the type of resource used by the Activity for this booking.</td>
+    </tr>
+    <tr>
+        <td>ScheduleCreatedDateTime</td>
+        <td>The date and time when the <strong>schedule</strong> that produces this <strong>booking</strong> was made.</td>
+    </tr>
+    <tr>
+        <td>ScheduleCreatedUser</td>
+        <td>The username who created the <strong>schedule</strong> that produces this <strong>booking</strong> was made.</td>
+    </tr>
+    <tr>
+        <td>ScheduleEndDate</td>
+        <td>The Calendar date of the end of the session on it's <strong>first</strong> occurrence. Often this is the same as the <strong>ScheduleStartDate</strong> for Activities that are held on a single day. However, it can be later if the Activity spans more than one day.</td>
+    </tr>
+    <tr>
+        <td>ScheduleEndTime</td>
+        <td>The time of day (24-hour format) at which this session ends on any given date.</td>
+    </tr>
+    <tr>
+        <td>ScheduleGenerated</td>
+        <td>'0' means that this schedule has not been generated since changes were made to it. '1' means that this schedule has been generated.<br />If a schedule is generated, then all bookings exist until the end of the current service year. These can be 'seen' in <em>Work With : Attendance</em>. It is recommended that you select 'print' from within that function
+        as this always shows future bookings.</td>
+    </tr>
+    <tr>
+        <td>ScheduleNotes</td>
+        <td>Free-format text. The notes written alongside any schedule which can be used for any purposes such as 'Remove this one after the Christmas Party'</td>
+    </tr>
+    <tr>
+        <td>ScheduleRepetition</td>
+        <td>Only defined if <strong>ScheduleType</strong> is 'Every n weeks'. The value of 'n' - the repetition factor - is stored here. So a <strong>ScheduleRepetition</strong> of 4 means that the schedule will repeate every 4 weeks.</td>
+    </tr>
+    <tr>
+        <td>ScheduleStartDate</td>
+        <td>The Calendar date of the start of the session on it's <strong>first</strong> occurrence.</td>
+    </tr>
+    <tr>
+        <td>ScheduleStartTime</td>
+        <td>The time of day (24-hour format) at which this session starts on any given date.</td>
+    </tr>
+    <tr>
+        <td>ScheduleType</td>
+        <td>The Type of scheduling to be performed. <br />Values allowed are:
+        <ul>
+            <li>Annually<br />Generate the <strong>first</strong> occurrence of this schedule (as defined by <strong>ScheduleStartDate</strong>, <Strong>ScheduleStartTime</Strong>, <Strong>ScheduleEndDate</Strong> and <strong>ScheduleEndTime</strong>). As all schedules are generated until the end of the current service year,
+            <em>no more</em> occurrences are generated as the next such occurrence will be after the end of the current service year. In effect, this allows the setting up of single sessions.</li>
+            <li>Daily (Weekdays)<br />Generate the <strong>first</strong> occurrence of this schedule <em>and</em> every weekday (Monday-Friday) up to (and including) the last date in the current service year.</li>
+            <li>Daily (Weekends)<br />Generate the <strong>first</strong> occurrence of this schedule <em>and</em> every weekend day (Saturday-Sunday) up to (and including) the last date in the current service year.</li>
+            <li>Daily (All 7 days)<br />Generate the <strong>first</strong> occurrence of this schedule <em>and</em> every day (Monday-Sunday) up to (and including) the last date in the current service year.</li>
+            <li>Weekly<br />Generate the <strong>first</strong> occurrence of this schedule <em>and</em> on the same day in all subsequent weeks up to (and including) the last date in the current service year.</li>
+            <li>Every n Weeks<br />Generate the <strong>first</strong> occurrence of this schedule <em>and</em> on the same day of a week n weeks ahead of the last occurrence  up to (and including) the last date in the current service year.The value of 'n' is held in <strong>ScheduleRepetition</strong></li>
+            </ul></td>
+    </tr>
+    <tr>
+        <td>ScheduleUpdatedDateTime</td>
+        <td>The date and time that this schedule was last amended.</td>
+    </tr>
+    <tr>
+        <td>ScheduleUpdatedUser</td>
+        <td>The username of the Staff member who last amended this schedule<td>
+    </td>
+    <tr>
+        <td>UpdateDateTime</td>
+        <td>The date and time that this booking record was last updated. As only the system can update bookings, this is the date/time that the last successful generate was performed on this schedule.</td>
+    </tr>   
+    </table>
+

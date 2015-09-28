@@ -1,0 +1,305 @@
+﻿@{
+    ViewBag.Title = "Help - Surveys";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Help</h2>
+<h3>Using Surveys</h3>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="text-info">
+    <p>Surveys permit you to gather responses from your registered (named) Clients, or anonymously, aligned to any specific Activity defined to your system:</p>
+    <dl>
+        <dt>Setup : Surveys</dt>
+        <dd>This menu item, restricted to senior staff, enables you to create, modify and delete Survey definitions. These definitions define which Activity the survey is to be collated against and additional stuff such as whether anonymous responses are to be accepted</dd>
+        <dt>Work With: Surveys</dt>
+        <dd>This menu item, restricted from normal staff, enables the entering of responses for the  Surveys defined in the previous step.</dd>
+    </dl>
+</div>
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Quick Start!</strong>There is a 'Quick Start', in how to make your own Survey, at the end of this article - but please read the rest sometime!
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Types of Surveys</h3>
+        <br />
+        All surveys must be aligned - collated against - an Activity. Within that requirement, there are a number of optional settings to control the <em>reach</em> of the survey when results are entered. <br />The screen shot below is from Setup: Surveys.
+        <div class="text-center">
+            <img src="~/Content/Images/CC Survey optional fields.png" title="This screen-shot is from Setup: Surveys - where surveys are defined." />
+        </div>
+        <dl>
+            <dt>
+                Active
+            </dt>
+            <dd>
+                A tick box. Tick it if you want the survey to be available for data entry. Untick it to hide it from data entry (this does not loose any results)<br />      <br />
+            </dd>
+            <dt>
+                Survey Name
+            </dt>
+            <dd>
+                A free-form text name for the survey. Anything you like can go in here but it is best to describe what the survey is about. For example "Survey" is pretty meaningless but "End of Activity satisfaction survey" is a bit more meaningful.
+                <br />      <br />
+            </dd>
+            <dt>
+                Activity
+            </dt>
+            <dd>
+                The Activity to which the survey is to apply.<br />   <br />
+            </dd>
+            <dt>
+                All Clients
+            </dt>
+            <dd>
+                A tick box. Normally, surveys only apply to clients who are enrolled into the associated Activity. Thus, you must normally enroll a client in an Activity if they are to have results processed. However, by ticking this box, <strong>all registered clients - everyone! -</strong> may have results entered.
+                <br />
+                This setting is often used for Annual Satisfaction Surveys where all clients may respond.<br />      <br />
+            </dd>
+            <dt>Allow Anonymous responses</dt>
+            <dd>
+                A tick box. Survey results are normally solicited, and entered against, registered clients. However, by ticking this box, the respondant need not be registered. (All responses are collated against a reserved 'client' called <em>Anonymous Persons</em>)
+
+                <br />  <br />
+            </dd>
+            <dt>
+                Number of Text Questions
+            </dt>
+            <dd>
+                <img src="~/Content/Images/CC Survey entering - textural.png" title="This screen-shot is from Work With: Surveys - where surveys are entered." width="200" align="right" />
+                How many free-format text questions do you wish to pose to your Clients? Any number from zero upwards. All textural response questions
+                are labelled alphabetically such that the first response is entered against label A, the second B etc. This sequence continues beyond 'Z' to 'AA' etc.
+                <br />
+                <br />
+            </dd>
+            <dt>
+                Number of Numeric Questions
+            </dt>
+            <dd>
+                <img src="~/Content/Images/CC Survey entering - numeric.png" title="This screen-shot is from Work With: Surveys - where surveys are entered." width="200" align="right" />
+                How many numeric - <em>scaled-response</em> -  questions do you wish to pose to your Clients? Any number from zero upwards. All numeric response questions
+                are labelled numerically such that the first response is entered against label A, the second 2 etc.
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Types of Survey responses</h3>
+        <p>
+            Surveys requires either numerical, or textural, or both types of, responses to a series of questions.
+            <dl>
+                <dt>
+                    Numerical
+                </dt>
+                <dd>
+                    Are always <strong>graded</strong> with response values being from 1 - 7. These are interpreted thus:
+                    <ol>
+                        <li>Strongly disagree</li>
+                        <li>Disagree</li>
+                        <li>Tend to disagree</li>
+                        <li>Neither agree nor disagree</li>
+                        <li>Tend to agree</li>
+                        <li>Agree</li>
+                        <li>Strongly agree</li>
+                    </ol>
+                </dd>
+                <dt>
+                    Textural
+                </dt>
+                <dd>
+                    Free-form text values. There are no restrictions what may be entered in these fields with the exception that the maximum character length is 255 characters.
+                </dd>
+            </dl>
+        </p>
+    </div>
+</div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Setup : Surveys</h3>
+                This section describes how Surveys are <strong>defined</strong> to the system. A Survey must be defined before any results can be entered against it and any analysis then performed.
+                <h4>
+                    Security and permissions
+                </h4>
+                You must be a member of either of these roles to be able to define Surveys:
+                <dl>
+                    <dt>
+                        systemAdmin
+                    </dt>
+                    <dd>
+                        The 'normal' special group that all Managers are member of. In any one centre, there is at least one member of Staff - the senior Manager - who has this security level.
+                        <br />      <br />
+                    </dd>
+                    <dt>
+                        canManageSurveys
+                    </dt>
+                    <dd>
+                        A special group that can be assigned to individual staff members that permits them to both <strong>define surveys</strong> (Setup: Surveys) and <strong>enter results</strong> (Work With: Surveys)
+                        <br />
+                    </dd>
+                </dl>
+                All other staff members will be blocked from either Setup: Surveys or Work With: Surveys.
+                <h4>
+                    New Surveys
+                </h4>
+                New Surveys are created by Selecting the <em>Setup</em> menu item and then selecting the <em>Surveys</em> sub-menu item. If you do not have permissions to do this act, you will be blocked from seeing the 'All Surveys (Management)' screen shown towards the top of this page.
+                You then press the <a href="#" class="btn btn-warning btn-xs">Create New</a> button at the top of the screen.
+                <p>
+                    You must select the Activity to which this survey is aligned from the drop-down list of options. This means that you must have created your Activity before attempting to align a Survey to it.
+                </p>
+                <p>
+                    You then complete all fields as described above (See "Types of Surveys" above for an explanation as to what each field means). The biggest issues to decide when considering a new Survey are:
+                    <ol>
+                        <li>
+                            What Activity is this Survey aligned to? <br />Often this is quite simple in that it clearly aligns to an Activity to which you have enrolled Clients.
+                            However, sometimes, when doing more general Surveying, it may be necessary to create an Activity specifically for this Survey. Examples
+                            would include such matters as an overall Client Satisfaction Survey (which may be targetted at the Centre's activities <em>as a whole</em> and not aligned to any particular Activity).
+                            Pre-Activity questionnaires, where surveys are required to help analyse needs in particular social-need areas (eg digital inclusion and web-purchasing training) are also example where an
+                            Activity may need setting-up before the Survey is defined.
+                        </li>
+                        <li>
+                            How many text questions should I be asking?
+                            <br />As few as possible is the general guideline here because textural responses cannot be <em>analysed</em>.
+                            However, most Surveys would typically have a 'Catch-all' question at the end of the 'Anything to add?' type.
+                        </li>
+                        <li>
+                            How should I structure my numeric questions? <br />
+                            Remember - all numeric responses are considered <em>scaled-responses</em> with values 1-7 and meanings interpreted as:
+                            <ol>
+                                <li>Strongly disagree</li>
+                                <li>Disagree</li>
+                                <li>Tend to disagree</li>
+                                <li>Neither agree nor disagree</li>
+                                <li>Tend to agree</li>
+                                <li>Agree</li>
+                                <li>Strongly agree</li>
+                            </ol>
+                            In general, <em>good statistical survey sampling</em> requires both <em>positive affirmation</em> and <em>negative affirmation</em> responses.
+                            <dl>
+                                <dt>
+                                    positive affirmation
+                                </dt>
+
+                                <dd>
+                                    Where a positive interpretation of the response means 'good'. For example, "I found the Centre easy to get into when I visited".
+                                    <br />
+                                    <br />
+                                </dd>
+
+                                <dt>
+                                    negative affirmation
+                                </dt>
+                                <dd>
+                                    Where a negative interpretation of the response means 'good'. For example, "It was hard to get into the Centre when I visited".
+                                </dd>
+                            </dl>
+                            Such responses enable you to consider <em>rejecting</em> survey responses where they have responded <em>contradictory</em> with, say, a '7' to both questions.
+                            <div class="alert alert-dismissible alert-info">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <h4>Note!</h4>
+                                If you wish to <em>reject</em> such contradictory responses from your analysis, you <strong>should reject them before entering in the system</strong>. There is
+                                no mechanism for rejecting entered responses within Community Counts; <strong>all</strong> responses are <em>analysed</em>.
+                            </div>
+                            However, such questions may be considered <em>tricky</em> by certain candidates. They might find them <em>challenging</em> to complete and thus not do so.
+                            You need to ask yourself whether <strong>lots</strong> of responses to a <strong>simple</strong> questionnaire is better than a <strong>reduced</strong> number of responses to a  <strong>more probing</strong> questionnaire will help you make the management decisions that you are trying to make.
+                            <a href="https://www.surveymonkey.com/mp/writing-survey-questions/" target="_blank">This is a useful article of writing Surveys in general.</a>
+                        </li>
+                    </ol>
+                </p>
+                <h4>Survey Unique ID</h4>
+                How do you <em>easily</em> associate survey results with a survey form?
+                <img src="~/Content/Images/CC Survey Entry List screen.png" width="600" title="This screen-shot is from Work With: Surveys - where surveys are entered." align="right" />
+                <img src="~/Content/Images/CC Survey Unique ID.png" title="This screen-shot is from Setup: Surveys - where surveys are defined." width="200" align="left" />
+                Over time, you will have a large number of Surveys. Descriptions and names are all very well but they can get confusing over time. The <em>unambiguous</em> way to associate survey results with the system is to use the <strong>Unique Survey ID</strong>. This
+                number is generated when you create a new survey and is visible on both the details screen of the Survey definition (Setup: Surveys: Details) or is listed on the Work With: Surveys List screen
+                <p>
+                    Your survey should clearly show this Unique Survey ID on all printed versions; By doing so, you easily enable the results to be correctly entered
+                    against the correct system Survey definition - looking to match names can be so error-prone!.
+                </p>
+
+            </div>
+        </div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Work With: Surveys</h3>
+        You enter results from Surveying by using the menu item Work With: Surveys. You will then be presented with a list of all currently active surveys like this:
+        <div class="text-center">
+            <img src="~/Content/Images/CC Survey Entry List screen.png" />
+        </div>
+        Entering starts by pressing the <a href="#" class="btn btn-warning btn-xs">Clients</a> button next to the survey that you wish to enter results for. You will then be presented with a screen similar to this..
+        <br /><br />
+        <img src="~/Content/Images/CC Anotated Survey Entering.png" />
+        <br /> <br />
+        For any client <strong>other</strong> than 'Anonymous Persons':
+        <ul>
+            <li>
+            The number of completed numeric/text responses is shown next to their name. You enter their numeric responses by pressing the <a href="#" class="btn btn-warning btn-xs">Numeric</a> button and their textural responses by pressing the <a href="#" class="btn btn-warning btn-xs">Text</a> button.
+            </li>
+            <li>
+                If any results have been entered for this client, then the <a href="#" class="btn btn-danger btn-xs">Delete</a> will delete <strong>both</strong> their numeric <strong>and</strong> their textural responses (after confirmation).
+            </li>
+            <li>
+                Attempting to enter any more results for this client, by pressing either the <a href="#" class="btn btn-warning btn-xs">Numeric</a> or the <a href="#" class="btn btn-warning btn-xs">Text</a> button will simply re-display the previously entered results. You can amend them if required.
+            </li>
+        </ul>
+        For the special entry entitled 'Anonymous Persons':
+        <ul>
+            <li>
+                The number of wholely completed numeric or textural results sets are shown in braces '{}'. This is because multiple result-sets may be entered for this special person.
+            </li>
+            <li>
+                If any results have been entered for this client, then the <a href="#" class="btn btn-danger btn-xs">Delete</a> will delete <strong>both</strong> the <strong>most recent</strong> numeric <strong>and</strong> textural responses (after confirmation). Repeated pressing of this button
+                will cause repeated deletion of previously entered results starting with the most recent entry.
+            </li>
+            <li>
+                Pressing the <a href="#" class="btn btn-warning btn-xs">Numeric</a> or <a href="#" class="btn btn-warning btn-xs">Text</a> buttons <strong>always</strong> enters <strong>another</strong> set of results for this Anonymous Person. This is how multiple results are entered for
+                such 'Anonymous Persons'.
+            </li>
+        </ul>
+    </div>
+</div>
+        
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="alert alert-dismissible alert-info">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Quick Start Tip!</strong> This is what you need to do to do the whole surveying thing...
+        </div>
+        <h3 id="paper-survey">Making your own Survey</h3>
+        To Community Counts, you simply define the <strong>number</strong> of numerical/textural responses that you wish to collate. It is up to you to produce the <em>paper-based form</em> that may present your survey data-collection; Community Counts does not produce the questionnaires; but it does provide a structured way of entering these responses and then analysing them.
+        <br />
+        Here are the necessary steps to designing, producing and entering a Survey:
+        <ol>
+            <li>
+                Decide on the Survey <em>design</em> that you need:
+                <ul>
+                    <li>
+                        Which Activity does it relate to?
+                    </li>
+                    <li>How many Questions?</li>
+                    <li>(See 'Setup : Surveys' above)</li>
+                </ul>
+            </li>
+            <li>
+                Make your own paper-based survey:
+                <ul>
+                    <li>
+                        You can place your questions in <strong>any order you wish</strong> - say with a text question first and 2 numeric questions next and a final text question.
+                        <ul>
+                            <li>Just remember that all text questions are labelled <strong>alphabetically</strong> and all numeric questions are labelled <strong>numerically</strong>.</li>
+                            <li>All your numeric questions must have responses of 1 - 7 available.</li>
+                            <li>Ensure that you include the <strong>Unique Survey ID</strong> on the form for identification</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Send out your questionnaires (Surveys). Get your responses
+            </li>
+            <li>Enter the results by using Work with: Surveys and entering them against the right <strong> Unique Survey ID</strong></li>
+        </ol>
+        <a href="https://www.surveymonkey.com/mp/writing-survey-questions/" target="_blank">This is a useful article of writing Surveys in general.</a>
+    </div>
+</div>

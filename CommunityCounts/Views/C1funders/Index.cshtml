@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1funders>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Funders</h2>
+
+<p>
+   @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FunderCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FunderName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunderCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunderName)
+            </td>
+            <td>
+                @*  @Html.ActionLink("Details", "Details", new { id = item.FunderCode }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" }) *@
+                @Html.ActionLink("Edit", "Edit", new { id = item.FunderCode }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.FunderCode }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

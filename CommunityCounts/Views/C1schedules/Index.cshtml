@@ -1,0 +1,85 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1schedules>
+
+@{
+    ViewBag.Title = "Schedule Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Schedule Management</h2>
+
+<p>
+   @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+    @if(@ViewBag.numSchedulesToGenerate>0)
+    {@Html.ActionLink("Generate Schedules", "Generate", null, htmlAttributes: new { @class = "btn btn-danger btn-xs" })}
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th width="120px">
+            @Html.DisplayNameFor(model => model.C1resources.ResourceName)
+        </th>
+        <th width="40px">
+            @Html.DisplayNameFor(model => model.C1servicetypes.ServiceType)
+        </th>
+        <th width="40px">
+            Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Generated)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.C1resources.ResourceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.C1servicetypes.ServiceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.refdata.RefCodeDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repetition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Generated)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.idSchedules }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.idSchedules }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.idSchedules }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

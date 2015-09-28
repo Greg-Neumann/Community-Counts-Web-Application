@@ -1,0 +1,138 @@
+﻿@model CommunityCounts.Models.Master.C1schedules
+
+@{
+    ViewBag.Title = "Delete Schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Schedule</h2>
+<div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Warning!</strong> Are you sure that you want to delete this Schedule?
+</div>
+<div>
+    <hr />
+    @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C1resources.ResourceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1resources.ResourceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C1servicetypes.ServiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1servicetypes.ServiceType)
+        </dd>
+
+        <dt>
+            Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.refdata.RefCodeDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Repetition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Generated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Generated)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color col-md-2">
+        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+    </div>
+    }
+</div>

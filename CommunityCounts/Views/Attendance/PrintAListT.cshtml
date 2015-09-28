@@ -1,0 +1,83 @@
+﻿@model  IEnumerable<CommunityCounts.Models.Master.C1client>
+@{
+    ViewBag.Title = "Print Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Attendance list</h2>
+<h3>@ViewBag.ActivityName - @ViewBag.StartDate at @ViewBag.StartTime</h3>
+<table>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+            <h4>Time</h4>
+        </th>
+        <th>
+            <h4>Time</h4>
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            <h4>First &nbsp;</h4>
+        </th>
+        <th>
+            <h4>Last </h4>
+        </th>
+        <th>
+            &nbsp&nbsp&nbsp
+        </th>
+        <th>
+            <h4>IN&nbsp;</h4>
+        </th>
+        <th>
+            <h4>OUT&nbsp;</h4>
+        </th>
+        <th>
+            <h4>@ViewBag.ListHeader</h4>
+        </th>
+    </tr>
+    @{int i = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                <h5> @i.ToString("D3")&nbsp;</h5>
+            </th>
+            <th>
+                <h5>@Html.DisplayFor(modelItem => item.FirstName)&nbsp;</h5>
+            </th>
+            <th>
+                <h5>@Html.DisplayFor(modelItem => item.LastName)</h5>
+            </th>
+            <th>
+                &nbsp&nbsp&nbsp
+            </th>
+            <th>
+                <h5>________&nbsp&nbsp&nbsp</h5>
+            </th>
+            <th>
+                <h5>________&nbsp&nbsp&nbsp</h5>
+            </th>
+            <th>
+                <h5>@ViewBag.ListFormat</h5>
+            </th>
+        </tr>
+        i++;
+    }
+</table>

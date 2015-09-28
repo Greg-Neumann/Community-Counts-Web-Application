@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.caldatList>
+
+@{
+    ViewBag.Title = "Calendar List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calendar Data Maintenance</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th width="40px">
+            Registration Year
+        </th>
+        <th width="60px">
+            First Date in Year
+        </th>
+        <th width="60px">
+            Last Date in Year
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegYearStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegYearEndDate)
+            </td>
+        </tr>
+    }
+</table>

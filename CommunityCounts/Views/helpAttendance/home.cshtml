@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Help - Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Help</h2>
+<h3>The Attendance process</h3>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home",null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="text-info">
+    <p>Within Community Counts, the Attendance process consists of two separate actions:</p>
+    <dl>
+        <dt>Attendance printing</dt>
+        <dd>Where a list of enrolled Clients for the required Activity are printed ahead, in time, of the actual session</dd>
+        <dt>Attendance marking</dt>
+        <dd>Where the completed attendance list is used to inform the marking of their attendance in the session after the session has taken place</dd>
+    </dl>
+</div>
+<h4>Methods of Attendance recording</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>
+            The format of attendance activity performed depends upon the type of attendance marking that has been assigned to the Activity concerned. Such assignment is performed in <strong>Setup</strong> and sub-menu option <strong>Activities</strong>
+            <dl>
+                <dt>Normal Present/Absent marking</dt>
+                <dd>
+                    This is the classic 'school register' type approach where a Client is <em>ticked</em> as being present.If there is no <em>tick</em>, then the Client is deemed as absent.
+                </dd>
+                <dt>Tally Count marking</dt>
+                <dd>For 'drop-in' type services where Clients may attend any number of times within the given session.(Such sessions are often multi-day sessions). Everytime that the Client attends within the dates of the chosen session, a tick is recorded which means that they attended <em>for each tick present</em></dd>
+                <dt>Timed Attendance</dt>
+                <dd>For the 'Sign-in-time' &amp; 'Sign-out-time' type attendance records. A Client may only attend once in the session, but at any time within that session. The time that they attended and departed is recorded as well as their attendance duration.</dd>
+            </dl>
+            </p>
+        </div>
+    </div>
+            <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Warning!</h4>
+        <p>Attendance printing and marking can only be performed for Activities that have been successfully scheduled. If you cannot see an Activity for either attendance-printing or attendance-marking, consult your local Manager in charge of setting up schedules for your Activity</p>
+    </div>
+    <h4>
+        Attendance Printing
+    </h4>
+    <p>
+        This is started by selecting the menu item <strong>Work with</strong> and then selecting the sub-menu <strong>Attendance</strong>. When this is selected, you will then be present with a list of all Activities that have been setup as valid for some form of Attendance marking. To print attendance sheets, you
+        press the <a href="#" class="btn btn-primary btn-xs">Print</a> button.
+    </p>
+    <p>
+        This will then present a list of all sessions for that activity that are either of today's date <em>or in the future</em>. <br />This means that it is not possible to print attendance sheets <strong>after</strong> today's date.
+        <br />
+        If the session list does not contain the session (day/date/time) that you require, see your local Manager in charge of setting up schedules for your Activity.
+    </p>
+    <p>
+        From the presented list of sessions for the chosen Activity, you can now press the <a href="#" class="btn btn-primary btn-xs">Print</a> button.
+        <br />
+        This produces a list of all clients, by alphabetical <strong>first-name</strong> (and then <strong>last-name</strong>) order, who are enrolled in this Activity <strong>at the date</strong> of the chosen session. This means that the enrollment start date of each client must be on, or before, this session date and any enrollment end date must be after the session date.
+        <br />You print off the actual list by pressing <strong>CTRL-P</strong> (on a Windows machine) or <strong>CMD-P</strong>
+ (on an Apple Mac)    </p>
+
+<p>
+    To the left of each client's name is a sequence number that should always match that present on the screen when you come to mark their attendance.
+    <br />
+    However, if client's have been enrolled in an Activity <strong>since the attendance sheet was printed</strong>, these sequence numbers will no longer match due to these additional clients being <strong>automatically</strong> inserted into the attendance-marking list.
+</p>
+
+<h4>
+    Attendance Marking
+</h4>
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Note!</h4> Whilst any signed-on user may print attendance sheets, only Staff who have been explicitely authorised to mark attendance sheets may do so. If you are not authorised, you will not be able to see the Attendance Marking screens.
+</div>
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>The Attendance mark list will normally exactly match that printed prior to the session. However, if new clients are enrolled onto the Activity (and with start/end dates overlapping the date of this sesssion), then new enrollments are <strong>automatically inserted</strong> into the attendance marking list. This will cause the sequence numbers to differ from the printed version that was printed at that earlier date.</p>
+</div>
+<p>
+    This is started by selecting the menu item <strong>Work with</strong> and then selecting the sub-menu <strong>Attendance</strong>. When this is selected, you will then be present with a list of all Activities that have been setup as valid for some form of Attendance marking. To mark attendance sheets, you
+    press the <a href="#" class="btn btn-warning btn-xs">Mark</a> button.
+<p>
+    This will then present a list of all sessions for that activity that are either of today's date <em>or in the past</em>. <br />This means that it is not possible to mark attendance sheets <strong>before</strong> today's date.
+    <br />
+    If the session list does not contain the session (day/date/time) that you require, see your local Manager in charge of setting up schedules for your Activity.
+</p>
+<p>
+    From the presented list of sessions for the chosen Activity, you can now press the <a href="#" class="btn btn-warning btn-xs">Mark</a> button. The type of screen then presented depends upon the type of Attendance marking assigned to this Activity.
+</p>
+<dl>
+    <dt>Normal Present/Absent marking</dt>
+    <dd>
+        This is the classic 'school register' type approach where a Client is <em>ticked</em> as being present.If there is no <em>tick</em>, then the Client is deemed as absent.
+        <br /><img src="~/Content/Images/CC Attendance marking - present absent.png" />
+        <br />
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Tip!</strong>You can quickly enter marks by clicking on the first tick box to position the cursor and then using the space bar to toggle attendance/absence; The use of the right-tab key moves down the list one item at a time.
+        </div>
+    </dd>
+    <dt>Tally Count marking</dt>
+    <dd>
+        For 'drop-in' type services where Clients may attend any number of times within the given session.(Such sessions are often multi-day sessions). Everytime that the Client attends within the dates of the chosen session, a tick is recorded which means that they attended <em>for each tick present</em>. The ticks are added up, by hand, and the total count is entered as shown below.
+        <br /><img src="~/Content/Images/CC Attendance Tally.png"  />
+        <br />
+        Such attendance counts must be entered as greater than zero and less that 99.
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Tip!</strong>You can quickly enter marks by clicking on the first box to position the cursor and then using the numeric keys to enter the attendance count; The use of the right-tab key moves down the list one item at a time.
+        </div>
+    </dd>
+    <dt>Timed Attendance</dt>
+    <dd>For the 'Sign-in-time' &amp; 'Sign-out-time' type attendance records. A Client may only attend once in the session, but at any time on the date of the session. The time that they attended and departed is recorded as well as their attendance duration.
+    <br /><img src="~/Content/Images/CC Attendance timed.png" />
+    <br />Valid clock times, using the 24-hour clock, are entered for all clients who actually attended. Non-attending Clients are left with Sign-in//Out times of zero.
+    <br />Note that attendance times are <strong>not</strong> restricted to be <em>within</em> the times of the session. They may be marked as attending earlier than the session start as appropriate (and/or finishing later).
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Tip!</strong>You can quickly enter marks by clicking on the first Sign-in box to position the cursor and then using the numeric keys to enter the hours portion; provided that two digits are always entered, the screen will automatically tab to the minutes segment; The use of the right-tab key moves across to the Sign-out box and so-on down the screen.
+        </div>
+    </dd>
+</dl>
+<h5>Attendance Unmarking</h5>
+<p>
+    From the presented list of session for the chosen Activity, any sessions that have previously been marked, will now have an <em>unmark</em> button like this <a href="#" class="btn btn-danger btn-xs">Unmark</a>. This button deletes all marks for the chosen session and is a good way to remove Clients from an Attendance list if they have been enrolled in-error.
+    <br />When the <a href="#" class="btn btn-danger btn-xs">Unmark</a> button is pressed, you are warned to confirm the deletion (unmarking) of this session before the deletion takes place.
+</p>

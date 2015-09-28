@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.user>
+
+@{
+    ViewBag.Title = "Users for a Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users for a Customer</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.CustName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserShortName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.CustName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserShortName)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.idUsers },htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+            @Html.ActionLink("Edit", "Edit", new { id = item.idUsers }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.idUsers }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>

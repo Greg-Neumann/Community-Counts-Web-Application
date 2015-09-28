@@ -1,0 +1,53 @@
+﻿@model CommunityCounts.Models.Master.C1servicetypes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Activity Details</h2>
+
+<div>
+    <hr />
+    <p>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idServiceType }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+    </p>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.C1funders.FunderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1funders.FunderName)
+        </dd>
+
+        <dt>
+            Attendance Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.refdata.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmploymentTracked)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=> model.EmploymentTracked)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BiometricTracked)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BiometricTracked)
+        </dd>
+
+    </dl>
+</div>

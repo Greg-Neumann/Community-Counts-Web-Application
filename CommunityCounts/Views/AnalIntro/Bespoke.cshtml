@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Analysis - Bespoke query";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - Creating a bespoke analysis query from scratch</h2>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>The Analsis Engine with Community Counts is very flexible. In short, if the data is captured <em>somewhere</em> within Community Counts' online system,
+        then it can be <em>analysed</em> by the Analysis Engine:
+        <ul>
+            <li>You can count it</li>
+            <li>You can add it</li>
+            <li>You can find the average of it</li>
+            <li>You can simply list it</li>
+            <li>You can <em>filter</em> by it (breakdown lists by that value)</li>
+            <li>You can <em>time-slice it</em> (View trends of the value over time)</li>
+            <li>etc.</li>
+        </ul>
+        The Analysis Engine comes with it's own set of queries that provides the answers to most typical questions. For most organisations, this Analysis Engine
+        consists of a 'series of buttons' to press to give you answers with no more hassle than that.<br />However, sometimes, you want to:
+        <ol>
+            <li>Ask a question that has not been asked before or</li>
+            <li>Interrogate the data beyond what is already answered by the standard Analysis Engine</li>
+        </ol>
+        Inorder to do that, a little more understanding is needed.
+        </p>
+        <p>Provided that the 'thing' that you are interested in is in the Data Dictionary, it is quite simple to construct a query from scratch on any machine which has
+        already had the Analysis Engine installed.</p>
+        <p>The following is an example of that, starting from a blank Microsoft Excel Worksheet.</p>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Example: To answer the question 'What Activitys do people use who are in the Armed Services?'</h2>
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>Warning!</h4>
+            <p>For this example to work you will need:
+            <ol>
+                <li>To work on a Microsoft Windows or an Apple Mac computer that has had the standard Analysis Engine installed AND</li>
+                <li>You will need a working copy of Microsoft Excel (Windows or Mac version)</li>
+                </ol></p>
+        </div>
+        <h3>Summary</h3>
+        In short, the steps needed to start any query are:
+        <ol>
+            <li>Start a new Excel worksheet or workbook</li>
+            <li>Use the <em>Insert</em> tab to insert a <em>Pivot Table</em> at a point where you want the results to appear</li>
+            <li>Choose an (existing) data connection that contains <strong>all</strong> the data items that you will want. This is hard the first time, but it does get easier by trial and error.</li>
+            <li>Drag <strong>Filter, Rows, Columns</strong> and/or <strong>Summation Values</strong> to build the query you need.</li>
+        </ol>
+        <h3>Detail</h3>
+        The detail of how to answer the question 'What Activitys do people use who are in the Armed Services?' is convered in the following steps:
+        <ol>
+            <li><br /><img src="~/Content/Images/CCAnalysis 01 - Start Excel.png" title="All Analysis queries are performed in Excel" width="100" /><br />Start Microsoft excel</li>
+            <li><br /><img src="~/Content/Images/CCAnalysis 02 - Start a blank workbook.png" title="" width="100"/><br />Choose a blank workbook</li>
+            <li><br /><img src="~/Content/Images/CCAnalysis 03 - Click the Insert Tab.png" width ="400" title="Click on the 'Insert' Tab and then select 'Pivot Table'"/><br />Click on the <strong>Insert</strong> tab and then press the <strong>Pivot Table</strong> button</li>
+            <li><br /><img src="~/Content/Images/CCAnalysis 04 - Use a data connection.png" width="400"/><br />Click on the <strong>Use an external data source</strong> button</li>
+            <li><br /><img src="~/Content/Images/CCAnalysis 05 - choose an appropriate data connection.png" width="400"/><br />Choose a data connection that contains the <em>data dictionary</em> items that you need. In this example, the query relates to clients <em>and</em> their enrolled Activities; so I choose <strong>ClientActivity</strong></li>
+            <li><br />
+                <img src="~/Content/Images/CCAnalysis 06 - Insert into the worksheet.png" width="400" /><br />Choose to insert it into the current worksheet, at the exact location, from where I first pressed <strong>Insert Pivot Table</strong>
+            </li>
+            <li><br />
+                <img src="~/Content/Images/CCAnalysis 07 - a blank Pivot Table.png" width="400" /><br />You now have a blank Pivot Table query using the ClientActivity set from the <em>Data Dictionary</em></li>
+           <li><br />
+                <img src="~/Content/Images/CCAnalysis 08 - adding a row data item from the data dictionary.png" width="400" /><br />What do we want to list? If we list <em>ActivityName</em> from the <em>Data Dictionary</em>
+            then we will see the name of the Activity that the client is enrolled in. So, we choose the <em>ActivityName</em> data item from the <em>Data Dictionary</em>
+            and drag it as the <strong>row</strong> item in the Pivot Table.</li>
+            <li><br />
+                <img src="~/Content/Images/CCAnalysis 09 - Inserting blank lines for a filter.png" width="400" /><br />Next, we are going to need
+            to add a data filter. These take up space at the top of the query - so we need to add some blank lines (if there arn't any already)</li>
+            <li><br />
+                      <img src="~/Content/Images/CCAnalysis 10 - Choosing a filter.png" width="400" /><br />Notice the blank rows at the top giving space for the filter.
+            To answer the question 'What Activitys do people use who are in the Armed Services?', I am going to need to <em>filter</em> from all the Clients in my
+            system, only <em>those clients where used to be in the Armed Services</em>. We do this by dragging the data item <em>ArmedServicesCurrently</em> into the Filter box</li>
+            <li><br />
+                      <img src="~/Content/Images/CCAnalysis 11 - Data filter in place.png" width="400"/><br />The filter is now added. However, as no value for the filter is selected, it will be whether they were in the Armed Services - or not. We need to be more specific. </li>
+            <li><br />
+                      <img src="~/Content/Images/CCAnalysis 12 - choosing the data filer value.png" width="400"/><br />This particular data item is a 'yes'/'no' thingy. The value '0' means 'no' and the value '1' means 'yes'. We want the 'yes' value ('1') </li>
+            <li><br />
+                      <img src="~/Content/Images/CCAnalysis 13 - Summation field.png" width="400" /><br />So far so good. So what is this telling us?
+            <p>Well, for those clients were are in the Armed Services, we have a list of the Activities that they are enrolled within. This <em>may be good enough</em>. However,
+            in this example, I want to not only know <em>which</em> Activities they are enrolled in, but <em>how many enrollments, per Activity,</em> there are.</p>
+            <p>So I need to <em>count</em> the number of clients that are enrolled in each Activity.</p>
+            <p>Drag the <em>ClientID</em> data item down from the <em>data dictionary</em> into the <strong>Sum Values</strong> box at the bottom (see next image)</p></li>
+            <li><br />
+                      <img src="~/Content/Images/CCAnalysis 14 - customisation the summation field.png" width="400" /><br />The <strong>Sum Values</strong>
+            box does what it says on the tin - it <em>sums up</em> (add) each value. Sometimes, <em>summation</em> is the right thing to do; in this
+            case it is not; I need to <em>count</em> those clients, for each Activity, who are in the Armed Services.
+            <p>Select the drop-down arrow to the right of the words 'Sum of ClientID'</p> </li>
+            <li> <br />
+                      <img src="~/Content/Images/CCAnalysis 15 - Summation field Value settings.png" width="200" /><br />
+            From the drop-down menu, choose <strong>Value Field Settings</strong></li>
+            <li> <br />
+                      <img src="~/Content/Images/CCAnalysis 16 - Setting summation to be count.png" /><br />
+            Change the <strong>Summarize Value field by</strong> field from <strong>Sum</strong> to <strong>Count </strong></li>
+           <li> <br />
+                      <img src="~/Content/Images/CCAnalysis 17 - Setting a custom name for count field.png" width="400" /><br />
+            We need to change to title of the field from 'Count of ClientID' to a slightly more meaningful 'No. of Clients'  (and press Ok)</li>
+          <li><br />
+                      <img src="~/Content/Images/CCAnalysis 18 - The answer.png" width="400" /><br />Congratulations! the Answer appears </li>
+        </ol>
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            Pivot Tables can be complex - but fun! There are many books on the subject.<a href="https://support.office.com/en-sg/article/Overview-of-PivotTable-and-PivotChart-reports-00a5bf71-65cb-49f9-b321-85bb7b0b06c2" class="alert-link">Here's a reasonable introduction about them from Microsoft</a>.
+        </div>
+        
+    </div>
+</div>

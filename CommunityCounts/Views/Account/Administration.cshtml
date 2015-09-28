@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron">
+    <h2>Administration</h2>
+    <p>
+        Administration permits authorised Users to manage the aspects of their system and of their users. For example, systems behaviour can be altered by defining new Activities for your service and then scheduling them into the work calendar so that Attendance sheets can be processed for that service.
+        In Addition, you can give (or take away) permissions of Users to access aspects of Community Counts such as allowing them to <strong>change</strong> Client records as well as view them.
+        </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Systems Administration</h2>
+       
+        </div>
+    <div class="col-md-6">
+        <h2>User Administration</h2>
+        <ul>
+            <li>@Html.ActionLink("Create a new user", "Register", "Account")</li>
+            <li>@Html.ActionLink("Manage existing roles for existing Users", "RoleManager", "Account")</li>
+            <li>@Html.ActionLink("Create a new role", "RoleCreate", "Account")</li>
+            <li>@Html.ActionLink("Manage existing roles", "RoleList", "Account")</li>
+            <li>@Html.ActionLink("View dumps", "", "elmah")</li>
+        </ul>
+    </div>
+    </div>

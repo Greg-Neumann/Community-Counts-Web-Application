@@ -1,0 +1,69 @@
+﻿@model List<CommunityCounts.Models.Master.AttendanceMark>
+@{
+    ViewBag.Title = "Mark Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Mark Attendance (Present/Absent)</h2>
+<h3>@ViewBag.ResourceName for @ViewBag.ActivityName</h3>
+<h4>@ViewBag.StartDate at @ViewBag.StartTime</h4>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table-condensed">
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th align="left">
+                First Name
+            </th>
+            <th align="left">
+                Last Name
+            </th>
+            <th align="center">
+                Attended?
+            </th>
+        </tr>
+        @{int counter = 0;}
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i.ToString("D3")&nbsp;
+                </td>
+                <td align="Left">
+                    <input name="[@counter].idAttendance" type="hidden" value="@item.idAttendance" />   @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idResource" type="hidden" value="@item.idResource" />       @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idServiceType" type="hidden" value="@item.idServiceType" /> @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idSchedules" type="hidden" value="@item.idSchedules" />     @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idClient" type="hidden" value="@item.idClient" />           @* Stack keys hidden to get them back in HTTPPOST*@
+                    @Html.DisplayFor(modelitem => item.FirstName)
+                </td>
+                <td align="left">
+                    @Html.DisplayFor(modelitem => item.LastName)
+                </td>
+                <td>
+                    @if (item.Present)
+                    {
+                        <input name="[@counter].Present" type="checkbox" checked id="[@counter].Present" value="true" /> @* return this if user clicked *@
+
+                    }
+                    else
+                    {
+                        <input name="[@counter].Present" type="checkbox" id="[@counter].Present" value="true"  />
+                    }
+                    <input type="hidden" value="false" name="[@counter].Present" />                     @* Otherwise this *@                                                  
+                </td>
+            </tr>
+            counter++;
+            i++;
+        }
+    </table>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Save/Back" class="btn btn-warning btn-xs" />
+        </div>
+    </div>
+}

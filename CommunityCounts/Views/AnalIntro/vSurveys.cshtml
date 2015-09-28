@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Analysis - vSurveys";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - The Data Dictionary for vSurveys</h2>
+<p>
+    @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>There is one vSurveys record for each survey definition. Survey results are not part of this dataset.</p>
+</div>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Data Dictionary item</th>
+        <th>Brief description</th>
+    </tr>
+    <tr>
+        <td>
+            ActivityName
+        </td>
+        <td>The Activity Name to which this survey relates. </td>
+    </tr>
+    <tr>
+        <td>AttendanceType</td>
+        <td>The <em>type</em> of attendance marking performed for this bookings (from the <em>schedule data</em>). Examples include 'Normal Present/Absent marking'</td>
+    </tr>
+    <tr>
+        <td>forAllClients?</td>
+        <td>'0' means not true - this survey is not for all Clients. Thus, this survey will only apply to those clients enrolled in the <strong>ActivityName</strong> above. '1' means false - this survey will apply to all clients irrespective of whether they are enrolled in <strong>ActivityName</strong> (or not)</td>
+    </tr>
+    <tr>
+        <td>FunderCode</td>
+        <td>The Funder Code assigned to the Activity to which this attendance relates.</td>
+    </tr>
+    <tr>
+        <td>idSurvey</td>
+        <td>The Unique system identified for this survey.</td>
+    </tr>
+    <tr>
+        <td>numNumericQuestions</td>
+        <td>The number of numeric response type questions in the survey. There can be zero.</td>
+    </tr>
+    <tr>
+        <td>NumTextQuestions</td>
+        <td>The number of textural response type questions in the survey. There can be zero.</td>
+    </tr>
+    <tr>
+        <td>SurveyActive?</td>
+        <td>'0' means false - this survey is not active and so will not appear in the <em>Work With : Surveys</em> menu list. '1' means true - this survey is active.</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedDate</td>
+        <td>The calendar date that this survey definition was first entered into the system.</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedDateTime</td>
+        <td>The calendar date and time that this survey definition was first entered into the system.</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedHalf</td>
+        <td>The half-year (service registration year, not calendar year) in which this survey definition was created. Example '2015H2'</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedQtr</td>
+        <td>The quarter-year (service registration year, not calendar year) in which this survey definition was created. Example '2015Q2'</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedUser</td>
+        <td>The name of the account that created this survey definition</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedYear</td>
+        <td>The year (service registration year, not calendar year) in which this survey definition was created. Example '2015'</td>
+    </tr>
+    <tr>
+        <td>SurveyCreatedYearMonth</td>
+        <td>The year and month (service registration year, not calendar year) in which this survey definition was created. Example '2015-05May'</td>
+    </tr>
+    <tr>
+        <td>SurveyDesc</td>
+        <td>The description of the survey definition</td>
+    </tr>
+    <tr>
+        <td>SurveyForAnonymousClients?</td>
+        <td>'0' means false - this survey cannot be used to collect results for <em>anonymous persons</em> - all clients must be enrolled in <strong>ActivityName</strong>. '1' means true - this survey can be used to collect (multiple) results for <em>anonymous persons</em></td>
+    </tr>
+    <tr>
+        <td>SurveyName</td>
+        <td>The name of this survey</td>
+    </tr>
+    <tr>
+        <td>SurveyUpdatedDateTime</td>
+        <td>The calendar date and time that this survey definition was last updated</td>
+    </tr>
+    <tr>
+        <td>SurveyUpdatedUser</td>
+        <td>The account name of the last person to update this survey definition</td>
+    </tr>
+</table>
+
+

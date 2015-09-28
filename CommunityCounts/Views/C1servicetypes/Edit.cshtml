@@ -1,0 +1,60 @@
+﻿@model CommunityCounts.Models.Master.C1servicetypes
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Activities</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idServiceType)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ServiceType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttendanceType, "AttendanceType", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AttendanceType", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AttendanceType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.C1funders.FunderName, "Funder's Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FunderCode", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FunderCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BiometricTracked, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.BiometricTracked)
+                    @Html.ValidationMessageFor(model => model.BiometricTracked, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input type="submit" value="Save" class="btn btn-warning btn-xs" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1locations>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Locations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idLocations }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.idLocations }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+        </tr>
+    }
+
+</table>

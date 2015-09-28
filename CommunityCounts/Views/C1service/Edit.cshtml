@@ -1,0 +1,54 @@
+﻿@model CommunityCounts.Models.Master.C1service
+@{
+    ViewBag.Title = "Edit Enrollment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Enrollment</h2>
+<h3>Client Name: @ViewBag.Firstname @ViewBag.LastName</h3>
+<h3>Activity   :  @ViewBag.Activity</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+  
+    <div class="form-horizontal">
+        <hr />
+        @Html.ActionLink("No - Back to List", "Index", new { id = @ViewBag.idClient }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idService)
+        @Html.HiddenFor(model => model.idClient)
+        @Html.HiddenFor(model => model.idServiceType)
+        @Html.HiddenFor(model => model.CreateDate)
+        @Html.HiddenFor(model => model.JourneyedServices)
+        <input type="hidden" name="OrigEnrollmentDate" value="@ViewBag.OrigEnrollmentDate" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JourneyedidCategory, "Journey Category", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("JourneyedidCategory", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.JourneyedidCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input type="submit" value="Save" class="btn btn-warning btn-xs" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,212 @@
+﻿@model CommunityCounts.Models.Master.C1client
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Warning!</strong> Are you sure that you want to delete this Client?
+</div>
+<div>
+    <hr />
+    @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HouseNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressLine1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressLine1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.citylist.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.citylist.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.countylist.County)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.countylist.County)
+        </dd>
+        <dt>
+            Postcode
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.postcode.PostCode1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            Hear Of Services
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata5.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HearOther)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HearOther)
+        </dd>
+        <dt>
+            Preferred Language
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata8.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.FirstLanguageOther)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.FirstLanguageOther)
+        </dd>
+        <dt>
+            Ethnicity
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata4.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ethnicity_Other)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ethnicity_Other)
+        </dd>
+        <dt>
+            Gender
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata3.RefCodeDesc)
+        </dd>
+        <dt>
+            Age Range
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata.RefCodeValue)
+        </dd>
+        <dt>
+            Housing Status
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata9.RefCodeDesc)
+        </dd>
+        <dt>
+            Landlord
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata10.RefCodeDesc)
+        </dd>
+        <dt>
+            Travel Method
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata2.RefCodeDesc)
+        </dd>
+        <dt>
+            Disability
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata6.RefCodeDesc)
+        </dd>
+        <dt>
+            Benefits
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata7.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArmedServCur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArmedServCur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArmedSerPre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArmedSerPre)
+        </dd>
+        <dt>
+            Employment
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata1.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Occupation_Other)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Occupation_Other)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AttainmentTracked)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AttainmentTracked)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MemoryStickIssued)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MemoryStickIssued)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChangedDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmSigned)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmSigned)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color col-md-2">
+        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+    </div>
+    }
+</div>

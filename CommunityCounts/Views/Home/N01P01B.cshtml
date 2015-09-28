@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "1.01b";
+}
+<p>
+    @Html.ActionLink("Back to News Summary", "ReadMore", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<h2>Change 1.01</h2>
+<h3>Addition of "Enrollment start date on any activity"</h3>
+<div>
+    <p>
+        When a Client is enrolled on a new Activity, it is now possible to set a date that the person enrolled upon this activity.
+    </p>
+    <p>
+        This enrollment date, which defaults to today's date, permits any Client to re-register for the same Activity at a later period in time. Please note that 
+        Attendance lists will only display enrolled Clients for any Activity if the enrollment start date and enrollment end date <em>span, in time,</em> the date for
+        which attendance is desired.
+    </p>
+    <p>
+        <span class="label label-warning">Important!</span>&nbsp; When this change was first applied, Any Clients <em>already</em> enrolled on any Activity will have had their enrollment date set to 1st April 2015.
+        Any Clients enrolled on any Activity <em>after</em> this change was applied will have their enrollment date set to today's date as a default, but you can set it to whatever value is appropriate.
+    </p>
+</div>
+

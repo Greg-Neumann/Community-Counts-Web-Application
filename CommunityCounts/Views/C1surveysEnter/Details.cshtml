@@ -1,0 +1,105 @@
+﻿@model CommunityCounts.Models.Master.C1surveys
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Survey Details</h2>
+
+<div>
+    <hr />
+    <p>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    </p>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C1servicetypes.ServiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1servicetypes.ServiceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurveyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurveyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurveyDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurveyDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.forAllClients)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.forAllClients)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.forAnonymousClients)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.forAnonymousClients)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numTxtQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numTxtQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numScaQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numScaQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updatedUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.updatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.updatedDateTime)
+        </dd>
+
+    </dl>
+</div>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1journeycat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Journey Categories</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CatName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CatDesc)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatDesc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idJourneyCat }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.idJourneyCat }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

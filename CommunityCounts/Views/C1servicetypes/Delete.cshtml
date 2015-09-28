@@ -1,0 +1,64 @@
+﻿@model CommunityCounts.Models.Master.C1servicetypes
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete an Activity</h2>
+<div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Warning!</strong> Are you sure that you want to delete this Activity?
+</div>
+<div>
+    <hr />
+    @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.C1funders.FunderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1funders.FunderName)
+        </dd>
+
+        <dt>
+           Attendance Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.refdata.RefCodeDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmploymentTracked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmploymentTracked)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BiometricTracked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BiometricTracked)
+        </dd>
+        
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color col-md-2">
+        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+    </div>
+    }
+</div>

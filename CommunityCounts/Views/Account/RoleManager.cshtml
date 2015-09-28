@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "RoleManager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Role Manager</h2> 
+<hr />
+
+<h3>Add a role to an existing User</h3>
+
+@using (Html.BeginForm("RoleAddToUser", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Username : @Html.TextBox("UserName")
+        Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
+   
+
+    </p>
+
+    <input type="submit" value="Save" />
+}
+<hr />
+<h3>List roles for an existing User</h3>
+@using (Html.BeginForm("RolesForAUser", "Account"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        Username : @Html.TextBox("UserName")
+        <input type="submit" value="Get Roles for this User" />
+    </p>
+}
+
+@if (ViewBag.RolesForThisUser != null)
+{
+    <div style="background-color:yellow;">
+        <h3>Roles for this user </h3>
+        <ol>
+            @foreach (string s in ViewBag.RolesForThisUser)
+            {
+                <li>@s</li>
+            }
+        </ol>
+    </div>
+}
+
+<hr />
+<h3>Delete A user from a role</h3>
+
+@using (Html.BeginForm("RoleDeleteForAUser", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Username : @Html.TextBox("UserName")
+        Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
+
+    </p>
+
+    <input type="submit" value="Delete this user from Role" />
+}
+

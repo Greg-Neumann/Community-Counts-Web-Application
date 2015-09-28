@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.activityList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Activities for Client</h2>
+<h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
+<p>
+     @Html.ActionLink("Back to List", "Index","C1client", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })   
+     @Html.ActionLink("Enroll", "Add", new {id=@ViewBag.idClient}, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Activity
+        </th>
+        <th>
+            Created
+        </th>
+        <th>
+            Started
+        </th>
+        <th>
+           Ended
+        </th>
+        <th>
+            Jrny Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> 
+                @Html.Raw(item.ServiceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JrnyCatName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idService }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Journey", "Journey", new { id = item.idService }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.idService }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

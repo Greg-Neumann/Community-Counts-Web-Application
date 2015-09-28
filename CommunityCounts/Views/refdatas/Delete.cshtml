@@ -1,0 +1,50 @@
+﻿@model CommunityCounts.Models.Master.refdata
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Warning!</strong> Are you sure that you want to delete this data item?
+</div>
+<div>
+    <hr />
+    @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.refdatatype.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.refdatatype.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefCodeValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefCodeValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefCodeDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefCodeDesc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color col-md-2">
+        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+    </div>
+    }
+</div>

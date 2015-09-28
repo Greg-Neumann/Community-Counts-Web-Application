@@ -1,0 +1,45 @@
+﻿@model List<CommunityCounts.Models.Master.SurveyResultsN>
+@{
+    ViewBag.Title = "Survey Results for a Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Survey Results for a Client (Numeric)</h2>
+<h3>Survey : @ViewBag.SurveyName</h3>
+<h3>Client : @ViewBag.Name</h3>
+<hr />
+@using (Html.BeginForm())
+{
+   @Html.AntiForgeryToken()
+    <table class="table-condensed" >
+        <tr>
+            <th align="center">
+                Question
+            </th>
+            <th align="center">
+                Response
+            </th>
+        </tr>
+        @{int counter = 0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="right">
+                    <input name="[@counter].idSurResSca" type="hidden" value="@item.idSurResSca"/>  @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idSurvey" type="hidden" value="@item.idSurvey" />       @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idClient" type="hidden" value="@item.idClient" />       @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].questionNum" type="hidden" value="@item.questionNum" /> @* Stack keys hidden to get them back in HTTPPOST*@
+                    @Html.DisplayFor(modelitem => item.questionNum)
+                </td>
+                <td>
+                  @Html.TextBox("[" + counter + "].response",item.response)
+                </td>
+            </tr>
+            counter++;
+        }
+    </table>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Save/Back" class="btn btn-warning btn-xs" />
+        </div>
+    </div>
+}

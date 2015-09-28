@@ -1,0 +1,102 @@
+﻿@model CommunityCounts.Models.Master.C1schedules
+
+@{
+    ViewBag.Title = "Schedule Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Details</h2>
+<div>
+    <hr />
+    <p>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idSchedules}, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+    </p>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C1resources.ResourceName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.C1resources.ResourceName) <strong>@ViewBag.ResourceName</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.C1servicetypes.ServiceType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.C1servicetypes.ServiceType) <strong>@ViewBag.ServiceType</strong>
+        </dd>
+        <dt>
+            Type
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.refdata.RefCodeDesc) <strong>@ViewBag.Type</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Repetition) <strong>@ViewBag.Repetition</strong>
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate) <strong>@ViewBag.StartDate</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate) <strong>@ViewBag.EndDate</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime) <strong>@ViewBag.StartTime</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndTime) <strong>@ViewBag.EndTime</strong>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUser)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Generated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Generated)
+        </dd>
+    </dl>
+    @Html.ActionLink("Revert", "Revert", new { id = Model.idSchedules }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+</div>

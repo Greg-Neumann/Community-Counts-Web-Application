@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Community Counts</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+                <body>
+                    <div class="navbar navbar-inverse navbar-fixed-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                @Html.ActionLink("Community Counts", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            </div>
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Work With<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>@Html.ActionLink("Attendance", "Index", "Attendance")</li>
+                                            <li>@Html.ActionLink("Clients", "Index", "C1client")</li>
+                                            <li>@Html.ActionLink("Surveys", "Index", "C1surveysEnter")</li>
+                                            <li class="divider"></li>
+                                            <li>@Html.ActionLink("Comments", "Index", "C1qccom")</li>
+                                            <li>@Html.ActionLink("SignPosts/Referrals", "Index", "C1qcsr")</li>
+                                        </ul>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Setup <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>@Html.ActionLink("Schedules", "Index", "C1schedules")</li>
+                                            <li>@Html.ActionLink("Activities", "Index", "C1servicetypes")</li>
+                                            <li>@Html.ActionLink("Resources", "Index", "C1resources")</li>
+                                            <li>@Html.ActionLink("Resource types", "Index", "C1resourcetypes")</li>
+                                            <li>@Html.ActionLink("Locations", "Index", "C1locations")</li>
+                                            <li>@Html.ActionLink("Funders", "Index", "C1funders")</li>
+                                            <li class="divider"></li>
+                                            <li>@Html.ActionLink("Comment Categories", "Index", "C1qccomtype")</li>
+                                            <li>@Html.ActionLink("Journey Categories", "Index", "C1journeycat")</li>
+                                            <li>@Html.ActionLink("Surveys", "Index", "C1surveys")</li>
+                                            <li>@Html.ActionLink("S/R Categories", "Index", "C1qcsrtype")</li>
+                                        </ul>
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Help <span class="caret"></span></a>  
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>@Html.ActionLink("Change Log","ReadMore","Home")</li>
+                                            <li>@Html.ActionLink("Activities & Journeys", "Home", "helpActivity")</li>
+                                            <li>@Html.ActionLink("Attendance", "Home", "helpAttendance")</li>
+                                            <li>@Html.ActionLink("Surveys", "Home", "helpSurvey")</li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Analysis <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>@Html.ActionLink("Introduction", "Home", "AnalIntro")</li>
+                                            <li>@Html.ActionLink("Bespoke Analysis", "Bespoke", "AnalIntro")</li>
+                                            <li>@Html.ActionLink("Data Dictionary", "DDIntro", "AnalIntro")</li>
+                                        </ul>
+                                    </li>                        
+                                    <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administration <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        @*<li>@Html.ActionLink("Customers","Index","customers")</li>
+                                        <li>@Html.ActionLink("Users", "Index", "users")</li>*@
+                                        <li>@Html.ActionLink("Control Data", "Index", "refdatas")</li>
+                                        <li>@Html.ActionLink("Calendar Data", "Index", "C1CalDat")</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("Create a new user", "Register", "Account")</li>
+                                        <li>@Html.ActionLink("Manage existing roles for existing Users", "RoleManager", "Account")</li>                                         <li>@Html.ActionLink("Create a new role", "RoleCreate", "Account")</li>
+                                        <li>@Html.ActionLink("Manage existing roles", "RoleList", "Account")</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("View dumps", "", "elmah")</li>
+                                        </ul>
+                                    </ul>
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container body-content">
+                        <div class="bg-danger">
+                            <h2>
+                                @ViewBag.ResultMessage
+                            </h2>
+                        </div>
+                        @RenderBody()
+                        <hr />
+                        <footer>
+                            <p>&copy; @DateTime.Now.Year - Community Counts by <a href="http://www.nsfwd.co.uk">Next Step Forward</a></p>
+                        </footer>
+                    </div>
+
+                    @Scripts.Render("~/bundles/jquery")
+                    @Scripts.Render("~/bundles/bootstrap")
+                    @RenderSection("scripts", required: false)
+                </body>
+</html>
