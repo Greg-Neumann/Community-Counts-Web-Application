@@ -9,8 +9,6 @@ namespace CommunityCounts.Models.Master
     [Table("ccmaster.1surressca")]
     public partial class C1surressca
     {
-        public C1surressca()
-        { }
         [Key]
         public int idSurResSca { get; set; }
 

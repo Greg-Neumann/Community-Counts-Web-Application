@@ -15,7 +15,7 @@ namespace CommunityCounts.Models.Master
             C1bookings = new HashSet<C1bookings>();
             C1schedules = new HashSet<C1schedules>();
             C1service = new HashSet<C1service>();
-            C1surveys = new HashSet<C1surveys>();    
+            C1surveys = new HashSet<C1surveys>();
         }
 
         [Key]
@@ -23,23 +23,16 @@ namespace CommunityCounts.Models.Master
 
         [Required]
         [StringLength(50)]
-        [Display(Name="Activity Name")]
         public string ServiceType { get; set; }
-       
-        [Required]
-        [Display(Name="Attendance recording type")]
+
         public int AttendanceType { get; set; }
 
         [Required]
         [StringLength(15)]
-        [Display(Name="Funder")]
         public string FunderCode { get; set; }
 
-        [Required]
-        [Display(Name = "Employment Tracked?")]
         public bool EmploymentTracked { get; set; }
-        [Required]
-        [Display(Name="Biometric Tracked?")]
+
         public bool BiometricTracked { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }
@@ -55,6 +48,5 @@ namespace CommunityCounts.Models.Master
         public virtual ICollection<C1surveys> C1surveys { get; set; }
 
         public virtual refdata refdata { get; set; }
-
     }
 }

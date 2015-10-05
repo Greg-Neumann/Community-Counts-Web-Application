@@ -24,33 +24,23 @@ namespace CommunityCounts.Models.Master
         [Column(TypeName = "char")]
         [Required]
         [StringLength(10)]
-        [Display(Name = "Customer Name")]
         public string CustShortName { get; set; }
 
         [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
         [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
         [Column(TypeName = "char")]
         [StringLength(10)]
-        [Display(Name = "House No.")]
         public string Number { get; set; }
 
         [Required]
         [StringLength(45)]
-        [Display(Name = "1st Line")]
         public string AddressLine1 { get; set; }
 
         [StringLength(45)]
-        [Display(Name = "2nd Line")]
         public string AddressLine2 { get; set; }
 
         public int idCity { get; set; }
@@ -66,6 +56,5 @@ namespace CommunityCounts.Models.Master
         public virtual countylist countylist { get; set; }
 
         public virtual postcode postcode { get; set; }
-
     }
 }

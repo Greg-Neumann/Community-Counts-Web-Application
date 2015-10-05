@@ -9,8 +9,6 @@ namespace CommunityCounts.Models.Master
     [Table("ccmaster.users")]
     public partial class user
     {
-        public user()
-        { }
         [Key]
         public int idUsers { get; set; }
 
@@ -18,10 +16,10 @@ namespace CommunityCounts.Models.Master
         [StringLength(128)]
         public string Email { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string UserShortName { get; set; }
 
         public bool readNews { get; set; }
-
     }
 }

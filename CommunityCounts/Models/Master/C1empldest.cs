@@ -15,12 +15,10 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
-        [Display(Name="Employment Dest id")]
         public int idEmploymentDestinations { get; set; }
 
         [Required]
         [StringLength(45)]
-        [Display(Name="Destination Description")]
         public string EmploymentDestDesc { get; set; }
 
         public virtual ICollection<C1empltck> C1empltck { get; set; }

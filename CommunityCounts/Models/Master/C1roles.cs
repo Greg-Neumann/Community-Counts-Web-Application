@@ -26,6 +26,7 @@ namespace CommunityCounts.Models.Master
         [Column(TypeName = "date")]
         public DateTime StartDate { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime EndDate { get; set; }
 
         [Column(TypeName = "date")]

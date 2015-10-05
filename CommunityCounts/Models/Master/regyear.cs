@@ -20,7 +20,6 @@ namespace CommunityCounts.Models.Master
         [Key]
         public int idRegYear { get; set; }
 
-
         [Column("RegYear", TypeName = "char")]
         [Required]
         [StringLength(4)]

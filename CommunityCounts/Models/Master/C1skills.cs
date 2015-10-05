@@ -9,8 +9,6 @@ namespace CommunityCounts.Models.Master
     [Table("ccmaster.1skills")]
     public partial class C1skills
     {
-        public C1skills()
-        { }
         [Key]
         public int idSkill { get; set; }
 
@@ -23,6 +21,7 @@ namespace CommunityCounts.Models.Master
         [Column(TypeName = "date")]
         public DateTime StartDate { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime EndDate { get; set; }
 
         [Column(TypeName = "date")]

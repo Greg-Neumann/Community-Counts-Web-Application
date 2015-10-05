@@ -9,10 +9,6 @@ namespace CommunityCounts.Models.Master
     [Table("ccmaster.1caldat")]
     public partial class C1caldat
     {
-        public C1caldat()
-        {
-        }
-
         [Key]
         [Column(TypeName = "date")]
         public DateTime ccCalDate { get; set; }
@@ -36,6 +32,5 @@ namespace CommunityCounts.Models.Master
         [Required]
         [StringLength(10)]
         public string ccCalYearMonth { get; set; }
-
     }
 }

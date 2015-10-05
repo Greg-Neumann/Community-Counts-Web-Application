@@ -57,3 +57,5 @@ Z:\Development\CommunityCounts\CommunityCounts\CommunityCounts\bin\Microsoft.Owi
 Z:\Development\CommunityCounts\CommunityCounts\CommunityCounts\obj\Debug\CommunityCounts.csprojResolveAssemblyReference.cache
 Z:\Development\CommunityCounts\CommunityCounts\CommunityCounts\obj\Debug\CommunityCounts.dll
 Z:\Development\CommunityCounts\CommunityCounts\CommunityCounts\obj\Debug\CommunityCounts.pdb
+Z:\Development\CCWeb\CommunityCounts\obj\Debug\CommunityCounts.csprojResolveAssemblyReference.cache
+Z:\Development\CCWeb\CommunityCounts\obj\Debug\CommunityCounts.dll

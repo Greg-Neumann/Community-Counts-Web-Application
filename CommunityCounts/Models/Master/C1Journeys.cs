@@ -1,4 +1,4 @@
-﻿namespace CommunityCounts.Models.Master
+namespace CommunityCounts.Models.Master
 {
     using System;
     using System.Collections.Generic;

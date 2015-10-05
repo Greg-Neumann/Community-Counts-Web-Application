@@ -9,8 +9,6 @@ namespace CommunityCounts.Models.Master
     [Table("ccmaster.1biometrics")]
     public partial class C1biometrics
     {
-        public C1biometrics()
-        { }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idBiometrics { get; set; }

@@ -1,57 +1,23 @@
 namespace CommunityCounts.Models.Master
 {
     using System;
-    using System.Web;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
     public partial class ccMaster : DbContext
     {
-        //public ccMaster(): base("name=ccMaster"){  }
-        //public ccMaster() : base("server=Localhost;Database=ccmaster;user id=CCMaster;password=yssMwh8M16i;persistsecurityinfo=True;") { }
-        public ccMaster() : base() { }
-        public ccMaster(string dbname) : base(GetConnectionString(dbname)) { }
-        public static string GetConnectionString(string dbname)
+        public ccMaster()
+            : base("name=ccMaster")
         {
-
-            var username = HttpContext.Current.User.Identity.Name; // get user's email logon name
-            char[] splitChar;
-            splitChar = "@".ToCharArray();
-            var logonParts = username.Split(splitChar[0]); // Email domain will be in 2nd part (index=1)
-            if (logonParts.Length == 2)
-            {
-                var domainName = logonParts[1];
-                var connString = "";
-                switch (domainName)
-                {
-                    case "bhlc.services":
-                        connString = "name=ccbhlc";
-                        return connString;
-                    case "sydni.org":
-                        connString = "name=ccsydn";
-                        return connString;
-                    case "nsfwd.co.uk":
-                        connString = "name=cctrai";
-                        return connString;
-                    case "crownroutes.co.uk":
-                        connString = "name=cccrow";
-                        return connString;
-                    default:
-                        throw new ArgumentOutOfRangeException("logon domain name not recognised");
-                }
-            }
-            else
-            { return "no connection string"; } // This allows fall-thru when user is not signed in to get Identity framework login screen
-
         }
-         
-        
-    public virtual DbSet<C1attendance> C1attendance { get; set; }
+
+        public virtual DbSet<C1attendance> C1attendance { get; set; }
         public virtual DbSet<C1biometrics> C1biometrics { get; set; }
         public virtual DbSet<C1bookings> C1bookings { get; set; }
         public virtual DbSet<C1caldat> C1caldat { get; set; }
         public virtual DbSet<C1client> C1client { get; set; }
+        public virtual DbSet<C1clientneeds> C1clientneeds { get; set; }
         public virtual DbSet<C1empldest> C1empldest { get; set; }
         public virtual DbSet<C1empltck> C1empltck { get; set; }
         public virtual DbSet<C1funders> C1funders { get; set; }
@@ -77,20 +43,22 @@ namespace CommunityCounts.Models.Master
         public virtual DbSet<C1surveys> C1surveys { get; set; }
         public virtual DbSet<C1surveysq> C1surveysq { get; set; }
         public virtual DbSet<citylist> citylists { get; set; }
+        public virtual DbSet<county> counties { get; set; }
         public virtual DbSet<countylist> countylists { get; set; }
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<district> districts { get; set; }
+        public virtual DbSet<nhspansha> nhspanshas { get; set; }
+        public virtual DbSet<nhssha> nhsshas { get; set; }
         public virtual DbSet<postcode> postcodes { get; set; }
         public virtual DbSet<refdata> refdatas { get; set; }
         public virtual DbSet<refdatatype> refdatatypes { get; set; }
         public virtual DbSet<regyear> regyears { get; set; }
+        public virtual DbSet<time> times { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<ward> wards { get; set; }
-      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<C1caldat>()
                 .Property(e => e.ccCalQtr)
                 .IsUnicode(false);
@@ -148,6 +116,10 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<C1client>()
+                .Property(e => e.FirstLanguageOther)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1client>()
                 .HasMany(e => e.C1attendance)
                 .WithRequired(e => e.C1client)
                 .WillCascadeOnDelete(false);
@@ -190,7 +162,7 @@ namespace CommunityCounts.Models.Master
                 .HasMany(e => e.C1service)
                 .WithRequired(e => e.C1journeycat)
                 .HasForeignKey(e => e.JourneyedidCategory)
-                .WillCascadeOnDelete();
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1locations>()
                 .Property(e => e.LocationCode)
@@ -315,10 +287,10 @@ namespace CommunityCounts.Models.Master
                 .WithRequired(e => e.C1schedules)
                 .WillCascadeOnDelete(false);
 
-       /*     modelBuilder.Entity<C1schedules>()
+            modelBuilder.Entity<C1schedules>()
                 .HasOptional(e => e.C1schedulesorig)
                 .WithRequired(e => e.C1schedules)
-                .WillCascadeOnDelete(); */
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<C1schedulesorig>()
                 .Property(e => e.Repetition)
@@ -337,9 +309,9 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<C1service>()
-               .HasMany(e => e.C1journeys)
-               .WithRequired(e => e.C1service)
-               .HasForeignKey(e => e.OrigidService);
+                .HasMany(e => e.C1journeys)
+                .WithRequired(e => e.C1service)
+                .HasForeignKey(e => e.OrigidService);
 
             modelBuilder.Entity<C1servicetypes>()
                 .Property(e => e.ServiceType)
@@ -361,6 +333,11 @@ namespace CommunityCounts.Models.Master
 
             modelBuilder.Entity<C1servicetypes>()
                 .HasMany(e => e.C1schedules)
+                .WithRequired(e => e.C1servicetypes)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<C1servicetypes>()
+                .HasMany(e => e.C1service)
                 .WithRequired(e => e.C1servicetypes)
                 .WillCascadeOnDelete(false);
 
@@ -441,6 +418,20 @@ namespace CommunityCounts.Models.Master
                 .HasForeignKey(e => e.idCity)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<county>()
+                .Property(e => e.CountyCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<county>()
+                .Property(e => e.CountyName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<county>()
+                .HasMany(e => e.postcodes)
+                .WithRequired(e => e.county)
+                .HasForeignKey(e => e.idCountyCode)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<countylist>()
                 .Property(e => e.County)
                 .IsUnicode(false);
@@ -480,12 +471,6 @@ namespace CommunityCounts.Models.Master
                 .WithRequired(e => e.customer)
                 .WillCascadeOnDelete(false);
 
-           
-
-            modelBuilder.Entity<district>()
-                .Property(e => e.CountyCode)
-                .IsUnicode(false);
-
             modelBuilder.Entity<district>()
                 .Property(e => e.DistrictCode)
                 .IsUnicode(false);
@@ -495,32 +480,40 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<district>()
-                .HasMany(e => e.wards)
+                .HasMany(e => e.postcodes)
                 .WithRequired(e => e.district)
-                .HasForeignKey(e => new { e.CountyCode, e.DistrictCode });
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<nhspansha>()
+                .Property(e => e.NHSPanSHACode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<nhspansha>()
+                .Property(e => e.NHSPanSHAName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<nhspansha>()
+                .HasMany(e => e.postcodes)
+                .WithRequired(e => e.nhspansha)
+                .HasForeignKey(e => e.idNHSRegHACode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<nhssha>()
+                .Property(e => e.NHSSHACode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<nhssha>()
+                .Property(e => e.NHSSHAName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<nhssha>()
+                .HasMany(e => e.postcodes)
+                .WithRequired(e => e.nhssha)
+                .HasForeignKey(e => e.idNHSHACode)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<postcode>()
                 .Property(e => e.PostCode1)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<postcode>()
-                .Property(e => e.CountyCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<postcode>()
-                .Property(e => e.DistrictCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<postcode>()
-                .Property(e => e.WardCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<postcode>()
-                .Property(e => e.NHSHACode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<postcode>()
-                .Property(e => e.NHSRegHACode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<postcode>()
@@ -687,14 +680,6 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<ward>()
-                .Property(e => e.CountyCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ward>()
-                .Property(e => e.DistrictCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ward>()
                 .Property(e => e.WardCode)
                 .IsUnicode(false);
 
@@ -705,9 +690,7 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<ward>()
                 .HasMany(e => e.postcodes)
                 .WithRequired(e => e.ward)
-                .HasForeignKey(e => new { e.CountyCode, e.DistrictCode, e.WardCode });
+                .WillCascadeOnDelete(false);
         }
-
-        public System.Data.Entity.DbSet<CommunityCounts.Models.Master.SurveyEnterList> SurveyEnterLists { get; set; }
     }
 }

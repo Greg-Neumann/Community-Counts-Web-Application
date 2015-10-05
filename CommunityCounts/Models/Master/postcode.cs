@@ -23,34 +23,29 @@ namespace CommunityCounts.Models.Master
         [StringLength(8)]
         public string PostCode1 { get; set; }
 
-        [Column(TypeName = "char")]
-        [Required]
-        [StringLength(3)]
-        public string CountyCode { get; set; }
+        public int idWardCode { get; set; }
 
-        [Column(TypeName = "char")]
-        [Required]
-        [StringLength(2)]
-        public string DistrictCode { get; set; }
+        public int idDistrictCode { get; set; }
 
-        [Column(TypeName = "char")]
-        [Required]
-        [StringLength(2)]
-        public string WardCode { get; set; }
+        public int idCountyCode { get; set; }
 
-        [Column(TypeName = "char")]
-        [Required]
-        [StringLength(4)]
-        public string NHSHACode { get; set; }
+        public int idNHSHACode { get; set; }
 
-        [Column(TypeName = "char")]
-        [Required]
-        [StringLength(4)]
-        public string NHSRegHACode { get; set; }
+        public int idNHSRegHACode { get; set; }
+
+        public int idCPDate { get; set; }
 
         public virtual ICollection<C1client> C1client { get; set; }
 
+        public virtual county county { get; set; }
+
         public virtual ICollection<customer> customers { get; set; }
+
+        public virtual district district { get; set; }
+
+        public virtual nhspansha nhspansha { get; set; }
+
+        public virtual nhssha nhssha { get; set; }
 
         public virtual ward ward { get; set; }
     }
