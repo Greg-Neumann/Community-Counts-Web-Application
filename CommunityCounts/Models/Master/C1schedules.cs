@@ -25,18 +25,29 @@ namespace CommunityCounts.Models.Master
         public int idServiceType { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start")]
         public TimeSpan StartTime { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End")]
         public TimeSpan EndTime { get; set; }
 
         public int idScheduleType { get; set; }
 
         [Column(TypeName = "char")]
+        [Display(Name = "Rep?")]
         [StringLength(2)]
         public string Repetition { get; set; }
 
@@ -54,6 +65,7 @@ namespace CommunityCounts.Models.Master
         [StringLength(45)]
         public string CreatedUser { get; set; }
 
+        [Display(Name = "Gen?")]
         public bool Generated { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }

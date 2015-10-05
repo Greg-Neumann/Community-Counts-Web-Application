@@ -15,6 +15,7 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
+        [Display(Name = "Comment Category")]
         public int idQCComType { get; set; }
 
         [Required]

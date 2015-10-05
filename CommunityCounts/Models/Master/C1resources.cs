@@ -19,14 +19,17 @@ namespace CommunityCounts.Models.Master
         [Key]
         public int idResource { get; set; }
 
+        [Display(Name = "Location")]
         public int idLocation { get; set; }
 
         [Required]
         [StringLength(30)]
+        [Display(Name = "Resource Name")]
         public string ResourceName { get; set; }
 
         [Required]
         [StringLength(30)]
+        [Display(Name = "Resource Type")]
         public string ResourceType { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }

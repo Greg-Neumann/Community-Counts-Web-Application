@@ -21,6 +21,8 @@ namespace CommunityCounts.Models.Master
         public int idClient { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddd}", ApplyFormatInEditMode = true)]
         public DateTime SessionDate { get; set; }
 
         public TimeSpan SessionTime { get; set; }

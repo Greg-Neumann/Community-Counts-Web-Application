@@ -23,16 +23,21 @@ namespace CommunityCounts.Models.Master
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Activity Name")]
         public string ServiceType { get; set; }
 
+        [Display(Name = "Attendance recording type")]
         public int AttendanceType { get; set; }
 
         [Required]
         [StringLength(15)]
+        [Display(Name = "Funder")]
         public string FunderCode { get; set; }
 
+        [Display(Name = "Employment Tracked?")]
         public bool EmploymentTracked { get; set; }
 
+        [Display(Name = "Biometric Tracked?")]
         public bool BiometricTracked { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }

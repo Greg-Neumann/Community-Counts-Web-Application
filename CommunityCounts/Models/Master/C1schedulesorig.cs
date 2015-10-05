@@ -20,19 +20,26 @@ namespace CommunityCounts.Models.Master
         public int idServiceType { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:ddd dd MMM yy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
+        [Display(Name = "Start Time")]
         public TimeSpan StartTime { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:ddd dd MMM yy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
         public DateTime EndDate { get; set; }
 
+        [Display(Name = "End Time")]
         public TimeSpan EndTime { get; set; }
 
         public int idScheduleType { get; set; }
 
         [Column(TypeName = "char")]
         [StringLength(2)]
+        [Display(Name = "Rep?")]
         public string Repetition { get; set; }
 
         [StringLength(255)]

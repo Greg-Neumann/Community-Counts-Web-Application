@@ -17,36 +17,48 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
+        [Display(Name = "Unique id")]
         public int idSurvey { get; set; }
-
+         [Display(Name = "Activity")]
         public int idServiceype { get; set; }
 
         [Required]
         [StringLength(30)]
+        [Display(Name = "Survey Name")]
         public string SurveyName { get; set; }
 
         [StringLength(60)]
+        [Display(Name = "Description")]
         public string SurveyDesc { get; set; }
 
+        [Display(Name = "All Clients?")]
         public bool forAllClients { get; set; }
 
+        [Display(Name = "Number of Text Questions")]
         public int numTxtQ { get; set; }
 
+        [Display(Name = "Number of Numeric Questions")]
         public int numScaQ { get; set; }
 
         [Required]
         [StringLength(45)]
+        [Display(Name = "Created by")]
         public string createdUser { get; set; }
 
         [StringLength(45)]
+        [Display(Name = "Updated by")]
         public string updatedUser { get; set; }
 
+          [Display(Name = "Created on")]
         public DateTime createdDateTime { get; set; }
 
+           [Display(Name = "Updated at")]
         public DateTime? updatedDateTime { get; set; }
 
+            [Display(Name = "Active?")]
         public bool active { get; set; }
 
+             [Display(Name = "Allow Anonomous Responses?")]
         public bool forAnonymousClients { get; set; }
 
         public virtual C1servicetypes C1servicetypes { get; set; }

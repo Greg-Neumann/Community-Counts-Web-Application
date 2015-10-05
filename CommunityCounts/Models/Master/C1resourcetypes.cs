@@ -16,10 +16,12 @@ namespace CommunityCounts.Models.Master
 
         [Key]
         [StringLength(30)]
+        [Display(Name = "Resource Type")]
         public string ResourceType { get; set; }
 
         [Required]
         [StringLength(60)]
+        [Display(Name = "Description of resource type")]
         public string ResourceTypeDesc { get; set; }
 
         public virtual ICollection<C1resources> C1resources { get; set; }

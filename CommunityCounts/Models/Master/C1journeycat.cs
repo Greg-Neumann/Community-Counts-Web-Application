@@ -19,10 +19,12 @@ namespace CommunityCounts.Models.Master
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "Journey Category")]
         public string CatName { get; set; }
 
         [Required]
         [StringLength(45)]
+        [Display(Name = "Category Description")]
         public string CatDesc { get; set; }
 
         public virtual ICollection<C1service> C1service { get; set; }

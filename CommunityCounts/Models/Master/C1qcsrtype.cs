@@ -19,8 +19,10 @@ namespace CommunityCounts.Models.Master
 
         [Required]
         [StringLength(30)]
+        [Display(Name = "S/R Category")]
         public string QCSRType { get; set; }
 
+        [Display(Name = "Signpost? (else Referral)")]
         public bool Signpost { get; set; }
 
         public virtual ICollection<C1qcsr> C1qcsr { get; set; }

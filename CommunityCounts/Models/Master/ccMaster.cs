@@ -1,15 +1,49 @@
 namespace CommunityCounts.Models.Master
 {
     using System;
+    using System.Web;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
     public partial class ccMaster : DbContext
     {
-        public ccMaster()
-            : base("name=ccMaster")
+ //       public ccMaster() : base("name=ccMaster"){}
+
+        public ccMaster() : base() { }
+        public ccMaster(string dbname) : base(GetConnectionString(dbname)) { }
+        public static string GetConnectionString(string dbname)
         {
+
+            var username = HttpContext.Current.User.Identity.Name; // get user's email logon name
+            char[] splitChar;
+            splitChar = "@".ToCharArray();
+            var logonParts = username.Split(splitChar[0]); // Email domain will be in 2nd part (index=1)
+            if (logonParts.Length == 2)
+            {
+                var domainName = logonParts[1];
+                var connString = "";
+                switch (domainName)
+                {
+                    case "bhlc.services":
+                        connString = "name=ccbhlc";
+                        return connString;
+                    case "sydni.org":
+                        connString = "name=ccsydn";
+                        return connString;
+                    case "nsfwd.co.uk":
+                        connString = "name=cctrai";
+                        return connString;
+                    case "crownroutes.co.uk":
+                        connString = "name=cccrow";
+                        return connString;
+                    default:
+                        throw new ArgumentOutOfRangeException("logon domain name not recognised");
+                }
+            }
+            else
+            { return "no connection string"; } // This allows fall-thru when user is not signed in to get Identity framework login screen
+
         }
 
         public virtual DbSet<C1attendance> C1attendance { get; set; }

@@ -14,15 +14,18 @@ namespace CommunityCounts.Models.Master
 
         public int idClient { get; set; }
 
+        [Display(Name = "Employed?")]
         public bool EmployedStatus { get; set; }
 
         public DateTime UpdateDateTime { get; set; }
 
+         [Display(Name = "Empl Activity Locn")]
         public int idEmploymentClubLoc { get; set; }
 
         [StringLength(45)]
         public string Comment { get; set; }
 
+         [Display(Name = "Empl Dest")]
         public int? idEmploymentDest { get; set; }
 
         public virtual C1client C1client { get; set; }

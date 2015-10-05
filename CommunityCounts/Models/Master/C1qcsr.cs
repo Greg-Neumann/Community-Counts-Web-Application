@@ -14,11 +14,16 @@ namespace CommunityCounts.Models.Master
 
         public int idCategory { get; set; }
 
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Created")]
         public DateTime CreateDateTime { get; set; }
 
         public int idRegYear { get; set; }
 
         [StringLength(256)]
+        [Display(Name = "Comment")]
         public string comment { get; set; }
 
         public virtual C1qcsrtype C1qcsrtype { get; set; }

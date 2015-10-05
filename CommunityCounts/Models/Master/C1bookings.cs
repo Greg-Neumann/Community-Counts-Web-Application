@@ -19,13 +19,21 @@ namespace CommunityCounts.Models.Master
         public int idServiceType { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:ddd dd MMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
-
+        
+        [Display(Name = "Start")]
+        [DisplayFormat(DataFormatString = "{0:hh':'mm}", ApplyFormatInEditMode = true)]
         public TimeSpan StartTime { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:ddd dd MMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
+        [Display(Name = "End")]
+        [DisplayFormat(DataFormatString = "{0:hh':'mm}", ApplyFormatInEditMode = true)]
         public TimeSpan EndTime { get; set; }
 
         public DateTime UpdateDateTime { get; set; }

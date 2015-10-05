@@ -20,10 +20,12 @@ namespace CommunityCounts.Models.Master
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "Location Short Name")]
         public string LocationCode { get; set; }
 
         [Required]
         [StringLength(45)]
+        [Display(Name = "Location Full Name")]
         public string LocationName { get; set; }
 
         public virtual ICollection<C1empltck> C1empltck { get; set; }
