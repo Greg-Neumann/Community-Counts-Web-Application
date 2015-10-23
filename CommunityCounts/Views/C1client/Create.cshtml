@@ -74,6 +74,7 @@
             <div class="col-md-10">
                 @Html.TextBox("postcodeText", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.postcode, "", new { @class = "text-danger" })
+                <h5>(Homeless? use 'CC1 1CC'. No Fixed Abode? use 'CC1 2CC')</h5>
             </div>
         </div>
 

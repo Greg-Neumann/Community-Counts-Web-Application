@@ -13,7 +13,6 @@
     <div class="form-horizontal">
         <hr />
         @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
-        <h4>(Note: You may use special postcodes - 'CC1 1CC' for Homeless, 'CC1 2CC' for NFA)</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
          <div class="form-group">               
              @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -75,6 +74,7 @@
             <div class="col-md-10">
                 @Html.TextBox("postcodeText", null, htmlAttributes: new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.postcode, "", new { @class = "text-danger" })
+                <h5>(Homeless? use 'CC1 1CC'. No Fixed Abode? use 'CC1 2CC')</h5>
             </div>
         </div>
 

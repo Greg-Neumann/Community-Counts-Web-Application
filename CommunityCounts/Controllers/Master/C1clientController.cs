@@ -58,7 +58,7 @@ namespace CommunityCounts.Controllers.Master
                     }
                 }
             }
-             
+            @ViewBag.userHasNews = CC.userHasNews(db);
             @ViewBag.ClientCount = clientsList.Count().ToString();
             return View(clientsList.Take(30).OrderBy(c=>c.LastName)); // limit i/o to the user to max 50 rows
         }

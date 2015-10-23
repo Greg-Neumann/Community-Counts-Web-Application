@@ -288,6 +288,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Community Counts graphics artwork 1140px x 641px.jpg" />
+    <Content Include="Content\Community Counts graphics artwork 784px x 441px.jpg" />
     <Content Include="Content\CommunityCounts.css" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Actions.png" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Journey daisy-chaining.png" />
@@ -321,6 +322,7 @@
     <Content Include="Content\Images\CCAnalysis 16 - Setting summation to be count.png" />
     <Content Include="Content\Images\CCAnalysis 17 - Setting a custom name for count field.png" />
     <Content Include="Content\Images\CCAnalysis 18 - The answer.png" />
+    <Content Include="Content\Images\Powered by OS Logo 92 x 84 px.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -331,6 +333,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\BHLC CC Server.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
