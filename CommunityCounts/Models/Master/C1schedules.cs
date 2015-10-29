@@ -61,7 +61,6 @@ namespace CommunityCounts.Models.Master
 
         public DateTime CreatedDateTime { get; set; }
 
-        [Required]
         [StringLength(45)]
         public string CreatedUser { get; set; }
 
