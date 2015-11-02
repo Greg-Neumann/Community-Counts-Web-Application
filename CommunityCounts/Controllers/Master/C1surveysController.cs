@@ -71,7 +71,7 @@ namespace CommunityCounts.Controllers.Master
             if (c1surveys.numScaQ == 0 && c1surveys.numTxtQ == 0)
             {
                 ModelState.AddModelError("numTxtQ", "At least one question must be present in a survey");
-            } 
+            }
             if (ModelState.IsValid)
             {
                 c1surveys.createdUser=User.Identity.Name;

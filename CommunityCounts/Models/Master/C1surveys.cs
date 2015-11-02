@@ -40,7 +40,6 @@ namespace CommunityCounts.Models.Master
         [Display(Name = "Number of Numeric Questions")]
         public int numScaQ { get; set; }
 
-        [Required]
         [StringLength(45)]
         [Display(Name = "Created by")]
         public string createdUser { get; set; }
