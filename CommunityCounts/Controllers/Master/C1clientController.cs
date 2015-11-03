@@ -302,15 +302,36 @@ namespace CommunityCounts.Controllers.Master
                 c1client.idPostcode = getid.First().idPostCode;                         // set the idPostCode into the Database field  
                 ModelState.Remove("postcode");                                          // reset the error message affecting the model state                             
             }
+            // 
+            // Create pseudo address for special postcodes relating to Homeless or No Fixed Abode
             //
+            switch (pcode.ToUpper())
+            {
+                case "CC1 1CC":
+                case "CC1 2CC":
+                    //
+                    c1client.HouseNumber = "1";
+                    c1client.AddressLine1 = "Hope Way";
+                    c1client.idCity = db.citylists.Where(t => t.City == "Town").First().Cityid;
+                    c1client.idCounty = db.countylists.Where(c => c.County == "United Kingdom").First().idCountyList;
+                    c1client.idHousingStatus = db.refdatas.Where(r => r.RefCodeValue == "Homeless/No fixed abode").First().idRefData;
+                    c1client.idTenantStatus = db.refdatas.Where(r => r.RefCodeValue == "TSb").First().idRefData;
+                    break;
+                default:
+                    if (c1client.AddressLine1 == null)
+                    {
+                        ModelState.AddModelError("AddressLine1", "Please enter a valid street name");
+                    }
+                    break;
+            }
             // Housing Status / Landlord checking
             // idHousingStatus of 106 = rented accommodation
             // idTenantStatus of 121 = not a tennant
             Boolean Tennant;
             Boolean validTennat;
             Boolean validAccomm;
-            Tennant = (c1client.idHousingStatus == 106);
-            validTennat = (c1client.idTenantStatus != 121);       
+            Tennant = (c1client.idHousingStatus == db.refdatas.Where(r => r.RefCodeValue == "Rented Accommodation").First().idRefData);
+            validTennat = (c1client.idTenantStatus != db.refdatas.Where(r => r.RefCodeValue == "TSb").First().idRefData); // Tennant status of 'none'       
             if (!Tennant)
             {
                 validAccomm = !validTennat;
