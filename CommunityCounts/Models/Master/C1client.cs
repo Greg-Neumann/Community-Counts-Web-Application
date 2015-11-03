@@ -42,7 +42,7 @@ namespace CommunityCounts.Models.Master
         [Display(Name = "House No.")]
         public string HouseNumber { get; set; }
 
-        [Required]
+        
         [StringLength(256)]
         [Display(Name = "Street")]
         public string AddressLine1 { get; set; }
