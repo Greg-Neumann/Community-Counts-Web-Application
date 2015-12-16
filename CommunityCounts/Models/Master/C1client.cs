@@ -15,8 +15,6 @@ namespace CommunityCounts.Models.Master
             C1biometrics = new HashSet<C1biometrics>();
             C1surressca = new HashSet<C1surressca>();
             C1surrestxt = new HashSet<C1surrestxt>();
-            C1empltck = new HashSet<C1empltck>();
-            C1roles = new HashSet<C1roles>();
             C1service = new HashSet<C1service>();
         }
 
@@ -180,10 +178,6 @@ namespace CommunityCounts.Models.Master
         public virtual refdata refdata10 { get; set; }
 
         public virtual regyear regyear { get; set; }
-
-        public virtual ICollection<C1empltck> C1empltck { get; set; }
-
-        public virtual ICollection<C1roles> C1roles { get; set; }
 
         public virtual ICollection<C1service> C1service { get; set; }
     }

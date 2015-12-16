@@ -11,7 +11,6 @@ namespace CommunityCounts.Models.Master
     {
         public C1locations()
         {
-            C1empltck = new HashSet<C1empltck>();
             C1resources = new HashSet<C1resources>();
         }
 
@@ -27,8 +26,6 @@ namespace CommunityCounts.Models.Master
         [StringLength(45)]
         [Display(Name = "Location Full Name")]
         public string LocationName { get; set; }
-
-        public virtual ICollection<C1empltck> C1empltck { get; set; }
 
         public virtual ICollection<C1resources> C1resources { get; set; }
     }

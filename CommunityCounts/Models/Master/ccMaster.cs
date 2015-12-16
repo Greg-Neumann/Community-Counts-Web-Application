@@ -51,9 +51,6 @@ namespace CommunityCounts.Models.Master
         public virtual DbSet<C1bookings> C1bookings { get; set; }
         public virtual DbSet<C1caldat> C1caldat { get; set; }
         public virtual DbSet<C1client> C1client { get; set; }
-        public virtual DbSet<C1clientneeds> C1clientneeds { get; set; }
-        public virtual DbSet<C1empldest> C1empldest { get; set; }
-        public virtual DbSet<C1empltck> C1empltck { get; set; }
         public virtual DbSet<C1funders> C1funders { get; set; }
         public virtual DbSet<C1journeycat> C1journeycat { get; set; }
         public virtual DbSet<C1journeys> C1journeys { get; set; }
@@ -64,14 +61,12 @@ namespace CommunityCounts.Models.Master
         public virtual DbSet<C1qcsrtype> C1qcsrtype { get; set; }
         public virtual DbSet<C1resources> C1resources { get; set; }
         public virtual DbSet<C1resourcetypes> C1resourcetypes { get; set; }
-        public virtual DbSet<C1roles> C1roles { get; set; }
-        public virtual DbSet<C1roletypes> C1roletypes { get; set; }
+
         public virtual DbSet<C1schedules> C1schedules { get; set; }
         public virtual DbSet<C1schedulesorig> C1schedulesorig { get; set; }
         public virtual DbSet<C1service> C1service { get; set; }
         public virtual DbSet<C1servicetypes> C1servicetypes { get; set; }
-        public virtual DbSet<C1skills> C1skills { get; set; }
-        public virtual DbSet<C1skilltypes> C1skilltypes { get; set; }
+
         public virtual DbSet<C1surressca> C1surressca { get; set; }
         public virtual DbSet<C1surrestxt> C1surrestxt { get; set; }
         public virtual DbSet<C1surveys> C1surveys { get; set; }
@@ -158,19 +153,6 @@ namespace CommunityCounts.Models.Master
                 .WithRequired(e => e.C1client)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<C1empldest>()
-                .Property(e => e.EmploymentDestDesc)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1empldest>()
-                .HasMany(e => e.C1empltck)
-                .WithOptional(e => e.C1empldest)
-                .HasForeignKey(e => e.idEmploymentDest);
-
-            modelBuilder.Entity<C1empltck>()
-                .Property(e => e.Comment)
-                .IsUnicode(false);
-
             modelBuilder.Entity<C1funders>()
                 .Property(e => e.FunderCode)
                 .IsUnicode(false);
@@ -205,12 +187,6 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<C1locations>()
                 .Property(e => e.LocationName)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<C1locations>()
-                .HasMany(e => e.C1empltck)
-                .WithRequired(e => e.C1locations)
-                .HasForeignKey(e => e.idEmploymentClubLoc)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1locations>()
                 .HasMany(e => e.C1resources)
@@ -275,24 +251,6 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<C1resourcetypes>()
                 .HasMany(e => e.C1resources)
                 .WithRequired(e => e.C1resourcetypes)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<C1roles>()
-                .Property(e => e.Mentor)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .Property(e => e.Role)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .HasMany(e => e.C1roles)
-                .WithRequired(e => e.C1roletypes)
-                .HasForeignKey(e => e.RoleTypeID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1schedules>()
@@ -379,19 +337,6 @@ namespace CommunityCounts.Models.Master
                 .HasMany(e => e.C1surveys)
                 .WithRequired(e => e.C1servicetypes)
                 .HasForeignKey(e => e.idServiceype)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<C1skilltypes>()
-                .Property(e => e.Skill)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1skilltypes>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1skilltypes>()
-                .HasMany(e => e.C1skills)
-                .WithRequired(e => e.C1skilltypes)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1surrestxt>()
@@ -642,12 +587,6 @@ namespace CommunityCounts.Models.Master
                 .HasMany(e => e.C1client10)
                 .WithOptional(e => e.refdata10)
                 .HasForeignKey(e => e.idTenantStatus);
-
-            modelBuilder.Entity<refdata>()
-                .HasMany(e => e.C1roletypes)
-                .WithRequired(e => e.refdata)
-                .HasForeignKey(e => e.idRoleApplication)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<refdata>()
                 .HasMany(e => e.C1schedules)

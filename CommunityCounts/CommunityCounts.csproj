@@ -236,9 +236,6 @@
     <Compile Include="Models\Master\C1bookings.cs" />
     <Compile Include="Models\Master\C1caldat.cs" />
     <Compile Include="Models\Master\C1client.cs" />
-    <Compile Include="Models\Master\C1clientneeds.cs" />
-    <Compile Include="Models\Master\C1empldest.cs" />
-    <Compile Include="Models\Master\C1empltck.cs" />
     <Compile Include="Models\Master\C1funders.cs" />
     <Compile Include="Models\Master\C1journeycat.cs" />
     <Compile Include="Models\Master\C1journeys.cs" />
@@ -249,14 +246,10 @@
     <Compile Include="Models\Master\C1qcsrtype.cs" />
     <Compile Include="Models\Master\C1resources.cs" />
     <Compile Include="Models\Master\C1resourcetypes.cs" />
-    <Compile Include="Models\Master\C1roles.cs" />
-    <Compile Include="Models\Master\C1roletypes.cs" />
     <Compile Include="Models\Master\C1schedules.cs" />
     <Compile Include="Models\Master\C1schedulesorig.cs" />
     <Compile Include="Models\Master\C1service.cs" />
     <Compile Include="Models\Master\C1servicetypes.cs" />
-    <Compile Include="Models\Master\C1skills.cs" />
-    <Compile Include="Models\Master\C1skilltypes.cs" />
     <Compile Include="Models\Master\C1surressca.cs" />
     <Compile Include="Models\Master\C1surrestxt.cs" />
     <Compile Include="Models\Master\C1surveys.cs" />
