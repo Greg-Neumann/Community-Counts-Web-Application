@@ -4,9 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using CommunityCounts.Models.Master;
 using CommunityCounts.Global_Methods;
 
@@ -41,8 +39,8 @@ namespace CommunityCounts.Controllers.Master
                 {
                     var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                     var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                    fname = CC.unscramble(c.FirstName,c.scramble);
-                    lname = CC.unscramble(c.LastName,c.scramble);
+                    fname = CS.unscramble(c.FirstName,c.scramble);
+                    lname = CS.unscramble(c.LastName,c.scramble);
                     textQ = scaTxt.Count().ToString() + "/" + survey.numTxtQ.ToString();
                     numericQ = scaRes.Count().ToString() + "/" + survey.numScaQ.ToString();
                     sle.Add(new SurveyEnterList() { 
@@ -68,8 +66,8 @@ namespace CommunityCounts.Controllers.Master
                     var c = db.C1client.Find(t.idClient);
                     var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                     var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                    fname = CC.unscramble(c.FirstName,c.scramble);
-                    lname = CC.unscramble(c.LastName,c.scramble);
+                    fname = CS.unscramble(c.FirstName,c.scramble);
+                    lname = CS.unscramble(c.LastName,c.scramble);
                     textQ = scaTxt.Count().ToString() + "/" + survey.numTxtQ.ToString();
                     numericQ = scaRes.Count().ToString() + "/" + survey.numScaQ.ToString();
                     sle.Add(new SurveyEnterList()
@@ -95,8 +93,8 @@ namespace CommunityCounts.Controllers.Master
                 var c = db.C1client.Find(1); // anonymous client is always id 1
                 var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                 var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                fname = CC.unscramble(c.FirstName, c.scramble);
-                lname = CC.unscramble(c.LastName, c.scramble);
+                fname = CS.unscramble(c.FirstName, c.scramble);
+                lname = CS.unscramble(c.LastName, c.scramble);
 
                 var tQ = 0;
                 if (survey.numTxtQ > 0)
@@ -130,7 +128,7 @@ namespace CommunityCounts.Controllers.Master
         {
             var survey = db.C1surveys.Find(id);
             var client = db.C1client.Find(clientid);
-            @ViewBag.Name = CC.unscramble(client.FirstName,client.scramble) + " " + CC.unscramble(client.LastName,client.scramble);
+            @ViewBag.Name = CS.unscramble(client.FirstName,client.scramble) + " " + CS.unscramble(client.LastName,client.scramble);
             @ViewBag.SurveyName = survey.SurveyName;
             List<SurveyResultsN> resultsList = new List<SurveyResultsN>();
             var scaledResponses = db.C1surressca.Where(s=>s.idSurvey==id).Where(s=>s.idClient==clientid).OrderBy(s=>s.ScaledQ);
@@ -243,7 +241,7 @@ namespace CommunityCounts.Controllers.Master
         {
             var survey = db.C1surveys.Find(id);
             var client = db.C1client.Find(clientid);
-            @ViewBag.Name = CC.unscramble(client.FirstName,client.scramble) + " " + CC.unscramble(client.LastName,client.scramble);
+            @ViewBag.Name = CS.unscramble(client.FirstName,client.scramble) + " " + CS.unscramble(client.LastName,client.scramble);
             @ViewBag.SurveyName = survey.SurveyName;
             //var resultsList = new SurveyResults() { idClient = clientid, idSurvey = id, results=new List<SurveyResultsN>()}; // create header row!
             List<SurveyResultsT> resultsList = new List<SurveyResultsT>();
@@ -269,14 +267,14 @@ namespace CommunityCounts.Controllers.Master
             // thus, selecting to enter responses for Anonymous person always advances to a new record
             for (int i = 1; i <= survey.numTxtQ; i++)
             {
-                var alreadyPresent = resultsList.Where(r => r.questionNum == CC.IntToLetters(i)).Count();
+                var alreadyPresent = resultsList.Where(r => r.questionNum == CS.IntToLetters(i)).Count();
                 if (alreadyPresent == 0)
                 {
                     resultsList.Add(new SurveyResultsT()    // key (idSurResTxt) not specified so as to auto increment to support duplicates
                     {
                         idClient = clientid,
                         idSurvey = id,
-                        questionNum = CC.IntToLetters(i), // scaled question responses are alphamumeric
+                        questionNum = CS.IntToLetters(i), // scaled question responses are alphamumeric
                         response = ""
                     });
                 }
@@ -397,8 +395,8 @@ namespace CommunityCounts.Controllers.Master
         });
         }
         C1client c = db.C1client.Find(clientid);
-        @ViewBag.FirstName = CC.unscramble(c.FirstName, c.scramble);
-        @ViewBag.LastName = CC.unscramble(c.LastName, c.scramble);
+        @ViewBag.FirstName = CS.unscramble(c.FirstName, c.scramble);
+        @ViewBag.LastName = CS.unscramble(c.LastName, c.scramble);
         return View(sci.OrderBy(s=>s.seqNo).ToList());    
     }
         // Post: Backup! - delete the most recently entered entry

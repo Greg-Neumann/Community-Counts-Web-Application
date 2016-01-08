@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
 
 namespace CommunityCounts.Controllers.Master
 {
-     [Authorize(Roles = "superAdmin,systemAdmin")]
+    [Authorize(Roles = "superAdmin,systemAdmin")]
     public class C1qccomtypeController : Controller
     {
         private ccMaster db = new ccMaster(null);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Net;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
@@ -50,13 +49,13 @@ namespace CommunityCounts.Controllers
                 //
                 // now, for each original item in the services list, build up the linked-list of journeyed services under each
                 //
-                CommunityCounts.Global_Methods.CC.addJourneyChild(servicesList, id, item.idService, item.StartedDate,0, db);
+                CommunityCounts.Global_Methods.CS.addJourneyChild(servicesList, id, item.idService, item.StartedDate,0, db);
             }
             //
             ViewBag.idClient = id;
             var getClientName = from c in db.C1client where (c.idClient==id) select new {c.FirstName, c.LastName, c.scramble};
-            ViewBag.FirstName = CC.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
-            ViewBag.LastName = CC.unscramble(getClientName.First().LastName,getClientName.First().scramble);
+            ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
+            ViewBag.LastName = CS.unscramble(getClientName.First().LastName,getClientName.First().scramble);
             return View(servicesList); 
         }
         // GET: c1service/Journey
@@ -79,8 +78,8 @@ namespace CommunityCounts.Controllers
                 j.JourneyDepth = currentdepth.JourneyDepth;
             }
             C1client c1client = db.C1client.Find(c1service.idClient);
-            ViewBag.FirstName = CC.unscramble(c1client.FirstName, c1client.scramble);
-            ViewBag.LastName = CC.unscramble(c1client.LastName, c1client.scramble);
+            ViewBag.FirstName = CS.unscramble(c1client.FirstName, c1client.scramble);
+            ViewBag.LastName = CS.unscramble(c1client.LastName, c1client.scramble);
             ViewBag.ServiceType = db.C1servicetypes.Find(c1service.idServiceType).ServiceType;
             ViewBag.idClient = c1service.idClient;
             //
@@ -118,8 +117,8 @@ namespace CommunityCounts.Controllers
             journeyItem.origidServiceType = j.origidServiceType;
             journeyItem.StartedDate = j.StartedDate;
             C1client c1client = db.C1client.Find(c1service.idClient);
-            ViewBag.FirstName = CC.unscramble(c1client.FirstName, c1client.scramble);
-            ViewBag.LastName = CC.unscramble(c1client.LastName, c1client.scramble);
+            ViewBag.FirstName = CS.unscramble(c1client.FirstName, c1client.scramble);
+            ViewBag.LastName = CS.unscramble(c1client.LastName, c1client.scramble);
             ViewBag.ServiceType = db.C1servicetypes.Find(c1service.idServiceType).ServiceType;
             //
             // check that this Client isn;t already allocated to this activity at this date?
@@ -138,6 +137,15 @@ namespace CommunityCounts.Controllers
             {
                 string msg = String.Format("Enrolled Date cannot be earlier than {0:d} as this is when the originating Activity was started",parentStartedDate);
                 ModelState.AddModelError("StartedDate", msg);
+            }
+            //
+            // Enrollment date must we within the registration year
+            //
+            var idRegYear = CS.getRegYearId(db);
+            var regyear = db.regyears.Find(idRegYear);
+            if ((journeyItem.StartedDate > regyear.EndDate) || (journeyItem.StartedDate < regyear.StartDate))
+            {
+                ModelState.AddModelError("StartedDate", "This enrollment date is not within the current registration year (" + regyear.StartDate.ToShortDateString() + "-" + regyear.EndDate.ToShortDateString() + ")");
             }
             if (ModelState.IsValid)
             {
@@ -212,6 +220,15 @@ namespace CommunityCounts.Controllers
             {
                 ModelState.AddModelError("idServiceType", "This client is already allocated to this activity on this date");
             }
+            //
+            // Enrollment date must we within the registration year
+            //
+            var idRegYear = CS.getRegYearId(db);
+            var regyear = db.regyears.Find(idRegYear);
+            if ((c1service.StartedDate > regyear.EndDate) || (c1service.StartedDate<regyear.StartDate))
+            {
+                ModelState.AddModelError("StartedDate", "This enrollment date is not within the current registration year (" + regyear.StartDate.ToShortDateString() + "-" + regyear.EndDate.ToShortDateString()+")");
+            }
             if (ModelState.IsValid)
             {
                 c1service.EndedDate = null;
@@ -237,8 +254,8 @@ namespace CommunityCounts.Controllers
             var getActivityName = from a in db.C1servicetypes where (a.idServiceType == c1service.idServiceType) select new { a.ServiceType };
             ViewBag.idClient = c1service.idClient;
             ViewBag.Activity = getActivityName.First().ServiceType;
-            ViewBag.FirstName = CC.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
-            ViewBag.LastName = CC.unscramble(getClientName.First().LastName,getClientName.First().scramble);
+            ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
+            ViewBag.LastName = CS.unscramble(getClientName.First().LastName,getClientName.First().scramble);
             ViewBag.JourneyedidCategory = new SelectList(db.C1journeycat.OrderBy(a=>a.CatName), "idJourneyCat", "CatName", c1service.JourneyedidCategory);
             ViewBag.OrigEnrollmentDate = c1service.StartedDate; 
         
@@ -261,6 +278,15 @@ namespace CommunityCounts.Controllers
                 {
                     ModelState.AddModelError("EndedDate", "Any unenrolment date must be later than any enrolment date");
                 }
+            }
+            //
+            // Enrollment date must we within the registration year
+            //
+            var idRegYear = CS.getRegYearId(db);
+            var regyear = db.regyears.Find(idRegYear);
+            if ((c1service.StartedDate > regyear.EndDate) || (c1service.StartedDate < regyear.StartDate))
+            {
+                ModelState.AddModelError("StartedDate", "This enrollment date is not within the current registration year (" + regyear.StartDate.ToShortDateString() + "-" + regyear.EndDate.ToShortDateString() + ")");
             }
             // any earlier enrollment to this same activity with an unenrollment date later than this start date?
             var earlyChk = from s in db.C1service where (
@@ -373,8 +399,8 @@ namespace CommunityCounts.Controllers
             var getActivityName = from a in db.C1servicetypes where (a.idServiceType == c1service.idServiceType) select new { a.ServiceType };
             ViewBag.idClient = c1service.idClient;
             ViewBag.Activity = getActivityName.First().ServiceType;
-            ViewBag.FirstName = CC.unscramble(getClientName.First().FirstName, getClientName.First().scramble);
-            ViewBag.LastName = CC.unscramble(getClientName.First().LastName, getClientName.First().scramble);
+            ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName, getClientName.First().scramble);
+            ViewBag.LastName = CS.unscramble(getClientName.First().LastName, getClientName.First().scramble);
             ViewBag.JourneyedidCategory = new SelectList(db.C1journeycat.OrderBy(a => a.CatName), "idJourneyCat", "CatName", c1service.JourneyedidCategory);
             ViewBag.OrigEnrollmentDate = OrigEnrollmentDate; 
             return View(c1service);
@@ -389,8 +415,8 @@ namespace CommunityCounts.Controllers
             }
             C1service c1service = db.C1service.Find(id);
             var getClientName = from c in db.C1client where (c.idClient == c1service.idClient) select new { c.FirstName, c.LastName, c.scramble };
-            ViewBag.FirstName = CC.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
-            ViewBag.LastName = CC.unscramble(getClientName.First().LastName,getClientName.First().scramble);
+            ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName,getClientName.First().scramble);
+            ViewBag.LastName = CS.unscramble(getClientName.First().LastName,getClientName.First().scramble);
             ViewBag.idClient = c1service.idClient;
             if (c1service  == null)
             {
@@ -409,8 +435,8 @@ namespace CommunityCounts.Controllers
             {
                 ModelState.AddModelError("", "This Activity cannot be deleted as it has journeyed Activities (Activities dependent upon this one). Delete those first.");
                 var getClientName = from c in db.C1client where (c.idClient == c1service.idClient) select new { c.FirstName, c.LastName, c.scramble };
-                ViewBag.FirstName = CC.unscramble(getClientName.First().FirstName, getClientName.First().scramble);
-                ViewBag.LastName = CC.unscramble(getClientName.First().LastName, getClientName.First().scramble);
+                ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName, getClientName.First().scramble);
+                ViewBag.LastName = CS.unscramble(getClientName.First().LastName, getClientName.First().scramble);
                 ViewBag.idClient = c1service.idClient;
                 return View(c1service);
             }

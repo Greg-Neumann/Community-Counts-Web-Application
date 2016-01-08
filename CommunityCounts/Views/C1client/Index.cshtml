@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Clients (@ViewBag.ClientCount)</h2>
+<h2>All Clients (@ViewBag.ClientCount in year @ViewBag.RegYear)</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-warning btn-xs" })

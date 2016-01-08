@@ -1,8 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using CommunityCounts.Models;
 
 [assembly: OwinStartupAttribute(typeof(CommunityCounts.Startup))]
 namespace CommunityCounts

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
 using CommunityCounts.Global_Methods;
@@ -62,8 +60,8 @@ namespace CommunityCounts.Controllers.Master
                          select new { b.C1client.FirstName, b.C1client.LastName, b.C1client.scramble }; // now have all idClients who need to have their attendance list printed
             foreach (var c in client.ToList())
             {
-                var fname = CC.unscramble(c.FirstName, c.scramble);
-                var lname = CC.unscramble(c.LastName, c.scramble);
+                var fname = CS.unscramble(c.FirstName, c.scramble);
+                var lname = CS.unscramble(c.LastName, c.scramble);
                 cl.Add(new C1client() { FirstName = fname, LastName = lname });
             }
             if (markFormat.First().RefCodeValue == "AMTT") // times to be printed
@@ -159,8 +157,8 @@ namespace CommunityCounts.Controllers.Master
                pr = (a.AttendedCount > 0);
                al.Add(new AttendanceMark() {
                    idAttendance=a.idAttendance, 
-                   FirstName=CC.unscramble(d.FirstName,d.scramble),
-                   LastName=CC.unscramble(d.LastName,d.scramble),
+                   FirstName=CS.unscramble(d.FirstName,d.scramble),
+                   LastName=CS.unscramble(d.LastName,d.scramble),
                    idResource=resource,idServiceType=servicetype,
                    idSchedules=schedule,
                    SessionDate=sessiondate,
@@ -286,8 +284,8 @@ namespace CommunityCounts.Controllers.Master
                     pr = (a.AttendedCount > 0);
                     al.Add(new AttendanceMark() { 
                         idAttendance = a.idAttendance, 
-                        FirstName = CC.unscramble(d.FirstName, d.scramble), 
-                        LastName = CC.unscramble(d.LastName, d.scramble), 
+                        FirstName = CS.unscramble(d.FirstName, d.scramble), 
+                        LastName = CS.unscramble(d.LastName, d.scramble), 
                         idResource = resource, 
                         idServiceType = servicetype, 
                         idSchedules = schedule, 

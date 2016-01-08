@@ -1,10 +1,7 @@
 namespace CommunityCounts.Models.Master
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ccmaster.users")]
     public partial class user
@@ -21,5 +18,6 @@ namespace CommunityCounts.Models.Master
         public string UserShortName { get; set; }
 
         public bool readNews { get; set; }
+        public int idRegYear { get; set; }
     }
 }

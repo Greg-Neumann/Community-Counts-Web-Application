@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
-using System.Net;
 using System.Linq;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
 using CommunityCounts.Global_Methods;
-using Microsoft.AspNet.Identity;
-using System.Web;
 
 namespace CommunityCounts.Controllers
 {
@@ -21,8 +16,10 @@ namespace CommunityCounts.Controllers
             {
                 // already logged in, check for user news
                 ccMaster db = new ccMaster(null);
-                @ViewBag.userHasNews = CC.userHasNews(db);
-            }
+                @ViewBag.userHasNews = CS.userHasNews(db);
+                ViewBag.RegYearDate = CS.getRegYear(db,true);
+                ViewBag.RegYear = CS.getRegYear(db, false);            }
+           
             return View();
         }
         public ActionResult ReadMore()
@@ -32,7 +29,7 @@ namespace CommunityCounts.Controllers
             {
                 // already logged in, check for user news
                 ccMaster db = new ccMaster(null);
-                @ViewBag.userHasNews = CC.userHasNews(db);
+                @ViewBag.userHasNews = CS.userHasNews(db);
             }
             return View();
         }
@@ -74,6 +71,25 @@ namespace CommunityCounts.Controllers
         public ActionResult N01P01B()
         {
             return View();
+        }
+        [Authorize]
+        public ActionResult ChgYear()
+        {
+            ccMaster db = new ccMaster(null);
+            ViewBag.idRegYear = new SelectList(db.regyears,"idRegYear","RegYear1",CS.getRegYearId(db));
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult ChgYear([Bind(Include = "idRegYear")]regyear r)
+        {
+            ccMaster db = new ccMaster(null);
+            var y = db.users.Where(u => u.Email == User.Identity.Name).First();
+            y.idRegYear = r.idRegYear; // update the chosen registration year
+            db.Entry(y).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

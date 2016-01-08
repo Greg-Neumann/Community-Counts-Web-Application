@@ -17,7 +17,14 @@
                     @Html.ActionLink("Read More", "ReadMore", null, htmlAttributes: new { @class = "btn btn-info  btn-sm" }) &nbsp;
                 </td>
             </tr>
-            </table>}
+            </table>
+            }
+    @if (@ViewBag.RegYear != null)
+    {
+    <p style="font-size:large">
+        You are logged-on to work with registration year @ViewBag.RegYear ending @ViewBag.RegYearDate @Html.ActionLink("Change", "ChgYear", null, htmlAttributes: new { @class = "btn btn-danger  btn-sm" })
+    </p>
+    }
             <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" />
         </div>
 <div class="col-md-3">
@@ -40,8 +47,8 @@
     <p><a href="http://www.sydni.org/">The SYDNI Centre</a> operates out of Cottage Square, Sydenham in Leamington Spa</p>
 </div>
 <div class="col-md-4">
-    <h2><a href="http://chainlillington.co.uk/crown.html">Crown routes</a></h2>
-    <p><a href="http://chainlillington.co.uk/crown.html">Crown routes</a> provides a number of services based in Lillington, Leamington Spa</p>
+    <h2><a href="http://chainlillington.co.uk/crown.html">Crown Routes</a></h2>
+    <p><a href="http://chainlillington.co.uk/crown.html">Crown Routes (The Chain)</a> provides a number of services based in Lillington, Leamington Spa</p>
 </div>
 <hr />
 

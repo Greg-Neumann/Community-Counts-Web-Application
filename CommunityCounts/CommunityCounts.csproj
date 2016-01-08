@@ -513,6 +513,7 @@
     <Content Include="Views\AnalIntro\vSurveys.cshtml" />
     <Content Include="Views\AnalIntro\vSurveyResultsNum.cshtml" />
     <Content Include="Views\AnalIntro\vSurveyResultsTxt.cshtml" />
+    <Content Include="Views\Home\ChgYear.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

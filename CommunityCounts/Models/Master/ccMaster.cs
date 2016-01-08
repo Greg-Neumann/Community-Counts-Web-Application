@@ -3,8 +3,6 @@ namespace CommunityCounts.Models.Master
     using System;
     using System.Web;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class ccMaster : DbContext
     {
