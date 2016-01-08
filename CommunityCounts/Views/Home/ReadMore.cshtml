@@ -60,7 +60,14 @@
             <strong>Bug Fixes and enhancements</strong>
             <ul>
                 <li>
-                    Enure that the date-picker (calendar) appears on the Client enrollment screen when enrolling (it always did when changing an enrollment)
+                    Ensure that the date-picker (calendar) appears on the Client enrollment screen when enrolling (it always did when changing an enrollment)
+                </li>
+                <li>
+                    Activities can now be ended. This means that clients cannot be enrolled in it from after the Activity Ended Date.
+                    <ul>
+                        <li>The end date can be any date from the date that the Activity was last attendance marked.</li>
+                        <li>If an Activity is so ended (in <em>Setup: Activities</em>), then that Activity is no longer listed after that date for enrollment (or journeying) by Clients in <em>Work with: Clients</em></li>
+                    </ul>
                 </li>
                 <li>
                     Schedules are now listed (in <em>Setup : Schedules</em>) sorted by the name of the room, then by the name of the activity and then by the start Date/Time to aid identification of each schedule.

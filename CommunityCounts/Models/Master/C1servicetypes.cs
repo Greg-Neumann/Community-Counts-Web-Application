@@ -1,5 +1,6 @@
 namespace CommunityCounts.Models.Master
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -32,11 +33,11 @@ namespace CommunityCounts.Models.Master
         [Display(Name = "Funder")]
         public string FunderCode { get; set; }
 
-        [Display(Name = "Employment Tracked?")]
-        public bool EmploymentTracked { get; set; }
-
-        [Display(Name = "Biometric Tracked?")]
-        public bool BiometricTracked { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Ended Date")]
+        public DateTime? EndedDate { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 

@@ -17,7 +17,6 @@ namespace CommunityCounts.Controllers
         // GET: C1service for idClient
         public ActionResult Index(int id)
         {
-            //var services = db.C1service.Where(c => c.idClient == id).ToList().OrderBy(c=>c.C1servicetypes.ServiceType);
             List<activityList> servicesList = new List<activityList>();
             string JrnyCat;
             //
@@ -91,7 +90,7 @@ namespace CommunityCounts.Controllers
             {
                 foreach (var item2 in alreadyInUse)
                 {
-                    if (item.idServiceType==item2.idServiceType)
+                    if ((item.idServiceType==item2.idServiceType) || item.EndedDate<=System.DateTime.Now)
                     {
                         fulllist.Remove(item);
                     }
@@ -190,7 +189,7 @@ namespace CommunityCounts.Controllers
             {
                 foreach (var item2 in alreadyInUse)
                 {
-                    if (item.idServiceType == item2.idServiceType)
+                    if ((item.idServiceType == item2.idServiceType)  || item.EndedDate<=System.DateTime.Now)
                     {
                         fulllist.Remove(item);
                     }
