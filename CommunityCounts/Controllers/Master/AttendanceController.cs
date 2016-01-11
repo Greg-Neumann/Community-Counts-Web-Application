@@ -17,7 +17,9 @@ namespace CommunityCounts.Controllers.Master
         // GET: Attendance
         public ActionResult Index()
         {
-            var activities = db.C1servicetypes.OrderBy(s => s.ServiceType).Where(s=>s.refdata.RefCodeValue!="AMNP"); // do not allow selection of activites that are Attendance Marking Not Permitted (AMNP)
+            var activities = from a in db.C1servicetypes.OrderBy(s => s.ServiceType)
+                             where ((a.refdata.RefCodeValue != "AMNP")                                    // suppress "attendance mark not permitted'
+                             && ((a.EndedDate == null) || (a.EndedDate > System.DateTime.Now))) select a; // dont list ended Activities past their end date
             return View(activities.ToList());
         }
 
