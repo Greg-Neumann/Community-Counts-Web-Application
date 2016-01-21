@@ -80,6 +80,7 @@
                 @Html.ActionLink("Activities", "Index", "C1service", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
                 @Html.ActionLink("Edit", "Edit", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+                @Html.ActionLink("Copy", "Copy", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
             </td>
         </tr>
     }

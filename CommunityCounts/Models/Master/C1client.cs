@@ -138,6 +138,9 @@ namespace CommunityCounts.Models.Master
 
         public bool scramble { get; set; }
 
+        [Display(Name ="Previous ID")]
+        public int? idClientPrev { get; set; }
+
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 
         public virtual ICollection<C1biometrics> C1biometrics { get; set; }

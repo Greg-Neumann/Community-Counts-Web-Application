@@ -427,6 +427,112 @@ namespace CommunityCounts.Controllers.Master
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        // GET: C1clients/Copy
+        public ActionResult Copy(int? id)
+        {
+            //
+            // copy forward selected idClient to another registration year.
+            //
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var c1client = db.C1client.Find(id);
+            ViewBag.FullName = CS.unscramble(c1client.FirstName, true) + " "
+                + CS.unscramble(c1client.LastName, true)
+                + " of " + c1client.postcode.PostCode1;
+            ViewBag.idRegYear = new SelectList(db.regyears,"idRegYear", "RegYear1",null, CS.getRegYearId(db));
+
+            return View();
+        }
+        // POST: C1client/Copy
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Copy([Bind(Include = "idRegYear")] int id, int idRegYear)
+        {
+            var prevClient = db.C1client.Find(id);
+            ViewBag.Msg = "";
+            if (prevClient.idRegYear==idRegYear)
+            {
+                ViewBag.Msg="Year cannot be the same as this currrent year; choose another";
+            }
+            if (ViewBag.Msg == "")
+            {
+                Boolean alreadyCopied = db.C1client
+                    .Where(c => c.FirstName == prevClient.FirstName)
+                    .Where(c => c.LastName == prevClient.LastName)
+                    .Where(c => c.idPostcode == prevClient.idPostcode)
+                    .Where(c => c.idRegYear == idRegYear).Any();
+                if (alreadyCopied)
+                {
+                    ViewBag.Msg = "A Client of this name and postcode already exists for this postcode and year " + db.regyears.Find(idRegYear).RegYear1.ToString();
+                }
+            }
+            if (ViewBag.Msg=="")
+            {
+                DateTime rightNow = System.DateTime.Now;
+                db.C1client.Add(new C1client
+                {
+                    AddressLine1 = prevClient.AddressLine1,
+                    AddressLine2 = prevClient.AddressLine2,
+                    ArmedSerPre = prevClient.ArmedSerPre,
+                    ArmedServCur = prevClient.ArmedServCur,
+                    AttainmentTracked = prevClient.AttainmentTracked,
+                    ChangedDateTime = rightNow,
+                    citylist = prevClient.citylist,
+                    ConfirmSigned = false,                  // override
+                    countylist = prevClient.countylist,
+                    CreatedDateTime = rightNow,
+                    customer = prevClient.customer,
+                    Email = prevClient.Email,
+                    Ethnicity_Other = prevClient.Ethnicity_Other,
+                    FirstLanguageOther = prevClient.FirstLanguageOther,
+                    FirstName = prevClient.FirstName,
+                    HearOther = prevClient.HearOther,
+                    HouseNumber = prevClient.HouseNumber,
+                    idAgeRange = prevClient.idAgeRange,
+                    idBenefits = prevClient.idBenefits,
+                    idCity = prevClient.idCity,
+                    idClientPrev = prevClient.idClient,      // watch swop of id's
+                    idCounty = prevClient.idCounty,
+                    idCust = prevClient.idCust,
+                    idDisability = prevClient.idDisability,
+                    idEthnicity = prevClient.idEthnicity,
+                    idFirstLanguage = prevClient.idFirstLanguage,
+                    idGender = prevClient.idGender,
+                    idHearOfServices = prevClient.idHearOfServices,
+                    idHousingStatus = prevClient.idHousingStatus,
+                    idOccupation = prevClient.idOccupation,
+                    idPostcode = prevClient.idPostcode,
+                    idRegYear = idRegYear,
+                    idTenantStatus = prevClient.idTenantStatus,
+                    idTravelMethod = prevClient.idTravelMethod,
+                    LastName = prevClient.LastName,
+                    MemoryStickIssued = prevClient.MemoryStickIssued,
+                    Occupation_Other = prevClient.Occupation_Other,
+                    Phone = prevClient.Phone,
+                    scramble = prevClient.scramble
+                });
+
+                db.SaveChanges();   // write the new client record
+                                    //
+                                    // read new client record back to get it's key
+                                    //
+                var newClient = db.C1client.Where(c => c.idClientPrev==prevClient.idClient).OrderByDescending(c=>c.ChangedDateTime);
+                if (!newClient.Any())
+                {
+                    throw new Exception("Program Logic Error : cannot find new Client created at " + rightNow.ToString() + " for idPostcode " + prevClient.idPostcode.ToString());
+                }
+                return RedirectToAction("Edit/" + newClient.First().idClient.ToString());
+            }
+            ViewBag.FullName = CS.unscramble(prevClient.FirstName, true) + " "
+             + CS.unscramble(prevClient.LastName, true)
+             + " of " + prevClient.postcode.PostCode1;
+            ViewBag.idRegYear = new SelectList(db.regyears, "idRegYear", "RegYear1", null, CS.getRegYearId(db));
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {
