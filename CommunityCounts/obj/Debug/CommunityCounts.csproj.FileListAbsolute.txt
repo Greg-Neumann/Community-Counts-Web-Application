@@ -174,4 +174,3 @@ Z:\Development\CCWeb\CommunityCounts\obj\Debug\CommunityCounts.pdb
 \\nsfwd-nas\home\Development\CCWeb\CommunityCounts\bin\System.Web.Optimization.xml
 \\nsfwd-nas\home\Development\CCWeb\CommunityCounts\obj\Debug\CommunityCounts.dll
 \\nsfwd-nas\home\Development\CCWeb\CommunityCounts\obj\Debug\CommunityCounts.pdb
-\\nsfwd-nas\home\Development\CCWEB\CommunityCounts\obj\Debug\CommunityCounts.csprojResolveAssemblyReference.cache

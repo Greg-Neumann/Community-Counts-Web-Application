@@ -15,6 +15,9 @@ namespace CommunityCounts.Models.Master
             C1surressca = new HashSet<C1surressca>();
             C1surrestxt = new HashSet<C1surrestxt>();
             C1service = new HashSet<C1service>();
+            C1clientcaseheader = new HashSet<C1clientcaseheader>();
+            C1clientneedsheader = new HashSet<C1clientneedsheader>();
+            C1client1 = new HashSet<C1client>();
         }
 
         [Key]
@@ -140,6 +143,9 @@ namespace CommunityCounts.Models.Master
 
         [Display(Name ="Previous ID")]
         public int? idClientPrev { get; set; }
+        public bool isCaseWorked { get; set; }
+
+        public bool hasNeedsAnalysed { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 
@@ -182,5 +188,10 @@ namespace CommunityCounts.Models.Master
         public virtual regyear regyear { get; set; }
 
         public virtual ICollection<C1service> C1service { get; set; }
+        public virtual ICollection<C1clientcaseheader> C1clientcaseheader { get; set; }
+
+        public virtual ICollection<C1clientneedsheader> C1clientneedsheader { get; set; }
+        public virtual ICollection<C1client> C1client1 { get; set; }
+        public virtual C1client C1client2 { get; set; }
     }
 }

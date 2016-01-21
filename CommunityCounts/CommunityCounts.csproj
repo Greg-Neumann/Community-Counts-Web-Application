@@ -236,6 +236,14 @@
     <Compile Include="Models\Master\C1bookings.cs" />
     <Compile Include="Models\Master\C1caldat.cs" />
     <Compile Include="Models\Master\C1client.cs" />
+    <Compile Include="Models\Master\C1clientcasedocs.cs" />
+    <Compile Include="Models\Master\C1clientcaseheader.cs" />
+    <Compile Include="Models\Master\C1clientcaseservice.cs" />
+    <Compile Include="Models\Master\C1clientcaseservicedetail.cs" />
+    <Compile Include="Models\Master\C1clientneedscat.cs" />
+    <Compile Include="Models\Master\C1clientneedsdetail.cs" />
+    <Compile Include="Models\Master\C1clientneedsdocs.cs" />
+    <Compile Include="Models\Master\C1clientneedsheader.cs" />
     <Compile Include="Models\Master\C1funders.cs" />
     <Compile Include="Models\Master\C1journeycat.cs" />
     <Compile Include="Models\Master\C1journeys.cs" />
