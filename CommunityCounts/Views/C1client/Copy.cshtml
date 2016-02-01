@@ -15,15 +15,15 @@
     <div class="text-danger">@ViewBag.Msg</div>
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label class="control-label col-md-2" for="idRegYear">Select Year :</label>
+        <label class="control-label col-md-1" for="idRegYear">Select Year :</label>
         <div class="col-md-2">
             @Html.DropDownList("idRegYear", null, htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
     <br />
-
+    <br />
     <div class="form-group">
-        <div class="col-md-offset-1 col-md-10">
+        <div class="col-md-offset-1 col-md-4">
             <input type="submit" value="Copy" class="btn btn-warning btn-xs" />
         </div>
     </div>

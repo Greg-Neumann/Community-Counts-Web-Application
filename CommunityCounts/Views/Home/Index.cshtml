@@ -21,8 +21,8 @@
             }
     @if (@ViewBag.RegYear != null)
     {
-    <p style="font-size:large">
-        You are logged-on to work with registration year @ViewBag.RegYear ending @ViewBag.RegYearDate @Html.ActionLink("Change", "ChgYear", null, htmlAttributes: new { @class = "btn btn-danger  btn-sm" })
+    <p style="font-size:large", class="text-primary">
+        You are logged-on to work with registration year <strong>@ViewBag.RegYear</strong> (ending @ViewBag.RegYearDate) @Html.ActionLink("Change", "ChgYear", null, htmlAttributes: new { @class = "btn btn-danger  btn-sm" })
     </p>
     }
             <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" />

@@ -176,12 +176,6 @@
             @Html.DisplayFor(model => model.Occupation_Other)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AttainmentTracked)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AttainmentTracked)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.MemoryStickIssued)
         </dt>
         <dd>
@@ -210,6 +204,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.idClient)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idClientPrev)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idClientPrev)  @ViewBag.PrevYear
         </dd>
     </dl>
 </div>

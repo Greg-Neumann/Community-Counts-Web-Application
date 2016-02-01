@@ -22,11 +22,15 @@ namespace CommunityCounts.Models.Master
 
         public int idClient { get; set; }
 
+        [Display (Name ="Date that these Needs apply")]
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ClientNeedsDate { get; set; }
 
-        [Column(TypeName = "tinytext")]
-        [StringLength(255)]
+        //[Column(TypeName = "text")]
+        [Display(Name = "Notes on the Client Needs")]
+        [StringLength(65536)]
         public string ClientNeedsNotes { get; set; }
 
         public virtual C1client C1client { get; set; }

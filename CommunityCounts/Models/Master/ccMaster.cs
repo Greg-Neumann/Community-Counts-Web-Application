@@ -155,9 +155,9 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<C1client>()
-    .HasMany(e => e.C1client1)
-    .WithOptional(e => e.C1client2)
-    .HasForeignKey(e => e.idClientPrev);
+                        .HasMany(e => e.C1client1)
+                        .WithOptional(e => e.C1client2)
+                        .HasForeignKey(e => e.idClientPrev);
 
             modelBuilder.Entity<C1clientcasedocs>()
                 .Property(e => e.ClientCaseDocsPath)

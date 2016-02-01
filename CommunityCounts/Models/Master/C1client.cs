@@ -21,6 +21,7 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
+        [Display(Name ="Current ID")]
         public int idClient { get; set; }
 
         [Required]
@@ -143,9 +144,6 @@ namespace CommunityCounts.Models.Master
 
         [Display(Name ="Previous ID")]
         public int? idClientPrev { get; set; }
-        public bool isCaseWorked { get; set; }
-
-        public bool hasNeedsAnalysed { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 

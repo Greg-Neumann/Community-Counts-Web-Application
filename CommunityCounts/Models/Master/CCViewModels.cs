@@ -3,6 +3,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CommunityCounts.Models.Master
 {
+    public class clientNeedsList
+    {
+        public int idClientNeeds { get; set; }
+
+        public int idClient { get; set; }
+        [Display (Name = "Date that these Needs apply")]
+       
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime ClientNeedsDate { get; set; }
+        [Display(Name = "Notes on the Client Needs")]
+        [StringLength(65536)]
+        public string ClientNeedsNotes { get; set; }
+        [Display (Name = "Number of Needs")]
+        public int numOfNeeds { get; set; }
+    }
     public class caldatList
     {
         public string RegYear { get; set; }

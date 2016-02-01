@@ -87,6 +87,11 @@ namespace CommunityCounts.Controllers.Master
             {
                 return HttpNotFound();
             }
+            ViewBag.PrevYear = "";
+            if (c1client.idClientPrev != null)
+            {
+                ViewBag.PrevYear =" In Year " +  db.regyears.Find(db.C1client.Find(c1client.idClientPrev).idRegYear).RegYear1;
+            }
             return View(c1client);
         }
 
@@ -117,7 +122,7 @@ namespace CommunityCounts.Controllers.Master
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idClient,FirstName,LastName,idPostcode,HouseNumber,AddressLine1,AddressLine2,idCity,idCounty,Phone,Email,idGender,idAgeRange,idEthnicity,Ethnicity_Other,idOccupation,Occupation_Other,idDisability,idBenefits,idTravelMethod,idHearOfServices,HearOther,AttainmentTracked,MemoryStickIssued,ConfirmSigned,idFirstLanguage,FirstLanguageOther,idHousingStatus,idTenantStatus,ArmedServCur,ArmedSerPre")] C1client c1client, string postcodeText)
+        public ActionResult Create([Bind(Include = "idClient,FirstName,LastName,idPostcode,HouseNumber,AddressLine1,AddressLine2,idCity,idCounty,Phone,Email,idGender,idAgeRange,idEthnicity,Ethnicity_Other,idOccupation,Occupation_Other,idDisability,idBenefits,idTravelMethod,idHearOfServices,HearOther,AttainmentTracked,MemoryStickIssued,ConfirmSigned,idFirstLanguage,FirstLanguageOther,idHousingStatus,idTenantStatus,ArmedServCur,ArmedSerPre,isCaseWorked,hasNeedsAnalysed")] C1client c1client, string postcodeText)
         {
             c1client.idRegYear = CS.getRegYearId(db);
             c1client.idCust = 1;                                                          // fix customer as 1; will need database edit for merging multi-customer records!
@@ -277,7 +282,7 @@ namespace CommunityCounts.Controllers.Master
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idClient,idRegYear,FirstName,LastName,idPostcode,HouseNumber,AddressLine1,AddressLine2,idCity,idCounty,Phone,Email,idGender,idAgeRange,idEthnicity,Ethnicity_Other,idOccupation,Occupation_Other,idDisability,idBenefits,idTravelMethod,idHearOfServices,HearOther,AttainmentTracked,MemoryStickIssued,CreatedDateTime,ChangedDateTime,ConfirmSigned,idFirstLanguage,FirstLanguageOther,idHousingStatus,idTenantStatus,ArmedServCur,ArmedSerPre")] C1client c1client, string postcodeText)
+        public ActionResult Edit([Bind(Include = "idClient,idClientPrev,idRegYear,FirstName,LastName,idPostcode,HouseNumber,AddressLine1,AddressLine2,idCity,idCounty,Phone,Email,idGender,idAgeRange,idEthnicity,Ethnicity_Other,idOccupation,Occupation_Other,idDisability,idBenefits,idTravelMethod,idHearOfServices,HearOther,AttainmentTracked,MemoryStickIssued,CreatedDateTime,ChangedDateTime,ConfirmSigned,idFirstLanguage,FirstLanguageOther,idHousingStatus,idTenantStatus,ArmedServCur,ArmedSerPre,isCaseWorked,hasNeedsAnalysed")] C1client c1client, string postcodeText)
         {
             c1client.idCust = 1;                                                          // fix customer as 1; will need database edit for merging multi-customer records!
             //

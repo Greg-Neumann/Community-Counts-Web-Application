@@ -21,8 +21,8 @@ namespace CommunityCounts.Models.Master
 
         public int? CaseServiceStaffid { get; set; }
 
-        [Column(TypeName = "tinytext")]
-        [StringLength(255)]
+       // [Column(TypeName = "text")]
+        [StringLength(65536)]
         public string CaseServiceNotes { get; set; }
 
         public virtual C1clientcaseservice C1clientcaseservice { get; set; }

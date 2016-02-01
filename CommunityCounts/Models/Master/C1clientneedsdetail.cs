@@ -10,13 +10,13 @@ namespace CommunityCounts.Models.Master
     public partial class C1clientneedsdetail
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idClientNeedsDetail { get; set; }
-
+        [Display (Name ="Need Category")]
         public int idClientNeedsCat { get; set; }
 
         public int idClientNeeds { get; set; }
-
+        [Display (Name = "Ticked = has need")]
         public bool hasThisNeed { get; set; }
 
         public virtual C1clientneedscat C1clientneedscat { get; set; }

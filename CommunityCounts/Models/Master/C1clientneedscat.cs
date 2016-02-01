@@ -16,11 +16,12 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idNeedsCat { get; set; }
 
         [Required]
         [StringLength(60)]
+        [Display (Name ="Needs Category")]
         public string Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

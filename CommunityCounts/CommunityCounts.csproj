@@ -195,6 +195,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalIntroController.cs" />
+    <Compile Include="Controllers\Master\C1clientneedscatController.cs" />
+    <Compile Include="Controllers\Master\C1clientneedsheaderController.cs" />
     <Compile Include="Controllers\helpActivityController.cs" />
     <Compile Include="Controllers\helpSurveyController.cs" />
     <Compile Include="Controllers\helpAttendanceController.cs" />
@@ -330,7 +332,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ClassDiagram1.cd" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -523,6 +524,17 @@
     <Content Include="Views\AnalIntro\vSurveyResultsTxt.cshtml" />
     <Content Include="Views\Home\ChgYear.cshtml" />
     <Content Include="Views\C1client\Copy.cshtml" />
+    <Content Include="Views\C1clientneedscat\Create.cshtml" />
+    <Content Include="Views\C1clientneedscat\Delete.cshtml" />
+    <Content Include="Views\C1clientneedscat\Details.cshtml" />
+    <Content Include="Views\C1clientneedscat\Edit.cshtml" />
+    <Content Include="Views\C1clientneedscat\Index.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Create.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Delete.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Notes.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Index.cshtml" />
+    <Content Include="Views\C1clientneedsheader\MarkNeeds.cshtml" />
+    <Content Include="Views\C1clientneedsheader\DetailsNeeds.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

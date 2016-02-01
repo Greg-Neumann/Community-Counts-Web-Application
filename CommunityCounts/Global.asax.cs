@@ -16,6 +16,11 @@ namespace CommunityCounts
                 name: "C1surveysEnterText",
                 url: "C1surveysEnter/Text/{id}/{clientid}",
                 defaults: new { controller = "C1surveysEnter", action = "Text", id = @"\d+", clientid = @"\d+" });
+            routes.MapRoute(
+                name: "ClientNeeds",
+                url: "C1clientneedsheader/MarkNeeds/{idclient}/{idclientneeds}",
+                defaults: new { controller = "C1clientneedheader", action = "MarkNeeds", idclient = @"\d+", idclientneeds = @"\d+" });
+
         }
         protected void Application_Start()
         {
