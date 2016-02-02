@@ -119,6 +119,21 @@ namespace CommunityCounts.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Notes([Bind(Include = "idClientNeeds,idClient,ClientNeedsDate,ClientNeedsNotes")] C1clientneedsheader c1clientneedsheader)
         {
+            //
+            // Needs date must be within the registration year
+            //
+            var idRegYear = CS.getRegYearId(db);
+            var regyear = db.regyears.Find(idRegYear);
+            var idclient = c1clientneedsheader.idClient;
+            var needDate = c1clientneedsheader.ClientNeedsDate;
+            if ((c1clientneedsheader.ClientNeedsDate > regyear.EndDate) || (c1clientneedsheader.ClientNeedsDate < regyear.StartDate))
+            {
+                ModelState.AddModelError("ClientNeedsDate", "This Needs date is not within the current registration year (" + regyear.StartDate.ToShortDateString() + "-" + regyear.EndDate.ToShortDateString() + ")");
+            }
+            if (db.C1clientneedsheader.Where(c => c.idClient == idclient).Where(c => c.ClientNeedsDate == needDate).Any())
+            {
+                ModelState.AddModelError("ClientNeedsDate", "There is already a Need entered for this client on this date; Edit that one instead");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(c1clientneedsheader).State = EntityState.Modified;
@@ -248,7 +263,7 @@ namespace CommunityCounts.Controllers
             ViewBag.NeedsDate = c1clientneedsheader.ClientNeedsDate.ToLongDateString();
             ViewBag.Needs = c1clientneedsheader.ClientNeedsNotes;
             var c1clientneedsdetail = db.C1clientneedsdetail.Where(a => a.idClientNeeds == id);
-            return View(c1clientneedsdetail.ToList());
+            return View(c1clientneedsdetail.ToList().OrderBy(a=>a.C1clientneedscat.Category));
         }
 
         protected override void Dispose(bool disposing)

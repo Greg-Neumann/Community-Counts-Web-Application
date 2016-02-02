@@ -110,13 +110,18 @@ namespace CommunityCounts.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             C1clientneedscat c1clientneedscat = db.C1clientneedscat.Find(id);
-            if (db.C1clientneedsdetail.Where(a => a.idClientNeedsCat == c1clientneedscat.idNeedsCat).Any())
+            if (db.C1clientneedsdetail.Where(a => a.idClientNeedsCat == c1clientneedscat.idNeedsCat).Where(a=>a.hasThisNeed== true).Any())
             {
                 ModelState.AddModelError("","Cannot delete this Client Needs Category as it is in-use by Clients");
             }
             if (ModelState.IsValid)
             {
-                db.C1clientneedscat.Remove(c1clientneedscat);
+                //
+                // Delete the clientneedsdetails that are attached to this needs category (but will not be marked as hasThisNeed== true.
+                //
+                var deleteList = db.C1clientneedsdetail.Where(a => a.C1clientneedscat.idNeedsCat == id);
+                db.C1clientneedsdetail.RemoveRange(deleteList);
+                db.C1clientneedscat.Remove(c1clientneedscat); // delete the parent
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
