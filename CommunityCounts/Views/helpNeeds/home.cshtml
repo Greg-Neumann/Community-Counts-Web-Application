@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Help - Client Needs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Help</h2>
+<h3>Using Client Needs</h3>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="text-info">
+    <p><em>Client Needs</em> is an <strong>optional</strong> part of working with Clients. The <em>Client Needs</em> part of Community Counts is, as usual, made of two main parts</p>
+    <dl>
+        <dt>Setup : Client Needs</dt>
+        <dd>This menu item, restricted to senior staff, enables you to create, modify and delete Client Needs Categories. These definitions enable Senior Staff (usually Managers) to define Categories which they wish to appear on the Client Needs screen so that a Client may be marked as having that Need.</dd>
+        <dt>Work With: Clients, then selecting the <a href="#" class="btn btn-warning btn-xs">Needs</a> button</dt>
+        <dd>This menu item, restricted from normal staff, enables so authorised Staff to assign Needs, from the previously defined list, to any Client already enrolled on the System.</dd>
+    </dl>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Setup : Client Needs</h3>
+        This section describes how Client Needs are <strong>defined</strong> to the system. A Client Need must be defined before any Client may be marked as having that Need.
+        <h4>
+            Security and permissions
+        </h4>
+        You must be a member of either of these roles to be able to define Surveys:
+        <dl>
+            <dt>
+                systemAdmin
+            </dt>
+            <dd>
+                The 'normal' special group that all Managers are member of. In any one centre, there is at least one member of Staff - the senior Manager - who has this security level.
+                <br />      <br />
+            </dd>
+            <dt>
+                canManageNeeds
+            </dt>
+            <dd>
+                A special group that can be assigned to individual staff members that permits them to <strong>mark/unmark Needs</strong> against any particular Client (Work With: Clients, then selecting the <a href="#" class="btn btn-warning btn-xs">Needs</a> button)
+                <br />
+            </dd>
+        </dl>
+        All other staff members will be blocked from either Setup: Client Needs or selecting the <a href="#" class="btn btn-warning btn-xs">Needs</a> button.
+        <h4>
+            New Client Needs
+        </h4>
+        <img src="~/Content/Images/CC Client Needs Setup.png" width="600" title="This screen-shot is from Work With: Client Needs - where Client Needs are entered." align="left" />
+        New Surveys are created by Selecting the <em>Setup</em> menu item and then selecting the <em>Client Needs</em> sub-menu item. If you do not have permissions to do this act, you will be blocked from seeing the screen shown shown to the left.
+        You then press the <a href="#" class="btn btn-warning btn-xs">Create New</a> button at the top of the screen.
+        <p>
+            You may enter any text to describe your new Need. When created, it will be listed alphabetically with all other existing Client Needs. This usually means that you should use some sort of <em>naming</em> convention such as prefixing all 'Personal Development' type Needs
+            with the text 'Personal Devl - &lt; rest of Need text &gt' so that they all group tegether when so listed. If you make a mistake, no worries as you can simply edit any Client Need and change it's name. This will NOT affect any such Needs already assigned to a Client (other than the name of that Need). Use the <a href="#" class="btn btn-warning btn-xs">Edit</a> button shown above to do this.
+        </p>
+        <p>
+            Any Client Need that is not in-use may be deleted at any time. This means that you may press the <a href="#" class="btn btn-danger btn-xs">Delete</a> button against any Client Need Category. If this Need Category is marked as 'ticked' against any Client, then you will not be able to delete this category.
+            If this Need Category is not 'ticked' against any Client, then the Need Category will be deleted and it will no longer be listed as a possible Client Need against any Client even if it is already listed (but not 'ticked').
+        </p>
+
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>Work With: Client Needs then selecting the <a href="#" class="btn btn-warning btn-xs">Needs</a> button</h3>
+        You record any Client Needs against any existing Client by selecting the menu item <em>>Work With: Client Needs</em> and selecting the <a href="#" class="btn btn-warning btn-xs">Needs</a> button. You will then be presented this screen:
+        <div class="text-center">
+            <img src="~/Content/Images/CC Client Needs Management.png" width="800" title="This screen shot shows the main information and actions on the Client Needs screen" />
+        </div>
+        <hr />
+        <div class="text-left">
+            Entering starts by pressing the <a href="#" class="btn btn-warning btn-xs">Create New</a> button at the top. You will then be presented with a screen similar to this..
+        </div>
+        <div class="text-center">
+            <img src="~/Content/Images/CC Client Needs - new need.png" width="600" title="Only the Date is mandatory here, any text is optional. Press the Needs button to continue" />
+        </div>
+        <div class="text-left">
+            <p>
+                On this screen, only a selected date is mandatory. The date chosen must reside within the current business registration year. You may switch registration years (<em>Setup : Change Years</em>) to enter Client Needs outside of the one you are currently using.
+                You may also enter any textural notes against this Client Need. To give you room to enter these notes, you may make the text area bigger by left-clicking (and holding), followed by dragging down/to the right as shown above. These notes may be extensive (there
+                is a system limit of 65,535 characters - about 36 pages of a typical novel.)
+            </p>
+            <p>
+                When you are done, press the <a href="#" class="btn btn-warning btn-xs">Enter Needs</a> button to both save these notes and go to the Client Needs tick-list as shown below.
+            </p>
+        </div>
+        <div class="text-left">
+            <img src="~/Content/Images/CC Client Needs tick list.png" width="400" title="Tick to mark, Tick again to unmark" /><br /><br /><br />
+            This list is populated from the Client Needs Categories set up by Management using <em>Setup: Client Needs</em>. Tick any appropriate Client Needs (and tick-again to untick an already ticked one)
+            Press the <a href="#" class="btn btn-warning btn-xs">Save/Back</a> button to return to the Client Needs list screen.
+        </div>
+        <div class="text-left">
+            <img src="~/Content/Images/CC Client Needs Management.png" width="800" title="This screen shot shows the main information and actions on the Client Needs screen" align="left"/><br /><br />
+            <h4>Other Actions</h4>
+            <ul>
+                <li>You may edit just the Client Needs Notes text by pressing the <a href="#" class="btn btn-warning btn-xs">Notes</a> button</li>
+                <li>You may edit the ticked Client Needs by pressing the <a href="#" class="btn btn-warning btn-xs">Needs</a> button</li>
+                <li>You may delete all this Need for a Client - both the Notes and the Tick-boxes by pressing the <a href="#" class="btn btn-danger btn-xs">Delete</a> button</li>
+            </ul>
+        </div>
+    </div>
+</div>

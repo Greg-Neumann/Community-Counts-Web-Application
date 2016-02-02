@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1clientneedsdetail>
+<h2>Client Needs</h2>
+<p>
+    @{string a = "Index/" + @ViewBag.idClient;}     @* compute URL that is returned to *@
+    @Html.ActionLink("Back to List", a, null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
+
+    <h4>Date that these Needs Applied: @ViewBag.NeedsDate</h4>
+@if(@ViewBag.Needs!=null){<div class="panel panel-default"><div class="panel-body">@ViewBag.Needs</div></div>}
+    <table>
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th width="50px" align="right">
+                @Html.DisplayNameFor(model => model.hasThisNeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.C1clientneedscat.Category)
+            </th>
+
+        </tr>
+        @{int i = 1;}
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @i.ToString("D3")&nbsp;
+                </td>
+                <td  align="center">
+                    @Html.DisplayFor(modelItem => item.hasThisNeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.C1clientneedscat.Category)
+                </td>
+
+            </tr>
+    i++;
+}
+    </table>

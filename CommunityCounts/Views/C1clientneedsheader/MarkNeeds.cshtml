@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1clientneedsdetail>
+@{
+    ViewBag.Title = "Mark Client Needs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Mark Client Needs</h2>
+<h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count() > 0)
+{
+    <div class="alert alert-dismissible alert-danger">
+        @Html.ValidationSummary()
+    </div>
+} 
+<h4>Date that these Needs Applied: @ViewBag.NeedsDate</h4>
+@if(@ViewBag.Needs!=null){<div class="panel panel-default"><div class="panel-body">@ViewBag.Needs</div></div>}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table-condensed">
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th align="right" style="width: 50px">
+                Ticked = has need
+            </th>     
+            <th align="left">
+                Client Need
+            </th>     
+        </tr>
+        @{int counter = 0;}
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i.ToString("D3")&nbsp;
+                </td>
+                <td align="right">
+                    @if (item.hasThisNeed)
+                    {
+                        <input name="[@counter].hasThisNeed" type="checkbox" checked id="[@counter].hasThisNeed" value="true" /> @* return this if user clicked *@
+
+                    }
+                    else
+                    {
+                        <input name="[@counter].hasThisNeed" type="checkbox" id="[@counter].hasThisNeed" value="true" />
+                    }
+                    <input type="hidden" value="false" name="[@counter].hasThisNeed" />                                      @* Otherwise this *@
+
+                </td>
+                <td align="Left">
+                    <input name="[@counter].idClientNeeds" type="hidden" value="@item.idClientNeeds" />                 @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idClientNeedsDetail" type="hidden" value="@item.idClientNeedsDetail" />     @* Stack keys hidden to get them back in HTTPPOST*@
+                    <input name="[@counter].idClientNeedsCat" type="hidden" value="@item.idClientNeedsCat" />           @* Stack keys hidden to get them back in HTTPPOST*@
+                    @Html.DisplayFor(modelitem => item.C1clientneedscat.Category)
+                </td>         
+            </tr>
+                    counter++;
+                    i++;
+        }
+    </table>
+    <div class="form-group">
+        <div class="col-md-4">
+            <input type="submit" value="Save/Back" class="btn btn-warning btn-xs" />
+        </div>
+    </div>
+}
