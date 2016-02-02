@@ -10,6 +10,7 @@ using CommunityCounts.Models.Master;
 
 namespace CommunityCounts.Controllers
 {
+     [Authorize(Roles = "superAdmin,systemAdmin")] 
     public class C1clientneedscatController : Controller
     {
         private ccMaster db = new ccMaster(null);
@@ -88,7 +89,6 @@ namespace CommunityCounts.Controllers
             }
             return View(c1clientneedscat);
         }
-
         // GET: C1clientneedscat/Delete/5
         public ActionResult Delete(int? id)
         {

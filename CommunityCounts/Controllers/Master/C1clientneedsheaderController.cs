@@ -11,6 +11,7 @@ using CommunityCounts.Global_Methods;
 
 namespace CommunityCounts.Controllers
 {
+    [Authorize(Roles = "canManageNeeds,superAdmin,systemAdmin")]
     public class C1clientneedsheaderController : Controller
     {
         private ccMaster db = new ccMaster(null);
@@ -126,14 +127,6 @@ namespace CommunityCounts.Controllers
             var regyear = db.regyears.Find(idRegYear);
             var idclient = c1clientneedsheader.idClient;
             var needDate = c1clientneedsheader.ClientNeedsDate;
-            if ((c1clientneedsheader.ClientNeedsDate > regyear.EndDate) || (c1clientneedsheader.ClientNeedsDate < regyear.StartDate))
-            {
-                ModelState.AddModelError("ClientNeedsDate", "This Needs date is not within the current registration year (" + regyear.StartDate.ToShortDateString() + "-" + regyear.EndDate.ToShortDateString() + ")");
-            }
-            if (db.C1clientneedsheader.Where(c => c.idClient == idclient).Where(c => c.ClientNeedsDate == needDate).Any())
-            {
-                ModelState.AddModelError("ClientNeedsDate", "There is already a Need entered for this client on this date; Edit that one instead");
-            }
             if (ModelState.IsValid)
             {
                 db.Entry(c1clientneedsheader).State = EntityState.Modified;
