@@ -81,35 +81,18 @@
             </td>
             <td>
                  @Html.ActionLink("Details", "Details", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-primary btn-block btn-xs" })
+                @Html.ActionLink("Needs", "Index", "C1clientneedsheader", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
             </td>
             <td>    
                 @Html.ActionLink("Activities", "Index", "C1service", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-primary btn-block btn-xs" })
+                @Html.ActionLink("Casework", "CaseWorkSummary", "ClientCaseWork", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
             </td>    
             <td>     
                @Html.ActionLink("Edit", "Edit", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
+               @Html.ActionLink("Delete", "Delete", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-danger btn-block btn-xs" })
             </td>
             <td>
                 @Html.ActionLink("Copy", "Copy", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
-            </td>
-            
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                @Html.ActionLink("Needs", "Index", "C1clientneedsheader", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
-            </td>
-            <td>
-                @Html.ActionLink("Casework", "Casework", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-block btn-xs" })
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.idClient }, htmlAttributes: new { @class = "btn btn-danger btn-block btn-xs" })
             </td>
         </tr>
     }

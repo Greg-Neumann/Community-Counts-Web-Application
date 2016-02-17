@@ -16,13 +16,13 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idClientCaseDetail { get; set; }
 
         public int idClientCaseHeader { get; set; }
 
-        [Column("1ServiceTypesid")]
-        public int C1ServiceTypesid { get; set; }
+        public int ServiceTypesid { get; set; }
+        public bool isCaseWorked { get; set; }
 
         public virtual C1clientcaseheader C1clientcaseheader { get; set; }
 

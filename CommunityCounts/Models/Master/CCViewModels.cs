@@ -3,6 +3,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CommunityCounts.Models.Master
 {
+    public class clientCaseWorkSelList
+    {
+        public int idClientCaseHeader { get; set; }
+        public int idServiceType { get; set; }
+        public string ServiceName { get; set; }
+        public bool isCaseWorked { get; set; }
+        public DateTime startedDate { get; set; }
+    }
+    public class clientCaseWorkList
+    {
+        [Display(Name ="Total No. of Case Worked Events")]
+        public int numDetailRecs { get; set; }
+        
+        [Display(Name ="Total amount of time spent")]
+        public TimeSpan totalTimeToDate { get; set; }
+        [Display(Name ="Activity")]
+        public string ServiceName { get; set; }
+        [Display(Name ="Last Staff")]
+        public string staffName { get; set; }
+        public bool isCaseWorked { get; set; }
+        public int idClientCaseDetail { get; set; }
+    }
     public class clientNeedsList
     {
         public int idClientNeeds { get; set; }

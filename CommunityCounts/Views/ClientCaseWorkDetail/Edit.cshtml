@@ -1,0 +1,49 @@
+﻿@model CommunityCounts.Models.Master.C1clientcaseservicedetail
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Casework Event for a Client/Activity</h2>
+<h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
+<h3>Activity Name: @ViewBag.ActivityName</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ActionLink("Back to List", "Index", new {id=@ViewBag.idClientCaseDetail}, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idClientCaseServiceDetail)
+        @Html.HiddenFor(model => model.idClientCaseDetail)
+        @Html.HiddenFor(model => model.CaseServiceDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CaseServiceTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.CaseServiceTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CaseServiceTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.CaseServiceNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CaseServiceNotes,4,100, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CaseServiceNotes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-4">
+                <input type="submit" value="Save" class="btn btn-warning btn-xs" />
+            </div>
+        </div>
+    </div>
+}
+

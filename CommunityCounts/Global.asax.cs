@@ -6,7 +6,7 @@ namespace CommunityCounts
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static void RegisterRoutes (RouteCollection routes)
+        public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
                 name: "C1surveysEnterNumeric",
@@ -20,8 +20,7 @@ namespace CommunityCounts
                 name: "ClientNeeds",
                 url: "C1clientneedsheader/MarkNeeds/{idclient}/{idclientneeds}",
                 defaults: new { controller = "C1clientneedheader", action = "MarkNeeds", idclient = @"\d+", idclientneeds = @"\d+" });
-
-        }
+        } 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

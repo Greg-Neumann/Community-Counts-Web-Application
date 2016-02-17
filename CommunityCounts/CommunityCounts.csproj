@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalIntroController.cs" />
+    <Compile Include="Controllers\Master\ClientCaseWorkController.cs" />
     <Compile Include="Controllers\helpNeedsController.cs" />
     <Compile Include="Controllers\Master\C1clientneedscatController.cs" />
     <Compile Include="Controllers\Master\C1clientneedsheaderController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Controllers\Master\C1servicetypesController.cs" />
     <Compile Include="Controllers\Master\C1surveysEnterController.cs" />
     <Compile Include="Controllers\Master\C1surveysController.cs" />
+    <Compile Include="Controllers\Master\ClientCaseWorkDetailController.cs" />
     <Compile Include="Controllers\Master\customersController.cs" />
     <Compile Include="Controllers\Master\FrigController.cs" />
     <Compile Include="Controllers\Master\refdatasController.cs" />
@@ -541,6 +543,14 @@
     <Content Include="Views\C1clientneedsheader\MarkNeeds.cshtml" />
     <Content Include="Views\C1clientneedsheader\DetailsNeeds.cshtml" />
     <Content Include="Views\helpNeeds\home.cshtml" />
+    <Content Include="Views\ClientCaseWork\CaseWorkSummary.cshtml" />
+    <Content Include="Views\ClientCaseWork\CreateCaseService.cshtml" />
+    <Content Include="Views\ClientCaseWork\DeletecaseWork.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Create.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Delete.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Details.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Edit.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CommunityCounts.Models.Master.C1clientcaseservicedetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CaseWork Events for a Client/Activity</h2>
+<h3>Client Name   : @ViewBag.FirstName @ViewBag.LastName</h3>
+<h3>Activity Name : @ViewBag.ActivityName</h3>
+
+<p>
+    @Html.ActionLink("Back to List", "CaseWorkSummary","ClientCaseWork", new {id=@ViewBag.idClient}, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("New Entry", "Create", new {id=@ViewBag.idClientCaseDetail}, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table">
+    <tr>
+        <th width="10%">
+            @Html.DisplayNameFor(model => model.CaseServiceDate)
+        </th>
+        <th width="10%">
+            @Html.DisplayNameFor(model => model.CaseServiceEditDate)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.user.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CaseServiceTime)
+        </th>
+        
+        <th width="45%">
+            @Html.DisplayNameFor(model => model.CaseServiceNotes)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaseServiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaseServiceEditDate)
+        </td>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.user.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaseServiceTime)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.CaseServiceNotes)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.idClientCaseServiceDetail }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.idClientCaseServiceDetail }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>
