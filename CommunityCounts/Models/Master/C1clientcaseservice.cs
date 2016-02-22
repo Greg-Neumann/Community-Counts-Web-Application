@@ -25,7 +25,7 @@ namespace CommunityCounts.Models.Master
         public bool isCaseWorked { get; set; }
 
         public virtual C1clientcaseheader C1clientcaseheader { get; set; }
-
+        public virtual C1servicetypes C1servicetypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1clientcaseservicedetail> C1clientcaseservicedetail { get; set; }
     }

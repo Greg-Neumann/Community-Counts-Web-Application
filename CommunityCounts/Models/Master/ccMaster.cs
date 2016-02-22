@@ -171,7 +171,7 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<C1clientcaseservice>()
                 .HasMany(e => e.C1clientcaseservicedetail)
                 .WithRequired(e => e.C1clientcaseservice)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<C1clientcaseservicedetail>()
                 .Property(e => e.CaseServiceNotes)
@@ -385,6 +385,12 @@ namespace CommunityCounts.Models.Master
                 .WithRequired(e => e.C1servicetypes)
                 .HasForeignKey(e => e.idServiceype)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<C1servicetypes>()
+               .HasMany(e => e.C1clientcaseservice)
+               .WithRequired(e => e.C1servicetypes)
+               .HasForeignKey(e => e.ServiceTypesid)
+               .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1surrestxt>()
                 .Property(e => e.TextQ)

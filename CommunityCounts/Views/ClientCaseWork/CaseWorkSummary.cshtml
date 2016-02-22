@@ -15,7 +15,9 @@
     }
     else
     {
-        @Html.ActionLink("Casework another Activity", "CreateCaseService", new { idClientCaseHeader = @ViewBag.idClientCaseHeader }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("OverView","OverView",new {id = @ViewBag.idClient},htmlAttributes: new { @class = "btn btn-primary btn-xs"})
+        
+        @Html.ActionLink("Casework another Activity", "CreateCaseService", new { idClientCaseHeader = @ViewBag.idClientCaseHeader }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })  
     }
 </p>
 <table class="table table-hover" >
@@ -29,7 +31,7 @@
         <th width="100px" >
             Number of Caseworking events
         </th>
-        <th width="100px">
+        <th width="100px" align="right">
             Total Staff Time
         </th>
         <th></th>
@@ -43,14 +45,14 @@
         <td>
             @Html.DisplayFor(modelitem => item.staffName)
         </td>
-        <td>
+        <td align="right">
             @Html.DisplayFor(modelItem => item.numDetailRecs)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem=> item.totalTimeToDate.TotalHours):@Html.DisplayFor(modelItem=>item.totalTimeToDate.TotalMinutes)
+        <td align="right">
+            @Html.DisplayFor(modelItem=> item.totalTimeToDateFormatted)
         </td>
         <td>
-            @Html.ActionLink("Details", "Index","ClientCaseWorkDetail", new { id = item.idClientCaseDetail }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+            @Html.ActionLink("Details", "Index","ClientCaseWorkDetail", new { id = item.idClientCaseDetail }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" }) 
             @Html.ActionLink("Delete", "DeleteCaseWork", new { id = item.idClientCaseDetail }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
         </td>
     </tr>

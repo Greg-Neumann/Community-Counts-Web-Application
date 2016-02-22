@@ -1,55 +1,59 @@
-﻿@model List<CommunityCounts.Models.Master.clientcaseWorkDetailList>
+﻿@model List<CommunityCounts.Models.Master.clientCaseWorkOverView>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "OverView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CaseWork Events for a Client/Activity</h2>
+<h2>All CaseWork events for a Client</h2>
 <h3>Client Name   : @ViewBag.FirstName @ViewBag.LastName</h3>
-<h3>Activity Name : @ViewBag.ActivityName</h3>
 
 <p>
     @Html.ActionLink("Back to List", "CaseWorkSummary","ClientCaseWork", new {id=@ViewBag.idClient}, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink("New Entry", "Create", new {id=@ViewBag.idClientCaseDetail}, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
-</p>
+   
 <table class="table">
     <tr>
+        
         <th width="10%">
-            CaseWork Started
-        </th>
-        <th width="10%">
-            Last Edit Date/Time
+            CaseWork StartDate
         </th>
         
+        <th width="10%">
+           Last Edit Date/Time
+        </th>
+        <th>
+           Activity
+        </th>
         <th>
             Name
         </th>
-        <th width="10%">
-            Time Spent (hh:mm)
+        <th>
+           Hours
         </th>
         
         <th width="45%">
-            CaseWork Notes
+            Notes
         </th>
-        
-        <th></th>
+   
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        
         <td>
             @Html.DisplayFor(modelItem => item.CaseServiceDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CaseServiceEditDate)
         </td>
-        
+        <td>
+            @Html.DisplayFor(x => item.ServiceName)
+        </td>
         
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
-        <td align="center">
+        <td align="right">
             @Html.DisplayFor(modelItem => item.CaseServiceTime)
         </td>
         
@@ -57,10 +61,6 @@
             @Html.DisplayFor(modelItem => item.CaseServiceNotes)
         </td>
         
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.idClientCaseServiceDetail }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
-            @Html.ActionLink("Delete", "Delete", new { id = item.idClientCaseServiceDetail }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
-        </td>
     </tr>
 }
 

@@ -551,6 +551,7 @@
     <Content Include="Views\ClientCaseWorkDetail\Details.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Edit.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
+    <Content Include="Views\ClientCaseWork\OverView.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

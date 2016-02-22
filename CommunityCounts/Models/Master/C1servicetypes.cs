@@ -15,6 +15,7 @@ namespace CommunityCounts.Models.Master
             C1schedules = new HashSet<C1schedules>();
             C1service = new HashSet<C1service>();
             C1surveys = new HashSet<C1surveys>();
+            C1clientcaseservice = new HashSet<C1clientcaseservice>();
         }
 
         [Key]
@@ -52,5 +53,6 @@ namespace CommunityCounts.Models.Master
         public virtual ICollection<C1surveys> C1surveys { get; set; }
 
         public virtual refdata refdata { get; set; }
+        public virtual ICollection<C1clientcaseservice> C1clientcaseservice { get; set; }
     }
 }

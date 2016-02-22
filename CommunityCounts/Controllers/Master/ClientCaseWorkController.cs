@@ -31,7 +31,7 @@ namespace CommunityCounts.Controllers
             List<clientCaseWorkList> caseList = new List<clientCaseWorkList>();
             TimeSpan totalTime = new TimeSpan(0, 0, 0); // hours minutes seconds integers
             string serviceName,staffName;
-            //char[] splitChar;
+            char[] splitChar;
             //
             if (ClientCaseHeader.Any())
             {
@@ -59,9 +59,9 @@ namespace CommunityCounts.Controllers
                     if (lastStaff!=0)
                     {
                         staffName = db.users.Find(lastStaff).Email;
-                        //splitChar = "@".ToCharArray();
-                        //var logonParts = staffName.Split(splitChar[0]); // Email domain will be in 2nd part (index=1)
-                        //staffName = logonParts[0]; // gets username from email address
+                        splitChar = "@".ToCharArray();
+                        var logonParts = staffName.Split(splitChar[0]); // Email domain will be in 2nd part (index=1)
+                        staffName = logonParts[0]; // gets username from email address
                     }
                     else
                     {
@@ -70,11 +70,18 @@ namespace CommunityCounts.Controllers
                     totalTime = new TimeSpan(new DateTime(totalTimeToDate).Hour, new DateTime(totalTimeToDate).Minute, new DateTime(totalTimeToDate).Second);
                     serviceName = db.C1servicetypes.Find(serviceRec.ServiceTypesid).ServiceType; // service name
                     //
+                    TimeSpan t = new TimeSpan(totalTimeToDate); // convert ticks to timespan
+                    int totalSeconds = t.Seconds;
+                    int totalMinutes = t.Minutes;
+                    int totalDays = t.Days;
+                    int totalHours = t.Hours + totalDays * 24;
+                    string formattedTime = totalHours.ToString("#,###") + ":" + totalMinutes.ToString("00");
                     caseList.Add(new clientCaseWorkList
                     {
                         numDetailRecs = numDetailRecs,
                         staffName = staffName,
                         totalTimeToDate = totalTime,
+                        totalTimeToDateFormatted = formattedTime,
                         ServiceName = serviceName,
                         isCaseWorked = false,
                         idClientCaseDetail = serviceRec.idClientCaseDetail
@@ -226,6 +233,53 @@ namespace CommunityCounts.Controllers
             db.SaveChanges();
             int idClient = db.C1clientcaseheader.Find(c1clientcaseservice.idClientCaseHeader).idClient;
             return RedirectToAction("CaseWorkSummary/"+idClient.ToString());
+        }
+        public ActionResult OverView(int id) // id passed is idClient
+        {
+            var ClientCaseHeader = db.C1clientcaseheader.Where(x => x.idClient == id).First();
+            int idClientCaseHeader = ClientCaseHeader.idClientCaseHeader;
+            List<clientCaseWorkOverView> dataList = new List<clientCaseWorkOverView>();
+            //
+            // get all Client Caseworking service detail records for all services (Activities) undertaken for this client with most recently created first in the list.
+            //
+            var allActivities = from a in db.C1clientcaseservice where a.C1clientcaseheader.idClientCaseHeader == idClientCaseHeader select new { a.idClientCaseDetail, a.ServiceTypesid }; // list of all records for all Activities caseworked
+            foreach (var i in allActivities.ToList())
+            {
+
+                string serviceName = db.C1servicetypes.Find(i.ServiceTypesid).ServiceType;
+                var allCaseWorkRecs = from b in db.C1clientcaseservicedetail where b.idClientCaseDetail == i.idClientCaseDetail select b;
+                foreach (var j in allCaseWorkRecs.ToList())
+                {
+                    string staffName = db.users.Find(j.CaseServiceStaffid).Email;
+                    char[] splitChar;
+                    splitChar = "@".ToCharArray();
+                    var logonParts = staffName.Split(splitChar[0]); // Name will be in the 1st part (index=0)
+                    staffName = logonParts[0];
+                    TimeSpan t = j.CaseServiceTime; // convert ticks to timespan
+                    int totalSeconds = t.Seconds;
+                    int totalMinutes = t.Minutes;
+                    int totalDays = t.Days;
+                    int totalHours = t.Hours + totalDays * 24;
+                    string formattedTime = totalHours.ToString("#,###") + ":" + totalMinutes.ToString("00");
+                    dataList.Add(new clientCaseWorkOverView
+                    {
+                        CaseServiceDate = j.CaseServiceDate,
+                        CaseServiceEditDate = j.CaseServiceEditDate,
+                        CaseServiceNotes = j.CaseServiceNotes,
+                        CaseServiceTime = formattedTime,
+                        Email = staffName,
+                        ServiceName = serviceName
+                    });
+                }
+            }
+            var displayList = dataList.OrderByDescending(a => a.CaseServiceDate);
+            int idClient = id;
+            var getClientName = from c in db.C1client where (c.idClient == idClient) select new { c.FirstName, c.LastName, c.scramble };
+            ViewBag.FirstName = CS.unscramble(getClientName.First().FirstName, getClientName.First().scramble);
+            ViewBag.LastName = CS.unscramble(getClientName.First().LastName, getClientName.First().scramble);
+            ViewBag.idClient = idClient;
+            
+            return View(displayList.ToList());
         }
 
         protected override void Dispose(bool disposing)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,6 +19,32 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult Index(int id) // id passed is idClientCaseDetail
         {
             var c1clientcaseservicedetail = db.C1clientcaseservicedetail.Where(a => a.idClientCaseDetail == id).OrderByDescending(x=>x.CaseServiceDate);
+            List<clientcaseWorkDetailList> detailList = new List<clientcaseWorkDetailList> { };
+            char[] splitChar;
+            string staffName;
+            foreach (var i in c1clientcaseservicedetail.ToList())
+            {
+                staffName = db.users.Find(i.CaseServiceStaffid).Email;
+                splitChar = "@".ToCharArray();
+                var logonParts = staffName.Split(splitChar[0]); // Email domain will be in 2nd part (index=1)
+                staffName = logonParts[0]; // gets username from email address
+                //
+                TimeSpan t = i.CaseServiceTime; // convert ticks to timespan
+                int totalSeconds = t.Seconds;
+                int totalMinutes = t.Minutes;
+                int totalDays = t.Days;
+                int totalHours = t.Hours + totalDays * 24;
+                string formattedTime = totalHours.ToString("#,###") + ":" + totalMinutes.ToString("00");
+                detailList.Add(new clientcaseWorkDetailList
+                {
+                    CaseServiceDate = i.CaseServiceDate,
+                    CaseServiceEditDate = i.CaseServiceEditDate,
+                    CaseServiceNotes = i.CaseServiceNotes,
+                    CaseServiceTime = formattedTime,
+                    name = staffName,
+                    idClientCaseServiceDetail = i.idClientCaseServiceDetail
+                });
+            }
             var ClientCaseHeader = db.C1clientcaseservice.Find(id);
             int idClientCaseHeader = ClientCaseHeader.idClientCaseHeader;          
             int idClient = db.C1clientcaseheader.Find(idClientCaseHeader).idClient;
@@ -29,7 +56,7 @@ namespace CommunityCounts.Controllers.Master
             int ServiceTypesID = ClientCaseHeader.ServiceTypesid;
             ViewBag.ActivityName = db.C1servicetypes.Find(ServiceTypesID).ServiceType;
 
-            return View(c1clientcaseservicedetail.ToList());
+            return View(detailList);
         }
 
         // GET: ClientCaseWorkDetail/Create
