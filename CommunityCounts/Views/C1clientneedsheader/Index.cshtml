@@ -8,6 +8,7 @@
 <h2>Client Needs</h2>
 <h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
 <p>
+    @Html.ActionLink("Back to List", "Index","C1client", new { SearchStringName = @ViewBag.idClient }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
     @Html.ActionLink("Create New", "Create", new { id = @ViewBag.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
 </p>
 <table class="table">
