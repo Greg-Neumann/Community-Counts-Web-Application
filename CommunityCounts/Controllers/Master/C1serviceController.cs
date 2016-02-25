@@ -84,7 +84,7 @@ namespace CommunityCounts.Controllers
             //
             // Only permit selection of service types not already in use
             //
-            var fulllist = db.C1servicetypes.ToList();
+            var fulllist = db.C1servicetypes.OrderBy(a=>a.ServiceType).ToList();
             var alreadyInUse = from s in db.C1service where ((s.idClient == c1service.idClient) & ((s.EndedDate == null) || s.EndedDate > System.DateTime.Today)) select new {s.idServiceType};
             foreach (var item in fulllist.ToList())
             {
@@ -96,7 +96,7 @@ namespace CommunityCounts.Controllers
                     }
                 }
             }
-            ViewBag.idServiceType = new SelectList(fulllist, "idServiceType", "ServiceType");
+            ViewBag.idServiceType = new SelectList(fulllist.OrderBy(a=>a.ServiceType), "idServiceType", "ServiceType");
             return View(j);
         }
         // POST: c1service/Journey
@@ -195,7 +195,7 @@ namespace CommunityCounts.Controllers
                     }
                 }
             }
-            ViewBag.idServiceType = new SelectList(fulllist, "idServiceType", "ServiceType");
+            ViewBag.idServiceType = new SelectList(fulllist.OrderBy(a=>a.ServiceType), "idServiceType", "ServiceType");
             ViewBag.DefStartDate = System.DateTime.Now.ToShortDateString();
             ViewBag.idClient = id; // pass idClient to add screen from ViewBag
             return View();
