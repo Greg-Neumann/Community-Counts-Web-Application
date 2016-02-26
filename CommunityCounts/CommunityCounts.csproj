@@ -224,6 +224,7 @@
     <Compile Include="Controllers\Master\ClientCaseWorkDetailController.cs" />
     <Compile Include="Controllers\Master\customersController.cs" />
     <Compile Include="Controllers\Master\FrigController.cs" />
+    <Compile Include="Controllers\Master\helpYearStartController.cs" />
     <Compile Include="Controllers\Master\refdatasController.cs" />
     <Compile Include="Controllers\Master\usersController.cs" />
     <Compile Include="Global Methods\encrypt.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Content\Images\CC Client Needs Setup.png" />
     <Content Include="Content\Images\CC Client Needs tick list.png" />
     <Content Include="Content\Images\CC Journey Category as unset.png" />
+    <Content Include="Content\Images\CC New-Year-Fresh-Start.jpg" />
     <Content Include="Content\Images\CC Setup Activities List Screen.png" />
     <Content Include="Content\Images\CC Setup Journey Categories.png" />
     <Content Include="Content\Images\CC Survey entering - numeric.png" />
@@ -552,6 +554,7 @@
     <Content Include="Views\ClientCaseWorkDetail\Edit.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
     <Content Include="Views\ClientCaseWork\OverView.cshtml" />
+    <Content Include="Views\helpYearStart\StartYear.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

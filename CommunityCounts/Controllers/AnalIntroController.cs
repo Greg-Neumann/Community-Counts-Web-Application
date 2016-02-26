@@ -2,7 +2,7 @@
 
 namespace CommunityCounts.Controllers
 {
-    [Authorize]
+   
     public class AnalIntroController : Controller
     {
         // GET: AnalIntro

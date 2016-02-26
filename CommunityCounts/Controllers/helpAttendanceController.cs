@@ -2,7 +2,7 @@
 
 namespace CommunityCounts.Controllers
 {
-    [Authorize]
+   
     public class helpAttendanceController : Controller
     {
         // GET: helpAttendance
