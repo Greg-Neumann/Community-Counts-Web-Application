@@ -55,10 +55,11 @@ namespace CommunityCounts.Controllers.Master
                     }
                 }
             }
+            var displayList = clientsList.OrderByDescending(c => c.CreatedDateTime);
             @ViewBag.userHasNews = CS.userHasNews(db);
             @ViewBag.ClientCount = clientsList.Count().ToString();
             @ViewBag.RegYear = CS.getRegYear(db,false);
-            return View(clientsList.Take(30).OrderBy(c=>c.LastName)); // limit i/o to the user to max 50 rows
+            return View(displayList.Take(10).OrderBy(c=>c.LastName)); // limit i/o to the user 
         }
 
         // GET: C1client/Details/5

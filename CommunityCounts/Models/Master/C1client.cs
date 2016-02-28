@@ -21,7 +21,7 @@ namespace CommunityCounts.Models.Master
         }
 
         [Key]
-        [Display(Name ="Current ID")]
+        [Display(Name ="ID")]
         public int idClient { get; set; }
 
         [Required]

@@ -20,6 +20,9 @@
 <table class="table table-striped table-hover">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.idClient)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
@@ -54,6 +57,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idClient)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
