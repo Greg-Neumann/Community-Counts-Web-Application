@@ -20,21 +20,20 @@
     }
     @if (@ViewBag.RegYear != null)
     {
-        <p style="font-size:large" , class="text-primary">
+        <p style="font-size:large" class="text-primary">
             You are logged-on to work with registration year <strong>@ViewBag.RegYear</strong> (ending @ViewBag.RegYearDate) @Html.ActionLink("Change", "ChgYear", null, htmlAttributes: new { @class = "btn btn-danger  btn-sm" })
         </p>
     }
     else
     {
-        <p style="font-size:large" , class="text-primary">
+        <p style="font-size:large"  class="text-primary">
             Record, monitor and <em> analyse </em> your community services using Community Counts
         </p>
     }
-    <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" />
+    <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" class="img-rounded" style="width:95%" />
 </div>
-<div class="col-md-3">
-    <h3 class="text-primary">Community Counts tracks, and analyses, community member’s use of community services</h3>
-    <hr />
+<div class="col-md-3>
+   <br /><br /><br />
     <p class="text-info">Contains OS data © Crown copyright</p>
     <p class="text-info">Contains Royal Mail data © Royal Mail copyright</p>
     <p class="text-info">Contains National Statistics data © Crown copyright</p>
