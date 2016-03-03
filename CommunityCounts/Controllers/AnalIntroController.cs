@@ -14,6 +14,10 @@ namespace CommunityCounts.Controllers
         {
             return View();
         }
+        public ActionResult PivotChart()
+        {
+            return View();
+        }
         public ActionResult DDIntro()
         {
             return View();

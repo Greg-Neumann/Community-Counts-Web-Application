@@ -337,6 +337,9 @@
     <Content Include="Content\Images\CCAnalysis 16 - Setting summation to be count.png" />
     <Content Include="Content\Images\CCAnalysis 17 - Setting a custom name for count field.png" />
     <Content Include="Content\Images\CCAnalysis 18 - The answer.png" />
+    <Content Include="Content\Images\CCAnalysis 20 - choosing the Chart Type.png" />
+    <Content Include="Content\Images\CCAnalysis 21 - The Chart.png" />
+    <Content Include="Content\Images\CCAnalysis19 - Starting a Chart .png" />
     <Content Include="Content\Images\Powered by OS Logo 92 x 84 px.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -557,6 +560,7 @@
     <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
     <Content Include="Views\ClientCaseWork\OverView.cshtml" />
     <Content Include="Views\helpYearStart\StartYear.cshtml" />
+    <Content Include="Views\AnalIntro\PivotChart.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>
