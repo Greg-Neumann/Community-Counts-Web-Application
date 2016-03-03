@@ -299,6 +299,7 @@
     <Content Include="Content\Community Counts graphics artwork 1140px x 641px.jpg" />
     <Content Include="Content\Community Counts graphics artwork 784px x 441px.jpg" />
     <Content Include="Content\CommunityCounts.css" />
+    <Content Include="Content\Documents\Training - V3.0\index.html" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Actions.png" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Journey daisy-chaining.png" />
     <Content Include="Content\Images\CC Anotated Survey Entering.png" />
@@ -349,6 +350,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\Documents\Training - V3.0\Community Counts V3.0 Training.pdf" />
     <None Include="Properties\PublishProfiles\BHLC CC Server.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
