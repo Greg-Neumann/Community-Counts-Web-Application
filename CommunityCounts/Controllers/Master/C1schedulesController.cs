@@ -19,9 +19,9 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult Index()
         {
             //var c1schedules = db.C1schedules.Include(c => c.C1resources).Include(c => c.C1servicetypes).Include(c => c.refdata);
-            var numSchedulesToGenerate = db.C1schedules.Where(s => s.Generated == false).Count();
-            @ViewBag.numSchedulesToGenerate = numSchedulesToGenerate;
             int idYear = CS.getRegYearId(db);
+            var numSchedulesToGenerate = db.C1schedules.Where(s => s.Generated == false).Where(s=>s.idRegYear==idYear).Count();
+            @ViewBag.numSchedulesToGenerate = numSchedulesToGenerate;
             var c1schedules = db.C1schedules.Where(c=>c.idRegYear==idYear).ToList();
             @ViewBag.RegYear = CS.getRegYear(db, false);
             return View(c1schedules.ToList().OrderBy(s=>s.C1resources.ResourceName).ThenBy(s=>s.C1servicetypes.ServiceType).ThenBy(s=>s.StartDate).ThenBy(s=>s.StartTime));
@@ -281,7 +281,7 @@ namespace CommunityCounts.Controllers.Master
             // go the list with last attended date/times, display it all.
             // 
             @ViewBag.attendanceMsg = attendanceMsg;
-            @ViewBag.numSchedulesToGenerate = c1schedules.Count();
+            @ViewBag.numSchedulesToGenerate = c1schedules.Where(s=>s.idRegYear==idRegYear).Count();
             return View(glist);
         }
         [HttpPost, ActionName("Generate")]
@@ -291,8 +291,9 @@ namespace CommunityCounts.Controllers.Master
             // 
             // generation has been confirmed. Loop over all schedules that have not been generated and do them
             //
-            var c1schedules = db.C1schedules.Where(s => s.Generated == false).ToList(); // list all schedules that need generating
-            var getRegYear = from a in db.regyears where (a.RegYear1=="2015") select a; // fix registration year always as 2015 - will need changing!
+            int idYear = CS.getRegYearId(db);
+            var c1schedules = db.C1schedules.Where(s => s.Generated == false).Where(s=>s.idRegYear==idYear).ToList(); // list all schedules that need generating
+            var getRegYear = from a in db.regyears where (a.idRegYear==idYear) select a;
             DateTime endOfYear = getRegYear.First().EndDate;                            // this is calendar date of the end of the current service year (business year)
             DateTime? ld;                                                               // last attendance date for this activity/schedule
             TimeSpan? lt;                                                               // last attendance time ....
