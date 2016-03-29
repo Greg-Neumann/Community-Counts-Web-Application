@@ -9,7 +9,7 @@
 @if (@ViewBag.userHasNews)
 {
 
-    <table class=" alert alert-dismissible alert-danger">
+    <table class="alert alert-dismissible alert-danger">
         <tr>
             <td>
                 <p style="font-size:x-large">You have news &nbsp;</p>
@@ -36,6 +36,22 @@
     </tr>
     <tr>
         <td>
+            29th March 2016
+        </td>
+        <td>
+            3.01
+        </td>
+        <td>
+            A minor bug-fix and enhancement release
+            <ul>
+                <li>Stop crashes during Attendance Marking due to enrolling clients more than once, on multiple computer terminals, in the same Activity.</li>
+                <li>Ensure that Attendance marking only shows bookings for the correct registration year</li>
+            </ul>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
             7th March 2016
         </td>
         <td>
@@ -52,7 +68,7 @@
                         <em>registration year</em> for your first logon.
                     </p>
                     <p>
-                        You can change this <em>registration year</em> by using the menu action <em>Setup : Change Year</em> which will then become the 
+                        You can change this <em>registration year</em> by using the menu action <em>Setup : Change Year</em> which will then become the
                         default <em>registration year</em> for you unless you change it again.
                     </p>
                 </li>
@@ -121,6 +137,7 @@
             </ul>
         </td>
     </tr>
+
     <tr>
         <td>3rd November 2015</td>
         <td>2.0.2</td>
@@ -135,14 +152,15 @@
     <tr>
         <td>23rd October 2015</td>
         <td>2.0</td>
-        <td>Full integration of Community Counts with the Ordnance Survey CodePoint Open Dataset which ensures that:
-        <ul>
-            <li>Postcodes are far more-up-to-date, being refreshed quarterly from National Data</li>
-            <li>Special 'Postcodes' introduced for genuinely homeless client and those with a home that is not at a fixed address (No Fixed Abode) such as Caravan, or Barge, dwellers. (These being visible on Client edit, or create, screens)</li>
-            <li>Geographical related data (Ward, District &amp; County) equally refreshed</li>
-            <li>NHS Strategic Health Authority codes equally refreshed</li>
-        </ul>
-        (These last 2 items only being visible in the Analysis Engine)
+        <td>
+            Full integration of Community Counts with the Ordnance Survey CodePoint Open Dataset which ensures that:
+            <ul>
+                <li>Postcodes are far more-up-to-date, being refreshed quarterly from National Data</li>
+                <li>Special 'Postcodes' introduced for genuinely homeless client and those with a home that is not at a fixed address (No Fixed Abode) such as Caravan, or Barge, dwellers. (These being visible on Client edit, or create, screens)</li>
+                <li>Geographical related data (Ward, District &amp; County) equally refreshed</li>
+                <li>NHS Strategic Health Authority codes equally refreshed</li>
+            </ul>
+            (These last 2 items only being visible in the Analysis Engine)
         </td>
     </tr>
     <tr>
@@ -153,10 +171,12 @@
     <tr>
         <td>17th June 2015</td>
         <td>1.25</td>
-        <td><ol>
-            <li>Permit searching for Client by Client ID AND partial name</li>
-            <li>Bug Fix relating to the identification of prior attendance when Journeying (Thanks, Hilary)</li>
-            </ol></td>
+        <td>
+            <ol>
+                <li>Permit searching for Client by Client ID AND partial name</li>
+                <li>Bug Fix relating to the identification of prior attendance when Journeying (Thanks, Hilary)</li>
+            </ol>
+        </td>
     </tr>
     <tr>
         <td>10th June 2015</td>
@@ -166,18 +186,19 @@
     <tr>
         <td>10th June 2015</td>
         <td>1.23</td>
-        <td>Various changes - largely behind the scenes:
-        <ol>
-            <li>
-                Provide support for automatic management of calendar dates used by both the online Community Counts system and the forth-comming Analysis Engine
-            </li>
-            <li>
-                Provide support for Crown Routes - pending approval
-            </li>
-            <li>
-                Show Journey Category on Activities for a Client list screen
-            </li>
-        </ol>
+        <td>
+            Various changes - largely behind the scenes:
+            <ol>
+                <li>
+                    Provide support for automatic management of calendar dates used by both the online Community Counts system and the forth-comming Analysis Engine
+                </li>
+                <li>
+                    Provide support for Crown Routes - pending approval
+                </li>
+                <li>
+                    Show Journey Category on Activities for a Client list screen
+                </li>
+            </ol>
         </td>
     </tr>
     <tr>
@@ -185,8 +206,8 @@
         <td>1.22</td>
         <td>
             Introduction of <strong>Journeys</strong>.<br />Journeys permit Activities to be link together in a <em>daisy-chaining</em> fashion and/or to categorise the <em>outcome</em> of such an Activity. Examples of the latter include such service-needs as marking Clients who have
-            used Employment-related Activities as now 'Employed Full Time'. 
-            
+            used Employment-related Activities as now 'Employed Full Time'.
+
             <ol>
                 <li>Created new option <a href="#" class="btn btn-warning btn-xs">Journey</a> on the Client's Activities list screen to permit <em>Journeys</em> to be created</li>
                 <li>Created new <strong>optional</strong> drop-down box on Client's Activities <a href="#" class="btn btn-warning btn-xs">Edit</a> screen to permit (optional) assignment of a <em>Journey Category</em></li>
@@ -227,7 +248,7 @@
                 <li>Tally Counting. Clients may make multiple attendances for a given session.</li>
                 <li>Timed. Clients sign-in and sign-out and the attendance records the hours (and minutes) of their attendance.</li>
             </ol>
-            <div class="alert alert-dismissible alert-info">        
+            <div class="alert alert-dismissible alert-info">
                 <strong>Heads up!</strong> This means that the system decides whether the 'Print with Times' option applies to each attendance sheet based upon how each Activity is declared for Attendance marking. You cannot chose it yourself.
             </div>
             You are advised to read the help text in this area @Html.ActionLink("More", "home", "helpAttendance", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
@@ -261,8 +282,10 @@
         <td>
             A 'Pick and Mix' release of several quickies ahead of bigger changes planned for the next release
             <ul>
-                <li>Ensure that printed attendance lists only include clients who, on the <strong>session date</strong> chosen are fully enrolled. This means that the Activity enrollment start date must be earler, or equal, to the session date <strong>AND</strong> the Activity ended date is later than the session date. Put another way
-                the 'window in time' for which the client is enrolled for this activity must span - be either side - of the session date.</li>
+                <li>
+                    Ensure that printed attendance lists only include clients who, on the <strong>session date</strong> chosen are fully enrolled. This means that the Activity enrollment start date must be earler, or equal, to the session date <strong>AND</strong> the Activity ended date is later than the session date. Put another way
+                    the 'window in time' for which the client is enrolled for this activity must span - be either side - of the session date.
+                </li>
                 <li>Ensure that printed attendance lists are sorted by ascending first name order (instead of last name)</li>
                 <li>Ensure that the term 'Preferred Language', as used on the paper forms, is correctly reflected on all online forms</li>
                 <li>Add (missing) option of entering a free-format text answer if the 'Preferred Language' is not one of the proscribed list values</li>
@@ -300,7 +323,7 @@
             <ul>
                 <li>
                     Introduction of "You have news" system @Html.ActionLink("More", "N01P01A", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
-</li>
+                </li>
                 <li>
                     Addition of "Enrollment start date on any activity"&nbsp; @Html.ActionLink("More", "N01P01B", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
                 </li>

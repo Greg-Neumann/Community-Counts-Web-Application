@@ -561,6 +561,7 @@
     <Content Include="Views\ClientCaseWork\OverView.cshtml" />
     <Content Include="Views\helpYearStart\StartYear.cshtml" />
     <Content Include="Views\AnalIntro\PivotChart.cshtml" />
+    <Content Include="Views\Attendance\MarkAListE.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,14 @@
+﻿@model List<CommunityCounts.Models.Master.AttendanceMark>
+@{
+    ViewBag.Title = "Mark Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Mark Attendance</h2>
+<h3>@ViewBag.ResourceName for @ViewBag.ActivityName</h3>
+<h4>@ViewBag.StartDate at @ViewBag.StartTime</h4>
+<hr />
+<div class="alert alert-danger">
+    <strong>Duplicate Enrollment detected!</strong>
+    We cannot continue marking attendance for this session as client @ViewBag.FirstName @ViewBag.LastName (of client id @ViewBag.idClient) is enrolled more than once into @ViewBag.ActivityName.<br />
+    Please @Html.ActionLink("click here","index","c1service",new { id=ViewBag.idClient},null) to edit the enrollments for this client to remove the duplicates for Activity @ViewBag.ActivityName.
+</div>
