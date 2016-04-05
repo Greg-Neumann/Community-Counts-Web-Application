@@ -18,7 +18,7 @@ namespace CommunityCounts.Controllers.Master
         // 
         public ActionResult Index()
         {
-            var c1surveys = db.C1surveys.Include(c => c.C1servicetypes).Where(c=>c.active);
+            var c1surveys = from s in db.C1surveys where (s.active == true) && ((s.C1servicetypes.EndedDate == null) || (s.C1servicetypes.EndedDate >= System.DateTime.Now)) select s;
             return View(c1surveys.ToList().OrderByDescending(s=>s.idSurvey));
         }
         // 
@@ -31,10 +31,11 @@ namespace CommunityCounts.Controllers.Master
             @ViewBag.SurveyName = survey.SurveyName;
             @ViewBag.SurveyID = id.ToString();
             @ViewBag.Activity = db.C1servicetypes.Find(survey.idServiceype).ServiceType;
+            int idYear = CS.getRegYearId(db);   // get signed-in year to work with
             if (survey.forAllClients)
             {
                 // for all clients
-                var cl = db.C1client.Where(c=>c.idClient>1); // omit anonymous client initially 
+                var cl = db.C1client.Where(c=>c.idClient>1).Where(c=>c.idRegYear==idYear); // omit anonymous client initially 
                 foreach (var c in cl.ToList())
                 {
                     var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
@@ -60,7 +61,7 @@ namespace CommunityCounts.Controllers.Master
             else
             {
                 // for all clients enrolled in activity idservicetype (despite typos on database schema!)
-                var sl = db.C1service.Where(s => s.idServiceType == survey.idServiceype);
+                var sl = db.C1service.Where(s => s.idServiceType == survey.idServiceype).Where(s=>s.C1client.idRegYear==idYear);
                 foreach (var t in sl.ToList())
                 {
                     var c = db.C1client.Find(t.idClient);
