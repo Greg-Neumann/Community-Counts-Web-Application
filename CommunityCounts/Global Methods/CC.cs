@@ -135,6 +135,8 @@ namespace CommunityCounts.Global_Methods
                 newRec.Email = userName;
                 newRec.UserShortName = " ";
                 newRec.readNews = false;
+                int idYear = CS.getRegYearId(db);
+                newRec.idRegYear = idYear;
                 db.users.Add(newRec); // insert username into users table (for next time) and set read to false
                 db.SaveChanges();
                 return true;

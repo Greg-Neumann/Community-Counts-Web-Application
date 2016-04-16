@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Bulk Copy Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Bulk Copy Clients to another Year</h2>
+<hr />
+@Html.ActionLink("Back to Home Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+<br /><br />
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>All done!</strong>
+    <p>
+        @ViewBag.was_copied_count clients were copied to the new year and @ViewBag.already_copied_count were already present.
+    </p>
+</div>

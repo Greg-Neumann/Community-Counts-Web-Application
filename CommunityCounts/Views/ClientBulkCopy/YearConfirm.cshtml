@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Confirm Bulk Copy Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Confirm Bulk Copy Clients to another Year</h2>
+<h3>Current Year Ends on : @ViewBag.regYear</h3>
+<h3>Copy Year Starts on : @ViewBag.NewYearStarts</h3>
+<h3>Number of Clients present in current year  : @ViewBag.current_count</h3>
+<h3>Number of Clients that will be copied to the new year : @ViewBag.will_be_copied_count</h3>
+<h3>Number of Clients that are already copied to the new year : @ViewBag.already_copied_count</h3>
+<hr />
+@Html.ActionLink("Back to Home Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+<br /><br />
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Important!</strong>
+    <ul>
+        <li>
+            You are now about to copy all the clients to the new year.
+        </li>
+        <li>
+           <strong>This action cannot be undone!</strong>
+        </li>
+        <li>
+            If you want to continue, press the <a href="#" class="btn btn-danger btn-xs">Do IT!</a> button; otherwise press the <a href="#" class="btn btn-primary btn-xs">Back to Home Screen</a> button above.
+        </li>
+    </ul>
+</div>
+@Html.ActionLink("Do IT!", "Copy", new { id = @ViewBag.idRegYear }, htmlAttributes: new { @class = "btn btn-danger  btn-xs" })
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <h4>Warning!</h4>
+    <p>This may take some time to processes - up to two whole minutes; please be patient and do not press this button again! You will be presented with a screen confirming that this is done.</p>
+
+</div>

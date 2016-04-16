@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalIntroController.cs" />
+    <Compile Include="Controllers\Master\ClientBulkCopyController.cs" />
     <Compile Include="Controllers\Master\ClientCaseWorkController.cs" />
     <Compile Include="Controllers\helpNeedsController.cs" />
     <Compile Include="Controllers\Master\C1clientneedscatController.cs" />
@@ -550,18 +551,22 @@
     <Content Include="Views\C1clientneedsheader\MarkNeeds.cshtml" />
     <Content Include="Views\C1clientneedsheader\DetailsNeeds.cshtml" />
     <Content Include="Views\helpNeeds\home.cshtml" />
-    <Content Include="Views\ClientCaseWork\CaseWorkSummary.cshtml" />
-    <Content Include="Views\ClientCaseWork\CreateCaseService.cshtml" />
-    <Content Include="Views\ClientCaseWork\DeletecaseWork.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\CaseWorkSummary.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\CreateCaseService.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\DeletecaseWork.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Create.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Delete.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Details.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Edit.cshtml" />
     <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
-    <Content Include="Views\ClientCaseWork\OverView.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\OverView.cshtml" />
     <Content Include="Views\helpYearStart\StartYear.cshtml" />
     <Content Include="Views\AnalIntro\PivotChart.cshtml" />
     <Content Include="Views\Attendance\MarkAListE.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Start.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Year.cshtml" />
+    <Content Include="Views\ClientBulkCopy\YearConfirm.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Copy.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

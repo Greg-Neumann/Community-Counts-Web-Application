@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Bulk Copy Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Bulk Copy Clients to another Year</h2>
+<h3>Current Year Ends on : @ViewBag.regYear</h3>
+<h3>Number of Clients present in this year  : @ViewBag.current_count</h3>
+<hr />
+@Html.ActionLink("Back to Home Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+<br /><br />
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Important!</strong>
+    <ul>
+        <li>
+            This action will allow you to copy <strong>all of</strong> the existing clients from the current year to another year.
+        </li>
+        <li>
+            This action can be performed at <strong>any</strong> time as this action will check that any clients <em>already</em> copied into that new year are not duplicated.
+        </li>
+        <li>
+            Client details are copied <em>as-is</em> with no progression nor amendment of their personal data. For example, their stated <strong>age-range</strong> is not altered and should be checked in the new year that this then matches their new registration data.
+            To this end, the <strong>confirm signed</strong> flag at the bottom of the client detail record is not marked by this process. Hence, you should check such details for all clients in the new year
+        </li>
+        <li>
+            If you want to continue, press the button below; otherwise press the button above.
+        </li>
+    </ul>
+</div>
+@Html.ActionLink("Choose New Year", "Year", null, htmlAttributes: new { @class = "btn btn-danger  btn-xs" })
