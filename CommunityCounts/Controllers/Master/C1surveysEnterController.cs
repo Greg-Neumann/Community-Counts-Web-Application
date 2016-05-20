@@ -289,54 +289,119 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult Text([Bind(Exclude = "")] List<SurveyResultsT> sc)
         {
             string r;
+            int ctr = 1;
             // Anonymous Client processing requires counter responseSeqNo
             int maxSeqNo = 0;
             int cl = sc.First().idClient;
             int su = sc.First().idSurvey;
-            if (sc.First().idClient == 1) // anonymous client
+            //
+            // check string length returned as not using entity framework model for the POST
+            //
+            foreach (var t in sc)
             {
-                var lastGroup = db.C1surrestxt.Where(c => c.idClient == cl).Where(c => c.idSurvey == su).OrderByDescending(c => c.responseSeqNo);
-                if (lastGroup.Any())
+                if ((t.response != null) && (t.response.Length> 255))
                 {
-                    maxSeqNo = lastGroup.First().responseSeqNo + 1;
+                    ModelState.AddModelError("", "The length of the entered text in response " + CS.IntToLetters(ctr) + " exceeds the limit of 255 characters by " + (t.response.Length - 255).ToString() + " characters. Please shorten this.");
+                    break;
                 }
-                else
-                {
-                    maxSeqNo = 0;
-                }
+                else { ctr++; }
             }
-            foreach (var i in sc)
+            if (ModelState.IsValid)
             {
-                if (String.IsNullOrEmpty(i.response))
+               
+                if (sc.First().idClient == 1) // anonymous client
                 {
-                    r="No Comment";
-                }
-                else
-                {
-                    r=i.response;
-                }
-                if (i.idSurResTxt == 0)                // new result to be added, therefor autonum idSurResSca
-                {
-                    // text st
-                    db.C1surrestxt.Add(new C1surrestxt()
+                    var lastGroup = db.C1surrestxt.Where(c => c.idClient == cl).Where(c => c.idSurvey == su).OrderByDescending(c => c.responseSeqNo);
+                    if (lastGroup.Any())
                     {
-                        idSurvey = i.idSurvey,
-                        idClient = i.idClient,
-                        Response = r,
-                        TextQ = i.questionNum,
-                        responseSeqNo = maxSeqNo
-                    });
+                        maxSeqNo = lastGroup.First().responseSeqNo + 1;
+                    }
+                    else
+                    {
+                        maxSeqNo = 0;
+                    }
                 }
-                else
+                foreach (var i in sc)
                 {
-                    C1surrestxt row = db.C1surrestxt.Find(i.idSurResTxt);
-                    row.Response = r;
-                    db.Entry(row).State = EntityState.Modified;
-                }
+                    if (String.IsNullOrEmpty(i.response))
+                    {
+                        r = "No Comment";
+                    }
+                    else
+                    {
+                        r = i.response;
+                    }
+                    if (i.idSurResTxt == 0)                // new result to be added, therefor autonum idSurResSca
+                    {
+                        // text st
+                        db.C1surrestxt.Add(new C1surrestxt()
+                        {
+                            idSurvey = i.idSurvey,
+                            idClient = i.idClient,
+                            Response = r,
+                            TextQ = i.questionNum,
+                            responseSeqNo = maxSeqNo
+                        });
+                    }
+                    else
+                    {
+                        C1surrestxt row = db.C1surrestxt.Find(i.idSurResTxt);
+                        row.Response = r;
+                        db.Entry(row).State = EntityState.Modified;
+                    }
 
+                }
+                db.SaveChanges();
+                return RedirectToAction("Clients/" + sc.First().idSurvey); // pass idSurvey as key to list clients for survey screen
             }
-            db.SaveChanges();
-            return RedirectToAction("Clients/" + sc.First().idSurvey); // pass idSurvey as key to list clients for survey screen
+            else
+            {
+                //
+                // error re-display
+                //
+                var survey = db.C1surveys.Find(su);
+                var client = db.C1client.Find(cl);
+                @ViewBag.Name = CS.unscramble(client.FirstName, client.scramble) + " " + CS.unscramble(client.LastName, client.scramble);
+                @ViewBag.SurveyName = survey.SurveyName;
+                //var resultsList = new SurveyResults() { idClient = clientid, idSurvey = id, results=new List<SurveyResultsN>()}; // create header row!
+                List<SurveyResultsT> resultsList = new List<SurveyResultsT>();
+                var Responses = db.C1surrestxt.Where(s => s.idSurvey == su).Where(s => s.idClient == cl).OrderBy(s => s.TextQ);
+                //
+                // firstly, if this is not the special case of Anonymous persons, assign any responses already entered into the view list
+                // Then, go back over the list to insert any questions not yet answered
+                //
+                if (cl != 1)
+                {
+                    foreach (var res in Responses.ToList())
+                    {
+                        resultsList.Add(new SurveyResultsT()
+                        {
+                            idSurResTxt = res.idSurResTxt, // retrieve existing key
+                            idClient = cl,
+                            idSurvey = su,
+                            questionNum = res.TextQ,
+                            response = res.Response
+                        }); // add the child row !
+                    }
+                }
+                // thus, selecting to enter responses for Anonymous person always advances to a new record
+                for (int i = 1; i <= survey.numTxtQ; i++)
+                {
+                    var alreadyPresent = resultsList.Where(res => res.questionNum == CS.IntToLetters(i)).Count();
+                    if (alreadyPresent == 0)
+                    {
+                        resultsList.Add(new SurveyResultsT()    // key (idSurResTxt) not specified so as to auto increment to support duplicates
+                        {
+                            idClient = cl,
+                            idSurvey = su,
+                            questionNum = CS.IntToLetters(i), // scaled question responses are alphamumeric
+                            response = ""
+                        });
+                    }
+
+                }
+                return View(resultsList);
+            } 
         }
         // GET: C1surveys/Details/5
         public ActionResult Details(int? id)
