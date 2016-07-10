@@ -1,3 +1,4 @@
 Community Counts Web Application
-CodePoint poastcode processing is separate project called CCCodePoint
-ASP.Net 4.6.* application using C sharp and MySQL
+*  CCWeb is an ASP.Net 4.6.* application using C sharp and MySQL
+*  NuGet restore is automatic using Visual Studio 2015
+*  CodePoint postcode processing is separate project called CCCodePoint
