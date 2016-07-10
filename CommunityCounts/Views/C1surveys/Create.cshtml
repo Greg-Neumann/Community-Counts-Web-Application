@@ -17,7 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.idServiceype, "Activity", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownList("idServiceype", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.idServiceype, "", new { @class = "text-danger" })
             </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SurveyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.SurveyName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SurveyName, "", new { @class = "text-danger" })
             </div>
@@ -33,7 +33,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SurveyDesc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.SurveyDesc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SurveyDesc, "", new { @class = "text-danger" })
             </div>
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.numTxtQ, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.numTxtQ, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.numTxtQ, "", new { @class = "text-danger" })
             </div>
@@ -49,14 +49,14 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.numScaQ, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.numScaQ, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.numScaQ, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.forAllClients, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.forAllClients)
                     @Html.ValidationMessageFor(model => model.forAllClients, "", new { @class = "text-danger" })
@@ -65,7 +65,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.forAnonymousClients, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.forAnonymousClients)
                     @Html.ValidationMessageFor(model => model.forAnonymousClients, "", new { @class = "text-danger" })
@@ -74,7 +74,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.active, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.active)
                     @Html.ValidationMessageFor(model => model.active, "", new { @class = "text-danger" })
@@ -84,7 +84,7 @@
         
 
         <div class="form-group">
-            <div class="col-md-offset-1 col-md-10">
+            <div class="col-md-offset-1 col-md-4">
                 <input type="submit" value="Create" class="btn btn-warning" />
             </div>
         </div>

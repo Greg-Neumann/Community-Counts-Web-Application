@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Help - Starting a new Year";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Help</h2>
+<h3>Things to think about, and do, inorder to start a new year of service in Community Counts</h3>
+<p>
+    @Html.ActionLink("Back to Main Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="text-info">
+    <img src="~/Content/Images/CC New-Year-Fresh-Start.jpg" width="15%" align="right" />
+    Starting a New Year in Community counts consists of two main things:
+    <ol>
+        <li>
+            Setting up your @Html.ActionLink("Schedules", "Index", "C1schedules") for your @Html.ActionLink("Activities", "Index", "C1servicetypes") so that you have something to mark @Html.ActionLink("Attendance", "Index", "Attendance") against.
+        </li>
+        <li>
+            Getting all your Clients re-registered to use your services for another year and then enrolling them into your Services.
+        </li>
+    </ol>
+    However, the start of a new year should always be taken as an opportunity to review what was done last year and to actively plan for the next year. This is a suggested list of things to think about and do.
+</div>
+<hr />
+
+<h3>Before the start of the new Year:</h3>
+<h4>Think abut this <em>before</em> going to your computer</h4>
+<div class="checkbox">
+    <label>
+        <input type="checkbox" />
+        Plan - on paper - how your Activity Schedules are to look next year.
+        <ul>
+            <li>
+                Is what you did last year the best way of Scheduling your services or could it be improved?
+            </li>
+            <li>
+                Remember, it's always easier if you schedule each Activity so it is clear what the Activity is AND when it is.
+                <br />For example, if you run an Activity such as “Aircraft Model Makers Club’ and it is clear to your organisation when that occurs in the week, then that title is good enough. However, if you run two such sessions per week consider “Aircraft Model Makers Club - Fri AM” & “Aircraft Model Makers Club - “Mon Even” or even “AMMC - Fri AM” etc. as the <strong>Activity</strong> name. <br />This will make it a lot clearer to you when reviewing your schedules later in the year and assist those printing/marking attendance.
+                <br />It may also help you with your enrollments as some clients might only be able to make the Friday session - so enroll them for that - but not the other.
+            </li>
+            <li>
+                Because Schedules are defined for each year, you will need to enter, in the next year, a schedule for all Activities that you plan to run in the new year.
+                <ul>
+                    <li>
+                        Are all Activities to run at the <strong>same</strong> date and time?
+                    </li>
+                    <li>Do you need to think about <strong>new</strong> Activities?</li>
+                    <li>Do you need to stop - not run - an Activity?</li>
+                </ul>
+            </li>
+        </ul>
+    </label>
+    <label>
+        <input type="checkbox" />
+        Do you need to run any Surveys to assess Activity effectiveness at the <strong>start</strong> of the year?<br />This technique is often called <a href="http://tenrox.com/glossary/baseline/" target="_blank">baselining</a> as it enables you to measure a project before actions are performed. You then re-measure - using a Survey - at a later point in time. The difference between the two surveys if often associated with the success of the project (Activity) performed.
+    </label>
+    <hr />
+    <h4>At your Computer</h4>
+    <div class="col-md-8 body-content">
+        <label>
+            <input type="checkbox" />
+            Are any Activities no longer to be applied in the new year?
+            <br />
+            If so, then @Html.ActionLink("end the Activity", "Index", "c1servicetype") (using <a href="#" class="btn btn-danger btn-xs">Edit</a>) with an end date of end of this current year E.g 31st March 2016.<br /> This will stop that Activity appearing in drop-down lists in the new year but will not affect your data from previous years.
+        </label>
+        <label>
+            <input type="checkbox" />
+            Do you need to review your Setup to add/delete/rename Activities? <br />In general, You can @Html.ActionLink("add", "Index", "c1servicetype") any new ones using the <a href="#" class="btn btn-warning btn-xs">Create New</a> button or even @Html.ActionLink("rename", "Index", "c1servicetype") ones already in use by using the <a href="#" class="btn btn-danger btn-xs">Edit</a> button. You cannot delete ones in use - use the 'End Date' facility mentioned above.
+        </label>
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Funders?", "Index", "C1funders")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Locations?", "Index", "C1locations")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Resources (rooms)?", "Index", "C1resources")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Comment Categories?", "Index", "c1qccomtype")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Journey Categories?", "Index", "c1journeycat")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Signpost or Referral Categories?", "Index", "C1qcsrtype")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Do you need to add/delete/rename any @Html.ActionLink("Client Need Categories?", "Index", "C1clientneedscat")
+        </label><br />
+        <label>
+            <input type="checkbox" />
+            Setup up your new @Html.ActionLink("schedules", "Index", "C1schedules") for the next year by @Html.ActionLink("changing", "ChgYear", "Home") into the new year and then creating all the required schedules for your calendared Activities. Important notes here:
+            <ul>
+                <li>
+                    You may <a href="#" class="btn btn-danger btn-xs">Generate Schedules</a> - which makes the sessions visible for each date that it is required - at any time; it will not re-generate any generated schedule unless you make changes to it.
+                </li>
+                <li>
+                    You can make any change to any schedule - e.g changing the date that the Activity starts or even the Activity name - provided that there are no attendance records later than the date clearly shown as the "Last attended date".
+                </li>
+                <li>
+                    Make sure that you look at the generated schedules by e.g @Html.ActionLink("printing attendance sheets", "Index", "Attendance") for each activity so that you can see the dates that it has generated for.
+                </li>
+            </ul>
+        </label>
+    </div>
+    <div class="col-md-4 alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Heads up!</strong> After you have done all this, your new Year is setup as far as the system is concerned but has one important omission - it has no clients.
+        <p> It is an important part of the workflow of Community Counts that each Client has to confirm his registration each, and every, year. This means that any new year in Community Counts has no client information copied over automatically from the previous, or earlier, years.</p>
+        <p> In practise, this means that your Centre will have to get Client registration forms OUT for use from day 1 of the new Year and you will have to organise their entry in Community Counts over the first few days/weeks of the new Year. It also means that there is a time-lag after the start of the new year during which any attendance lists cannot be complete (as all clients are not yet re-entered)</p>
+    </div>
+</div>
+<div class="col-md-12 body-content">
+    <hr />
+    <h3>Just before the start of the New Year</h3>
+    <div class="col-md-6">
+        It is suggested that, in the last week of the current year, you print off Attendance Sheets for all of your services and:
+        <ul>
+            <li>Blank out the date/time at the top of the sheet</li>
+            <li>Make copies of these sheets - enough to last you a few weeks into the new year</li>
+            <li>Write dates/times at the top of each copy for each week of the first few weeks into the new Year</li>
+            <li>Use these Attendance sheets to monitor attendance in the normal manner during this transitional period</li>
+        </ul>
+    </div>
+    <div class="col-md-6 alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Did You Know?</strong> you can copy forward all the details entered onto the Client registration form, except the enrolments, by using the <a href="#" class="btn btn-warning btn-xs">Copy</a> button against any @Html.ActionLink("Client", "Index", "C1client"). This speeds up data-entry as most such re-registrations have the majority of details (Address, Gender, etc) the same as previous years but there may be some changes (Age band, Employment Status, etc) that are quickly done by re-editing the copyied-forward Client record in the New Year </strong>
+    </div>
+</div>
+
+<div class="col-md-12 body-content">
+    <hr />
+    <h3>A few weeks into the New Year</h3>
+</div>
+<div class="col-md-6">
+    <ul>
+        <li>
+            After a few weeks, when all clients are suitably re-entered into the new year (and re-enrolled!), you can then switch to using the printed Attendance sheets produced for the New Year, which will, by then contain the correct Client enrollments.
+        </li>
+        <li>
+            You can also then mark attendance for all dates from the start of the New Year.
+        </li>
+    </ul>
+</div>
+<div class="col-md-6 alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>An important note is that the Analysis Engine needs no re-configuration at any time and you may analyse any of your data at any time for any date-period.</strong>
+</div>
+

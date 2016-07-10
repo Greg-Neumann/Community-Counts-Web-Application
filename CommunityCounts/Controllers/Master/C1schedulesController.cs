@@ -4,9 +4,9 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
+using CommunityCounts.Global_Methods;
 
 namespace CommunityCounts.Controllers.Master
 {
@@ -19,10 +19,12 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult Index()
         {
             //var c1schedules = db.C1schedules.Include(c => c.C1resources).Include(c => c.C1servicetypes).Include(c => c.refdata);
-            var numSchedulesToGenerate = db.C1schedules.Where(s => s.Generated == false).Count();
+            int idYear = CS.getRegYearId(db);
+            var numSchedulesToGenerate = db.C1schedules.Where(s => s.Generated == false).Where(s=>s.idRegYear==idYear).Count();
             @ViewBag.numSchedulesToGenerate = numSchedulesToGenerate;
-            var c1schedules = db.C1schedules.ToList();
-            return View(c1schedules.ToList());
+            var c1schedules = db.C1schedules.Where(c=>c.idRegYear==idYear).ToList();
+            @ViewBag.RegYear = CS.getRegYear(db, false);
+            return View(c1schedules.ToList().OrderBy(s=>s.C1resources.ResourceName).ThenBy(s=>s.C1servicetypes.ServiceType).ThenBy(s=>s.StartDate).ThenBy(s=>s.StartTime));
         }
 
         // GET: C1schedules/Details/5
@@ -105,21 +107,8 @@ namespace CommunityCounts.Controllers.Master
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idResource,idServiceType,StartDate,StartTime,EndDate,EndTime,idScheduleType,Repetition,Notes")] C1schedules c1schedules)
         {
-            if (c1schedules.StartDate > c1schedules.EndDate)
+            if (scheduleIsValid(c1schedules))
             {
-                ModelState.AddModelError("StartDate", "Schedules must end on, of after, the start date");
-            }
-            if (c1schedules.StartDate == c1schedules.EndDate)
-            {
-                if (c1schedules.StartTime >= c1schedules.EndTime)
-                {
-                    ModelState.AddModelError("StartTime", "Schedules must have an end-time after the start time");
-                }
-            }
-            if (ModelState.IsValid)
-            {
-                var getRegYear = from a in db.regyears where (a.RegYear1 == "2015") select a; // fix registration year always as 2015 - will need changing!
-                c1schedules.idRegYear = getRegYear.First().idRegYear;
                 c1schedules.CreatedUser = User.Identity.Name;
                 c1schedules.CreatedDateTime = System.DateTime.Now;
                 c1schedules.Generated = false;
@@ -182,19 +171,8 @@ namespace CommunityCounts.Controllers.Master
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idSchedules,idRegYear,idResource,idServiceType,StartDate,StartTime,EndDate,EndTime,idScheduleType,Repetition,Notes,CreatedDateTime,CreatedUser")] C1schedules c1schedules)
-        {
-            if (c1schedules.StartDate > c1schedules.EndDate)
-            {
-                ModelState.AddModelError("StartDate", "Schedules must end on, of after, the start date");
-            }
-            if (c1schedules.StartDate==c1schedules.EndDate)
-            {
-                if (c1schedules.StartTime>=c1schedules.EndTime)
-                {
-                    ModelState.AddModelError("StartTime", "Schedules must have an end-time after the start time");
-                }
-            }
-            if (ModelState.IsValid)
+        { 
+            if (scheduleIsValid(c1schedules))
             {
                 c1schedules.UpdatedDateTime = System.DateTime.Now;
                 c1schedules.UpdatedUser = User.Identity.Name;
@@ -230,15 +208,27 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult DeleteConfirmed(int id)
         {
             C1schedules c1schedules = db.C1schedules.Find(id);
-            db.C1schedules.Remove(c1schedules);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            // 
+            // can (cascade) delete any associated booking but cannot permit this to cascade if their are attendance records
+            //
+            Boolean attendanceRecords = db.C1attendance.Where(a => a.idSchedules == id).Any();
+            if (attendanceRecords)
+            {
+                ModelState.AddModelError("","You cannot delete this schedule as there are marked attendances already present");
+            }
+            if (ModelState.IsValid)
+            {
+                db.C1schedules.Remove(c1schedules);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(c1schedules);
         }
 
         public ActionResult Generate()
         {
-
-            var c1schedules = db.C1schedules.Where(s => s.Generated == false).ToList(); // list all schedules that need generating
+            var idRegYear = CS.getRegYearId(db);
+            var c1schedules = db.C1schedules.Where(s => s.Generated == false).Where(s=>s.idRegYear==idRegYear).ToList(); // list all schedules that need generating
             List<generateList> glist = new List<generateList>();
             string lastAttendedD, lastAttendedT;
             DateTime ld;
@@ -291,7 +281,7 @@ namespace CommunityCounts.Controllers.Master
             // go the list with last attended date/times, display it all.
             // 
             @ViewBag.attendanceMsg = attendanceMsg;
-            @ViewBag.numSchedulesToGenerate = c1schedules.Count();
+            @ViewBag.numSchedulesToGenerate = c1schedules.Where(s=>s.idRegYear==idRegYear).Count();
             return View(glist);
         }
         [HttpPost, ActionName("Generate")]
@@ -301,8 +291,9 @@ namespace CommunityCounts.Controllers.Master
             // 
             // generation has been confirmed. Loop over all schedules that have not been generated and do them
             //
-            var c1schedules = db.C1schedules.Where(s => s.Generated == false).ToList(); // list all schedules that need generating
-            var getRegYear = from a in db.regyears where (a.RegYear1=="2015") select a; // fix registration year always as 2015 - will need changing!
+            int idYear = CS.getRegYearId(db);
+            var c1schedules = db.C1schedules.Where(s => s.Generated == false).Where(s=>s.idRegYear==idYear).ToList(); // list all schedules that need generating
+            var getRegYear = from a in db.regyears where (a.idRegYear==idYear) select a;
             DateTime endOfYear = getRegYear.First().EndDate;                            // this is calendar date of the end of the current service year (business year)
             DateTime? ld;                                                               // last attendance date for this activity/schedule
             TimeSpan? lt;                                                               // last attendance time ....
@@ -553,6 +544,89 @@ namespace CommunityCounts.Controllers.Master
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        Boolean scheduleIsValid(C1schedules s)
+        {
+            if (s.StartDate > s.EndDate)
+            {
+                ModelState.AddModelError("StartDate", "Schedules must end on, of after, the start date");
+            }
+            if (s.StartDate == s.EndDate)
+            {
+                if (s.StartTime >= s.EndTime)
+                {
+                    ModelState.AddModelError("StartTime", "Schedules must have an end-time after the start time");
+                }
+            }
+            s.idRegYear = CS.getRegYearId(db);
+            var regyear = db.regyears.Find(s.idRegYear);
+            if (s.StartDate > regyear.EndDate)
+            {
+                ModelState.AddModelError("StartDate", "Start Date cannot be after the last day in current year which is " + regyear.EndDate.ToShortDateString());
+            }
+            if (s.StartDate < regyear.StartDate)
+            {
+                ModelState.AddModelError("StartDate", "Start Date must be after the first day in current year which is " + regyear.StartDate.ToShortDateString());
+            }
+            if (s.EndDate < regyear.StartDate)
+            {
+                ModelState.AddModelError("EndDate", "End Date cannot be before the first day in current year which is " + regyear.StartDate.ToShortDateString());
+            }
+            if (s.EndDate > regyear.EndDate)
+            {
+                ModelState.AddModelError("EndDate", "End Date must be before the last day in current year which is " + regyear.EndDate.ToShortDateString());
+            }
+            //
+            //  now validate schedule days of week against the schedule type
+            //
+            var scheduleType = db.refdatas.Find(s.idScheduleType).RefCodeValue;   // type of schedule desired
+            switch (scheduleType)
+            {
+                case "ScDa":                                                // Daily (weekdays)
+                    if (s.StartDate.DayOfWeek == DayOfWeek.Saturday || s.StartDate.DayOfWeek==DayOfWeek.Sunday)
+                    {
+                        ModelState.AddModelError("StartDate", "For a schedule type of each weekday, the startdate must be Mon-Fri");
+                    }
+                    if (s.Repetition!=null)
+                    {
+                        ModelState.AddModelError("Repetition", "Do not specify a repetition for a schedule type of Daily (Weekdays)");
+                    }
+                    break;
+                case "ScD7":                                                // Daily (all 7 days)
+                    break;
+                case "ScDW":                                                // Daily (weekends)
+                    if (!(s.StartDate.DayOfWeek == DayOfWeek.Saturday || s.StartDate.DayOfWeek == DayOfWeek.Sunday))
+                    {
+                        ModelState.AddModelError("StartDate", "For a schedule type of at weekends, the startdate must be Sat-Sun");
+                    }
+                    if (s.Repetition != null)
+                    {
+                        ModelState.AddModelError("Repetition", "Do not specify a repetition for a schedule type of Weekends");
+                    }
+                    break;
+                case "ScWe":                                                // Weekly
+                    if (s.Repetition != null)
+                    {
+                        ModelState.AddModelError("Repetition", "Do not specify a repetition for a schedule type of Weekly");
+                    }
+                    break;
+                case "ScN":                                                 // every N weeks
+                    if (s.Repetition == null)
+                    {
+                        ModelState.AddModelError("Repetition", "You must specify a repetition value for this type of schedule");
+                    }
+                    break;
+                case "ScA":                                                 // Annually
+                    if (s.Repetition != null)
+                    {
+                        ModelState.AddModelError("Repetition", "Do not specify a repetition for a schedule type of Annually");
+                    }
+                    break;
+                default:
+                    throw new ArgumentException("Schedule type of {0} invalid for scheduling", scheduleType);
+            }
+            // 
+            return ModelState.IsValid;
         }
     }
 }

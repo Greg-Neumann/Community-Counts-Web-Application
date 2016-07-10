@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CommunityCounts</RootNamespace>
     <AssemblyName>CommunityCounts</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,9 +118,9 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -194,6 +195,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalIntroController.cs" />
+    <Compile Include="Controllers\Master\ClientBulkCopyController.cs" />
+    <Compile Include="Controllers\Master\ClientCaseWorkController.cs" />
+    <Compile Include="Controllers\helpNeedsController.cs" />
+    <Compile Include="Controllers\Master\C1clientneedscatController.cs" />
+    <Compile Include="Controllers\Master\C1clientneedsheaderController.cs" />
     <Compile Include="Controllers\helpActivityController.cs" />
     <Compile Include="Controllers\helpSurveyController.cs" />
     <Compile Include="Controllers\helpAttendanceController.cs" />
@@ -216,8 +222,10 @@
     <Compile Include="Controllers\Master\C1servicetypesController.cs" />
     <Compile Include="Controllers\Master\C1surveysEnterController.cs" />
     <Compile Include="Controllers\Master\C1surveysController.cs" />
+    <Compile Include="Controllers\Master\ClientCaseWorkDetailController.cs" />
     <Compile Include="Controllers\Master\customersController.cs" />
     <Compile Include="Controllers\Master\FrigController.cs" />
+    <Compile Include="Controllers\Master\helpYearStartController.cs" />
     <Compile Include="Controllers\Master\refdatasController.cs" />
     <Compile Include="Controllers\Master\usersController.cs" />
     <Compile Include="Global Methods\encrypt.cs" />
@@ -235,9 +243,14 @@
     <Compile Include="Models\Master\C1bookings.cs" />
     <Compile Include="Models\Master\C1caldat.cs" />
     <Compile Include="Models\Master\C1client.cs" />
-    <Compile Include="Models\Master\C1clientneeds.cs" />
-    <Compile Include="Models\Master\C1empldest.cs" />
-    <Compile Include="Models\Master\C1empltck.cs" />
+    <Compile Include="Models\Master\C1clientcasedocs.cs" />
+    <Compile Include="Models\Master\C1clientcaseheader.cs" />
+    <Compile Include="Models\Master\C1clientcaseservice.cs" />
+    <Compile Include="Models\Master\C1clientcaseservicedetail.cs" />
+    <Compile Include="Models\Master\C1clientneedscat.cs" />
+    <Compile Include="Models\Master\C1clientneedsdetail.cs" />
+    <Compile Include="Models\Master\C1clientneedsdocs.cs" />
+    <Compile Include="Models\Master\C1clientneedsheader.cs" />
     <Compile Include="Models\Master\C1funders.cs" />
     <Compile Include="Models\Master\C1journeycat.cs" />
     <Compile Include="Models\Master\C1journeys.cs" />
@@ -248,14 +261,10 @@
     <Compile Include="Models\Master\C1qcsrtype.cs" />
     <Compile Include="Models\Master\C1resources.cs" />
     <Compile Include="Models\Master\C1resourcetypes.cs" />
-    <Compile Include="Models\Master\C1roles.cs" />
-    <Compile Include="Models\Master\C1roletypes.cs" />
     <Compile Include="Models\Master\C1schedules.cs" />
     <Compile Include="Models\Master\C1schedulesorig.cs" />
     <Compile Include="Models\Master\C1service.cs" />
     <Compile Include="Models\Master\C1servicetypes.cs" />
-    <Compile Include="Models\Master\C1skills.cs" />
-    <Compile Include="Models\Master\C1skilltypes.cs" />
     <Compile Include="Models\Master\C1surressca.cs" />
     <Compile Include="Models\Master\C1surrestxt.cs" />
     <Compile Include="Models\Master\C1surveys.cs" />
@@ -291,13 +300,19 @@
     <Content Include="Content\Community Counts graphics artwork 1140px x 641px.jpg" />
     <Content Include="Content\Community Counts graphics artwork 784px x 441px.jpg" />
     <Content Include="Content\CommunityCounts.css" />
+    <Content Include="Content\Documents\Training - V3.0\index.html" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Actions.png" />
     <Content Include="Content\Images\CC Anotated Activies screen showing Journey daisy-chaining.png" />
     <Content Include="Content\Images\CC Anotated Survey Entering.png" />
     <Content Include="Content\Images\CC Attendance marking - present absent.png" />
     <Content Include="Content\Images\CC Attendance Tally.png" />
     <Content Include="Content\Images\CC Attendance timed.png" />
+    <Content Include="Content\Images\CC Client Needs - new need.png" />
+    <Content Include="Content\Images\CC Client Needs Management.png" />
+    <Content Include="Content\Images\CC Client Needs Setup.png" />
+    <Content Include="Content\Images\CC Client Needs tick list.png" />
     <Content Include="Content\Images\CC Journey Category as unset.png" />
+    <Content Include="Content\Images\CC New-Year-Fresh-Start.jpg" />
     <Content Include="Content\Images\CC Setup Activities List Screen.png" />
     <Content Include="Content\Images\CC Setup Journey Categories.png" />
     <Content Include="Content\Images\CC Survey entering - numeric.png" />
@@ -323,12 +338,15 @@
     <Content Include="Content\Images\CCAnalysis 16 - Setting summation to be count.png" />
     <Content Include="Content\Images\CCAnalysis 17 - Setting a custom name for count field.png" />
     <Content Include="Content\Images\CCAnalysis 18 - The answer.png" />
+    <Content Include="Content\Images\CCAnalysis 20 - choosing the Chart Type.png" />
+    <Content Include="Content\Images\CCAnalysis 21 - The Chart.png" />
+    <Content Include="Content\Images\CCAnalysis19 - Starting a Chart .png" />
+    <Content Include="Content\Images\CCKeep Calm.png" />
     <Content Include="Content\Images\Powered by OS Logo 92 x 84 px.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ClassDiagram1.cd" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -337,13 +355,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\Documents\Training - V3.0\Community Counts V3.0 Training.pdf" />
     <None Include="Properties\PublishProfiles\BHLC CC Server.pubxml" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -519,6 +538,36 @@
     <Content Include="Views\AnalIntro\vSurveys.cshtml" />
     <Content Include="Views\AnalIntro\vSurveyResultsNum.cshtml" />
     <Content Include="Views\AnalIntro\vSurveyResultsTxt.cshtml" />
+    <Content Include="Views\Home\ChgYear.cshtml" />
+    <Content Include="Views\C1client\Copy.cshtml" />
+    <Content Include="Views\C1clientneedscat\Create.cshtml" />
+    <Content Include="Views\C1clientneedscat\Delete.cshtml" />
+    <Content Include="Views\C1clientneedscat\Details.cshtml" />
+    <Content Include="Views\C1clientneedscat\Edit.cshtml" />
+    <Content Include="Views\C1clientneedscat\Index.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Create.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Delete.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Notes.cshtml" />
+    <Content Include="Views\C1clientneedsheader\Index.cshtml" />
+    <Content Include="Views\C1clientneedsheader\MarkNeeds.cshtml" />
+    <Content Include="Views\C1clientneedsheader\DetailsNeeds.cshtml" />
+    <Content Include="Views\helpNeeds\home.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\CaseWorkSummary.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\CreateCaseService.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\DeletecaseWork.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Create.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Delete.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Details.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Edit.cshtml" />
+    <Content Include="Views\ClientCaseWorkDetail\Index.cshtml" />
+    <Content Include="Views\C1service\ClientCaseWork\OverView.cshtml" />
+    <Content Include="Views\helpYearStart\StartYear.cshtml" />
+    <Content Include="Views\AnalIntro\PivotChart.cshtml" />
+    <Content Include="Views\Attendance\MarkAListE.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Start.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Year.cshtml" />
+    <Content Include="Views\ClientBulkCopy\YearConfirm.cshtml" />
+    <Content Include="Views\ClientBulkCopy\Copy.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

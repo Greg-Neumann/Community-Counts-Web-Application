@@ -1,10 +1,8 @@
 namespace CommunityCounts.Models.Master
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ccmaster.refdata")]
     public partial class refdata
@@ -23,7 +21,6 @@ namespace CommunityCounts.Models.Master
             C1client8 = new HashSet<C1client>();
             C1client9 = new HashSet<C1client>();
             C1client10 = new HashSet<C1client>();
-            C1roletypes = new HashSet<C1roletypes>();
             C1schedules = new HashSet<C1schedules>();
             C1servicetypes = new HashSet<C1servicetypes>();
             C1surressca = new HashSet<C1surressca>();
@@ -68,8 +65,6 @@ namespace CommunityCounts.Models.Master
         public virtual ICollection<C1client> C1client9 { get; set; }
 
         public virtual ICollection<C1client> C1client10 { get; set; }
-
-        public virtual ICollection<C1roletypes> C1roletypes { get; set; }
 
         public virtual ICollection<C1schedules> C1schedules { get; set; }
 

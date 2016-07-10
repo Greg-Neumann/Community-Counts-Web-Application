@@ -3,8 +3,6 @@ namespace CommunityCounts.Models.Master
     using System;
     using System.Web;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class ccMaster : DbContext
     {
@@ -51,9 +49,14 @@ namespace CommunityCounts.Models.Master
         public virtual DbSet<C1bookings> C1bookings { get; set; }
         public virtual DbSet<C1caldat> C1caldat { get; set; }
         public virtual DbSet<C1client> C1client { get; set; }
-        public virtual DbSet<C1clientneeds> C1clientneeds { get; set; }
-        public virtual DbSet<C1empldest> C1empldest { get; set; }
-        public virtual DbSet<C1empltck> C1empltck { get; set; }
+        public virtual DbSet<C1clientcasedocs> C1clientcasedocs { get; set; }
+        public virtual DbSet<C1clientcaseheader> C1clientcaseheader { get; set; }
+        public virtual DbSet<C1clientcaseservice> C1clientcaseservice { get; set; }
+        public virtual DbSet<C1clientcaseservicedetail> C1clientcaseservicedetail { get; set; }
+        public virtual DbSet<C1clientneedscat> C1clientneedscat { get; set; }
+        public virtual DbSet<C1clientneedsdetail> C1clientneedsdetail { get; set; }
+        public virtual DbSet<C1clientneedsdocs> C1clientneedsdocs { get; set; }
+        public virtual DbSet<C1clientneedsheader> C1clientneedsheader { get; set; }
         public virtual DbSet<C1funders> C1funders { get; set; }
         public virtual DbSet<C1journeycat> C1journeycat { get; set; }
         public virtual DbSet<C1journeys> C1journeys { get; set; }
@@ -64,14 +67,12 @@ namespace CommunityCounts.Models.Master
         public virtual DbSet<C1qcsrtype> C1qcsrtype { get; set; }
         public virtual DbSet<C1resources> C1resources { get; set; }
         public virtual DbSet<C1resourcetypes> C1resourcetypes { get; set; }
-        public virtual DbSet<C1roles> C1roles { get; set; }
-        public virtual DbSet<C1roletypes> C1roletypes { get; set; }
+
         public virtual DbSet<C1schedules> C1schedules { get; set; }
         public virtual DbSet<C1schedulesorig> C1schedulesorig { get; set; }
         public virtual DbSet<C1service> C1service { get; set; }
         public virtual DbSet<C1servicetypes> C1servicetypes { get; set; }
-        public virtual DbSet<C1skills> C1skills { get; set; }
-        public virtual DbSet<C1skilltypes> C1skilltypes { get; set; }
+
         public virtual DbSet<C1surressca> C1surressca { get; set; }
         public virtual DbSet<C1surrestxt> C1surrestxt { get; set; }
         public virtual DbSet<C1surveys> C1surveys { get; set; }
@@ -154,22 +155,50 @@ namespace CommunityCounts.Models.Master
                 .IsUnicode(false);
 
             modelBuilder.Entity<C1client>()
+                        .HasMany(e => e.C1client1)
+                        .WithOptional(e => e.C1client2)
+                        .HasForeignKey(e => e.idClientPrev);
+
+            modelBuilder.Entity<C1clientcasedocs>()
+                .Property(e => e.ClientCaseDocsPath)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1clientcaseheader>()
+                .HasMany(e => e.C1clientcasedocs)
+                .WithRequired(e => e.C1clientcaseheader)
+                .HasForeignKey(e => e.idClientCase);
+
+            modelBuilder.Entity<C1clientcaseservice>()
+                .HasMany(e => e.C1clientcaseservicedetail)
+                .WithRequired(e => e.C1clientcaseservice)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<C1clientcaseservicedetail>()
+                .Property(e => e.CaseServiceNotes)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1clientneedscat>()
+                .Property(e => e.Category)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1clientneedscat>()
+                .HasMany(e => e.C1clientneedsdetail)
+                .WithRequired(e => e.C1clientneedscat)
+                .HasForeignKey(e => e.idClientNeedsCat)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<C1clientneedsdocs>()
+                .Property(e => e.ClientNeedsDocsPath)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1clientneedsheader>()
+                .Property(e => e.ClientNeedsNotes)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<C1client>()
                 .HasMany(e => e.C1attendance)
                 .WithRequired(e => e.C1client)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<C1empldest>()
-                .Property(e => e.EmploymentDestDesc)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1empldest>()
-                .HasMany(e => e.C1empltck)
-                .WithOptional(e => e.C1empldest)
-                .HasForeignKey(e => e.idEmploymentDest);
-
-            modelBuilder.Entity<C1empltck>()
-                .Property(e => e.Comment)
-                .IsUnicode(false);
 
             modelBuilder.Entity<C1funders>()
                 .Property(e => e.FunderCode)
@@ -205,12 +234,6 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<C1locations>()
                 .Property(e => e.LocationName)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<C1locations>()
-                .HasMany(e => e.C1empltck)
-                .WithRequired(e => e.C1locations)
-                .HasForeignKey(e => e.idEmploymentClubLoc)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1locations>()
                 .HasMany(e => e.C1resources)
@@ -275,24 +298,6 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<C1resourcetypes>()
                 .HasMany(e => e.C1resources)
                 .WithRequired(e => e.C1resourcetypes)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<C1roles>()
-                .Property(e => e.Mentor)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .Property(e => e.Role)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1roletypes>()
-                .HasMany(e => e.C1roles)
-                .WithRequired(e => e.C1roletypes)
-                .HasForeignKey(e => e.RoleTypeID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1schedules>()
@@ -381,18 +386,11 @@ namespace CommunityCounts.Models.Master
                 .HasForeignKey(e => e.idServiceype)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<C1skilltypes>()
-                .Property(e => e.Skill)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1skilltypes>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C1skilltypes>()
-                .HasMany(e => e.C1skills)
-                .WithRequired(e => e.C1skilltypes)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<C1servicetypes>()
+               .HasMany(e => e.C1clientcaseservice)
+               .WithRequired(e => e.C1servicetypes)
+               .HasForeignKey(e => e.ServiceTypesid)
+               .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<C1surrestxt>()
                 .Property(e => e.TextQ)
@@ -644,12 +642,6 @@ namespace CommunityCounts.Models.Master
                 .HasForeignKey(e => e.idTenantStatus);
 
             modelBuilder.Entity<refdata>()
-                .HasMany(e => e.C1roletypes)
-                .WithRequired(e => e.refdata)
-                .HasForeignKey(e => e.idRoleApplication)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<refdata>()
                 .HasMany(e => e.C1schedules)
                 .WithRequired(e => e.refdata)
                 .HasForeignKey(e => e.idScheduleType)
@@ -712,6 +704,11 @@ namespace CommunityCounts.Models.Master
             modelBuilder.Entity<user>()
                 .Property(e => e.UserShortName)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<user>()
+               .HasMany(e => e.C1clientcaseservicedetail)
+               .WithOptional(e => e.user)
+               .HasForeignKey(e => e.CaseServiceStaffid);
 
             modelBuilder.Entity<ward>()
                 .Property(e => e.WardCode)

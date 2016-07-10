@@ -4,9 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using CommunityCounts.Models.Master;
 using CommunityCounts.Global_Methods;
 
@@ -20,7 +18,7 @@ namespace CommunityCounts.Controllers.Master
         // 
         public ActionResult Index()
         {
-            var c1surveys = db.C1surveys.Include(c => c.C1servicetypes).Where(c=>c.active);
+            var c1surveys = from s in db.C1surveys where (s.active == true) && ((s.C1servicetypes.EndedDate == null) || (s.C1servicetypes.EndedDate >= System.DateTime.Now)) select s;
             return View(c1surveys.ToList().OrderByDescending(s=>s.idSurvey));
         }
         // 
@@ -33,16 +31,17 @@ namespace CommunityCounts.Controllers.Master
             @ViewBag.SurveyName = survey.SurveyName;
             @ViewBag.SurveyID = id.ToString();
             @ViewBag.Activity = db.C1servicetypes.Find(survey.idServiceype).ServiceType;
+            int idYear = CS.getRegYearId(db);   // get signed-in year to work with
             if (survey.forAllClients)
             {
                 // for all clients
-                var cl = db.C1client.Where(c=>c.idClient>1); // omit anonymous client initially 
+                var cl = db.C1client.Where(c=>c.idClient>1).Where(c=>c.idRegYear==idYear); // omit anonymous client initially 
                 foreach (var c in cl.ToList())
                 {
                     var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                     var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                    fname = CC.unscramble(c.FirstName,c.scramble);
-                    lname = CC.unscramble(c.LastName,c.scramble);
+                    fname = CS.unscramble(c.FirstName,c.scramble);
+                    lname = CS.unscramble(c.LastName,c.scramble);
                     textQ = scaTxt.Count().ToString() + "/" + survey.numTxtQ.ToString();
                     numericQ = scaRes.Count().ToString() + "/" + survey.numScaQ.ToString();
                     sle.Add(new SurveyEnterList() { 
@@ -62,14 +61,14 @@ namespace CommunityCounts.Controllers.Master
             else
             {
                 // for all clients enrolled in activity idservicetype (despite typos on database schema!)
-                var sl = db.C1service.Where(s => s.idServiceType == survey.idServiceype);
+                var sl = db.C1service.Where(s => s.idServiceType == survey.idServiceype).Where(s=>s.C1client.idRegYear==idYear);
                 foreach (var t in sl.ToList())
                 {
                     var c = db.C1client.Find(t.idClient);
                     var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                     var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                    fname = CC.unscramble(c.FirstName,c.scramble);
-                    lname = CC.unscramble(c.LastName,c.scramble);
+                    fname = CS.unscramble(c.FirstName,c.scramble);
+                    lname = CS.unscramble(c.LastName,c.scramble);
                     textQ = scaTxt.Count().ToString() + "/" + survey.numTxtQ.ToString();
                     numericQ = scaRes.Count().ToString() + "/" + survey.numScaQ.ToString();
                     sle.Add(new SurveyEnterList()
@@ -95,8 +94,8 @@ namespace CommunityCounts.Controllers.Master
                 var c = db.C1client.Find(1); // anonymous client is always id 1
                 var scaRes = db.C1surressca.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
                 var scaTxt = db.C1surrestxt.Where(s => s.idSurvey == survey.idSurvey).Where(s => s.idClient == c.idClient);
-                fname = CC.unscramble(c.FirstName, c.scramble);
-                lname = CC.unscramble(c.LastName, c.scramble);
+                fname = CS.unscramble(c.FirstName, c.scramble);
+                lname = CS.unscramble(c.LastName, c.scramble);
 
                 var tQ = 0;
                 if (survey.numTxtQ > 0)
@@ -130,7 +129,7 @@ namespace CommunityCounts.Controllers.Master
         {
             var survey = db.C1surveys.Find(id);
             var client = db.C1client.Find(clientid);
-            @ViewBag.Name = CC.unscramble(client.FirstName,client.scramble) + " " + CC.unscramble(client.LastName,client.scramble);
+            @ViewBag.Name = CS.unscramble(client.FirstName,client.scramble) + " " + CS.unscramble(client.LastName,client.scramble);
             @ViewBag.SurveyName = survey.SurveyName;
             List<SurveyResultsN> resultsList = new List<SurveyResultsN>();
             var scaledResponses = db.C1surressca.Where(s=>s.idSurvey==id).Where(s=>s.idClient==clientid).OrderBy(s=>s.ScaledQ);
@@ -243,7 +242,7 @@ namespace CommunityCounts.Controllers.Master
         {
             var survey = db.C1surveys.Find(id);
             var client = db.C1client.Find(clientid);
-            @ViewBag.Name = CC.unscramble(client.FirstName,client.scramble) + " " + CC.unscramble(client.LastName,client.scramble);
+            @ViewBag.Name = CS.unscramble(client.FirstName,client.scramble) + " " + CS.unscramble(client.LastName,client.scramble);
             @ViewBag.SurveyName = survey.SurveyName;
             //var resultsList = new SurveyResults() { idClient = clientid, idSurvey = id, results=new List<SurveyResultsN>()}; // create header row!
             List<SurveyResultsT> resultsList = new List<SurveyResultsT>();
@@ -269,14 +268,14 @@ namespace CommunityCounts.Controllers.Master
             // thus, selecting to enter responses for Anonymous person always advances to a new record
             for (int i = 1; i <= survey.numTxtQ; i++)
             {
-                var alreadyPresent = resultsList.Where(r => r.questionNum == CC.IntToLetters(i)).Count();
+                var alreadyPresent = resultsList.Where(r => r.questionNum == CS.IntToLetters(i)).Count();
                 if (alreadyPresent == 0)
                 {
                     resultsList.Add(new SurveyResultsT()    // key (idSurResTxt) not specified so as to auto increment to support duplicates
                     {
                         idClient = clientid,
                         idSurvey = id,
-                        questionNum = CC.IntToLetters(i), // scaled question responses are alphamumeric
+                        questionNum = CS.IntToLetters(i), // scaled question responses are alphamumeric
                         response = ""
                     });
                 }
@@ -290,54 +289,119 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult Text([Bind(Exclude = "")] List<SurveyResultsT> sc)
         {
             string r;
+            int ctr = 1;
             // Anonymous Client processing requires counter responseSeqNo
             int maxSeqNo = 0;
             int cl = sc.First().idClient;
             int su = sc.First().idSurvey;
-            if (sc.First().idClient == 1) // anonymous client
+            //
+            // check string length returned as not using entity framework model for the POST
+            //
+            foreach (var t in sc)
             {
-                var lastGroup = db.C1surrestxt.Where(c => c.idClient == cl).Where(c => c.idSurvey == su).OrderByDescending(c => c.responseSeqNo);
-                if (lastGroup.Any())
+                if ((t.response != null) && (t.response.Length> 255))
                 {
-                    maxSeqNo = lastGroup.First().responseSeqNo + 1;
+                    ModelState.AddModelError("", "The length of the entered text in response " + CS.IntToLetters(ctr) + " exceeds the limit of 255 characters by " + (t.response.Length - 255).ToString() + " characters. Please shorten this.");
+                    break;
                 }
-                else
-                {
-                    maxSeqNo = 0;
-                }
+                else { ctr++; }
             }
-            foreach (var i in sc)
+            if (ModelState.IsValid)
             {
-                if (String.IsNullOrEmpty(i.response))
+               
+                if (sc.First().idClient == 1) // anonymous client
                 {
-                    r="No Comment";
-                }
-                else
-                {
-                    r=i.response;
-                }
-                if (i.idSurResTxt == 0)                // new result to be added, therefor autonum idSurResSca
-                {
-                    // text st
-                    db.C1surrestxt.Add(new C1surrestxt()
+                    var lastGroup = db.C1surrestxt.Where(c => c.idClient == cl).Where(c => c.idSurvey == su).OrderByDescending(c => c.responseSeqNo);
+                    if (lastGroup.Any())
                     {
-                        idSurvey = i.idSurvey,
-                        idClient = i.idClient,
-                        Response = r,
-                        TextQ = i.questionNum,
-                        responseSeqNo = maxSeqNo
-                    });
+                        maxSeqNo = lastGroup.First().responseSeqNo + 1;
+                    }
+                    else
+                    {
+                        maxSeqNo = 0;
+                    }
                 }
-                else
+                foreach (var i in sc)
                 {
-                    C1surrestxt row = db.C1surrestxt.Find(i.idSurResTxt);
-                    row.Response = r;
-                    db.Entry(row).State = EntityState.Modified;
-                }
+                    if (String.IsNullOrEmpty(i.response))
+                    {
+                        r = "No Comment";
+                    }
+                    else
+                    {
+                        r = i.response;
+                    }
+                    if (i.idSurResTxt == 0)                // new result to be added, therefor autonum idSurResSca
+                    {
+                        // text st
+                        db.C1surrestxt.Add(new C1surrestxt()
+                        {
+                            idSurvey = i.idSurvey,
+                            idClient = i.idClient,
+                            Response = r,
+                            TextQ = i.questionNum,
+                            responseSeqNo = maxSeqNo
+                        });
+                    }
+                    else
+                    {
+                        C1surrestxt row = db.C1surrestxt.Find(i.idSurResTxt);
+                        row.Response = r;
+                        db.Entry(row).State = EntityState.Modified;
+                    }
 
+                }
+                db.SaveChanges();
+                return RedirectToAction("Clients/" + sc.First().idSurvey); // pass idSurvey as key to list clients for survey screen
             }
-            db.SaveChanges();
-            return RedirectToAction("Clients/" + sc.First().idSurvey); // pass idSurvey as key to list clients for survey screen
+            else
+            {
+                //
+                // error re-display
+                //
+                var survey = db.C1surveys.Find(su);
+                var client = db.C1client.Find(cl);
+                @ViewBag.Name = CS.unscramble(client.FirstName, client.scramble) + " " + CS.unscramble(client.LastName, client.scramble);
+                @ViewBag.SurveyName = survey.SurveyName;
+                //var resultsList = new SurveyResults() { idClient = clientid, idSurvey = id, results=new List<SurveyResultsN>()}; // create header row!
+                List<SurveyResultsT> resultsList = new List<SurveyResultsT>();
+                var Responses = db.C1surrestxt.Where(s => s.idSurvey == su).Where(s => s.idClient == cl).OrderBy(s => s.TextQ);
+                //
+                // firstly, if this is not the special case of Anonymous persons, assign any responses already entered into the view list
+                // Then, go back over the list to insert any questions not yet answered
+                //
+                if (cl != 1)
+                {
+                    foreach (var res in Responses.ToList())
+                    {
+                        resultsList.Add(new SurveyResultsT()
+                        {
+                            idSurResTxt = res.idSurResTxt, // retrieve existing key
+                            idClient = cl,
+                            idSurvey = su,
+                            questionNum = res.TextQ,
+                            response = res.Response
+                        }); // add the child row !
+                    }
+                }
+                // thus, selecting to enter responses for Anonymous person always advances to a new record
+                for (int i = 1; i <= survey.numTxtQ; i++)
+                {
+                    var alreadyPresent = resultsList.Where(res => res.questionNum == CS.IntToLetters(i)).Count();
+                    if (alreadyPresent == 0)
+                    {
+                        resultsList.Add(new SurveyResultsT()    // key (idSurResTxt) not specified so as to auto increment to support duplicates
+                        {
+                            idClient = cl,
+                            idSurvey = su,
+                            questionNum = CS.IntToLetters(i), // scaled question responses are alphamumeric
+                            response = ""
+                        });
+                    }
+
+                }
+                return View(resultsList);
+            } 
         }
         // GET: C1surveys/Details/5
         public ActionResult Details(int? id)
@@ -397,8 +461,8 @@ namespace CommunityCounts.Controllers.Master
         });
         }
         C1client c = db.C1client.Find(clientid);
-        @ViewBag.FirstName = CC.unscramble(c.FirstName, c.scramble);
-        @ViewBag.LastName = CC.unscramble(c.LastName, c.scramble);
+        @ViewBag.FirstName = CS.unscramble(c.FirstName, c.scramble);
+        @ViewBag.LastName = CS.unscramble(c.LastName, c.scramble);
         return View(sci.OrderBy(s=>s.seqNo).ToList());    
     }
         // Post: Backup! - delete the most recently entered entry

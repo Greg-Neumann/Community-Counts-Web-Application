@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Bulk Copy Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Bulk Copy Clients to another Year</h2>
+<h3>Current Year Ends on : @ViewBag.regYear</h3>
+<h3>Number of Clients present in this year  : @ViewBag.current_count</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ActionLink("Back to Home Screen", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+    <div class="text-danger">@ViewBag.Msg</div>
+    <br /><br />
+    @Html.AntiForgeryToken()
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Important!</strong><br />
+        You have requested to copy <strong>all of</strong> the clients from the year ending @ViewBag.regYear to another year. Choose that year from the drop-down box below and press the <a href="#" class="btn btn-danger btn-xs">Continue</a> button if you want to continue.
+        Otherwise press the <a href="#" class="btn btn-primary btn-xs">Back to Home Screen</a> button
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-1" for="idRegYear">Select Year :</label>
+        <div class="col-md-2">
+            @Html.DropDownList("idRegYear", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Continue" class="btn btn-danger btn-xs" />
+        </div>
+    </div>
+}
+<div class="alert alert-dismissible alert-warning col-md-12">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <h4>Warning!</h4>
+    <p>This may take some time to processes - up to a whole minute; please be patient and do not press this button again!</p>
+</div>
+
+

@@ -12,18 +12,17 @@
 </p>
 <table class="table table-striped table-hover">
     <tr>
-        <th>
+        <th width="350px">
             @Html.DisplayNameFor(model => model.ServiceType)
         </th>
-        <th>
+        <th width="30px">
             @Html.DisplayNameFor(model => model.C1funders.FunderCode)
         </th>
-
         <th>
-            @Html.DisplayNameFor(model => model.AttendanceType)
+            @Html.DisplayNameFor(model => model.EndedDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BiometricTracked)
+            @Html.DisplayNameFor(model => model.AttendanceType)
         </th>
         <th></th>
     </tr>
@@ -38,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.C1funders.FunderCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.refdata.RefCodeDesc)
+                @Html.DisplayFor(modelItem => item.EndedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BiometricTracked)
+                @Html.DisplayFor(modelItem => item.refdata.RefCodeDesc)
             </td>
             <td>
                 @* @Html.ActionLink("Details", "Details", new { id = item.idServiceType }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })*@

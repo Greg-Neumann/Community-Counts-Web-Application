@@ -51,9 +51,11 @@ namespace CommunityCounts
             ir = rm.Create(new IdentityRole("superAdmin"));         // Manages whole system for a customer, inc Setup
             ir = rm.Create(new IdentityRole("canDeleteClient"));    // Can perform client deletes for a customer
             ir = rm.Create(new IdentityRole("canMarkAttendance"));  // Can mark attendance sheets (all can print)
-            ir = rm.Create(new IdentityRole("canTrackEmployment")); // Can update employment tracking
             ir = rm.Create(new IdentityRole("canManageSurveys"));   // Can setup / manage surveys for a customer
             ir = rm.Create(new IdentityRole("canManageQuicks"));   // Can setup / manage Quick contacts for a customer
+            ir = rm.Create(new IdentityRole("canManageCaseWork"));  // Allowed to use most caseworking functions (except Delete)
+            ir = rm.Create(new IdentityRole("canManageNeeds"));     // Can fully access Client Needs
+            ir = rm.Create(new IdentityRole("canDeleteCaseWork"));  // can delete any / all casework for a client
             ir = rm.Create(new IdentityRole("canManageSurveyResults"));   // Can setup / manage survey results for a customer
                                                                 // All other (authorised) users can read, create, update for a customer.
             var um = new UserManager<ApplicationUser>(

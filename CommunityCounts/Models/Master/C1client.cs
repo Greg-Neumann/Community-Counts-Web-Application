@@ -4,7 +4,6 @@ namespace CommunityCounts.Models.Master
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ccmaster.1client")]
     public partial class C1client
@@ -15,12 +14,14 @@ namespace CommunityCounts.Models.Master
             C1biometrics = new HashSet<C1biometrics>();
             C1surressca = new HashSet<C1surressca>();
             C1surrestxt = new HashSet<C1surrestxt>();
-            C1empltck = new HashSet<C1empltck>();
-            C1roles = new HashSet<C1roles>();
             C1service = new HashSet<C1service>();
+            C1clientcaseheader = new HashSet<C1clientcaseheader>();
+            C1clientneedsheader = new HashSet<C1clientneedsheader>();
+            C1client1 = new HashSet<C1client>();
         }
 
         [Key]
+        [Display(Name ="ID")]
         public int idClient { get; set; }
 
         [Required]
@@ -141,6 +142,9 @@ namespace CommunityCounts.Models.Master
 
         public bool scramble { get; set; }
 
+        [Display(Name ="Previous ID")]
+        public int? idClientPrev { get; set; }
+
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 
         public virtual ICollection<C1biometrics> C1biometrics { get; set; }
@@ -181,10 +185,11 @@ namespace CommunityCounts.Models.Master
 
         public virtual regyear regyear { get; set; }
 
-        public virtual ICollection<C1empltck> C1empltck { get; set; }
-
-        public virtual ICollection<C1roles> C1roles { get; set; }
-
         public virtual ICollection<C1service> C1service { get; set; }
+        public virtual ICollection<C1clientcaseheader> C1clientcaseheader { get; set; }
+
+        public virtual ICollection<C1clientneedsheader> C1clientneedsheader { get; set; }
+        public virtual ICollection<C1client> C1client1 { get; set; }
+        public virtual C1client C1client2 { get; set; }
     }
 }

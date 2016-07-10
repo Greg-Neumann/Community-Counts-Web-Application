@@ -2,18 +2,67 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using System.Data.Entity;
-using System.Net;
 using System.Linq;
 using System.Web;
-using CommunityCounts.Global_Methods;
 using CommunityCounts.Models.Master;
 
 
 namespace CommunityCounts.Global_Methods
 {
-    public static class CC
+    public static class CS
     {
+        public static string getRegYear(ccMaster db, Boolean fullDate)
+        {
+            //
+            // set up the business registration year for this user. Defaults to current business year if none specified or orverrided
+            //
+            var userName = HttpContext.Current.User.Identity.Name;
+            var us = db.users.Where(u => u.Email == userName);
+            if (us.Any())
+            {
+                if (fullDate)
+                {
+                    return db.regyears.Find((us.First().idRegYear)).EndDate.ToShortDateString();
+                }
+                else
+                {
+                    return db.regyears.Find((us.First().idRegYear)).RegYear1;
+                }
+            }
+            var currentDate = DateTime.Today;
+            var reg = db.regyears.Where(r => r.StartDate <= currentDate).Where(r => r.EndDate >= currentDate);
+            if (!reg.Any())
+            {
+                throw new Exception("No control data in RegYears table for todays date");
+            }
+            if (fullDate)
+            {
+                return reg.First().EndDate.ToShortDateString();
+            }
+            else
+            {
+                return reg.First().RegYear1;
+            }
+        }
+        public static int getRegYearId(ccMaster db)
+        {
+            //
+            // set up the business registration year id for this user. Defaults to current business year if none specified or orverrided
+            //
+            var userName = HttpContext.Current.User.Identity.Name;
+            var us = db.users.Where(u => u.Email == userName);
+            if (us.Any())
+            {
+                return us.First().idRegYear;
+            }
+            var currentDate = DateTime.Today;
+            var reg = db.regyears.Where(r => r.StartDate <= currentDate).Where(r => r.EndDate >= currentDate);
+            if (!reg.Any())
+            {
+                throw new Exception("No control data in RegYears table for todays date");
+            }
+            return reg.First().idRegYear;
+        }
         public static void addJourneyChild(List<activityList> servicesList, int idClient, int idService, DateTime StartedDate, int journeyDepth, ccMaster db)
         {
             var childList = from j in db.C1journeys.Where(j => j.OrigidService == idService) select new { j.JourneyedidService };
@@ -86,6 +135,8 @@ namespace CommunityCounts.Global_Methods
                 newRec.Email = userName;
                 newRec.UserShortName = " ";
                 newRec.readNews = false;
+                int idYear = CS.getRegYearId(db);
+                newRec.idRegYear = idYear;
                 db.users.Add(newRec); // insert username into users table (for next time) and set read to false
                 db.SaveChanges();
                 return true;

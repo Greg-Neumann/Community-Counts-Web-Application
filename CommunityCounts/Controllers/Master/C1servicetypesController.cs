@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
 
 namespace CommunityCounts.Controllers.Master
 {
-   [Authorize(Roles = "superAdmin,systemAdmin")]
+    [Authorize(Roles = "superAdmin,systemAdmin")]
     public class C1servicetypesController : Controller
     {
         private ccMaster db = new ccMaster(null);
@@ -51,7 +48,7 @@ namespace CommunityCounts.Controllers.Master
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idServiceType,ServiceType,AttendanceType,FunderCode,EmploymentTracked,BiometricTracked")] C1servicetypes c1servicetypes)
+        public ActionResult Create([Bind(Include = "idServiceType,ServiceType,AttendanceType,FunderCode")] C1servicetypes c1servicetypes)
         {
             if (ModelState.IsValid)
             {
@@ -87,8 +84,19 @@ namespace CommunityCounts.Controllers.Master
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idServiceType,ServiceType,AttendanceType,FunderCode,EmploymentTracked,BiometricTracked")] C1servicetypes c1servicetypes)
+        public ActionResult Edit([Bind(Include = "idServiceType,ServiceType,AttendanceType,FunderCode,EndedDate")] C1servicetypes c1servicetypes)
         {
+            if (c1servicetypes.EndedDate!= null)
+            {
+                var attendancesForServiceType = db.C1attendance.Where(a=>a.idServiceType==c1servicetypes.idServiceType).OrderByDescending(a=>a.SessionDate);
+                if (attendancesForServiceType.Any())
+                {
+                    if (c1servicetypes.EndedDate < attendancesForServiceType.First().SessionDate)
+                    {
+                        ModelState.AddModelError("EndedDate", "Too Early; there are attendances for this activity up until "+attendancesForServiceType.First().SessionDate.ToShortDateString());
+                    }
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(c1servicetypes).State = EntityState.Modified;
@@ -121,9 +129,15 @@ namespace CommunityCounts.Controllers.Master
         public ActionResult DeleteConfirmed(int id)
         {
             C1servicetypes c1servicetypes = db.C1servicetypes.Find(id);
-            db.C1servicetypes.Remove(c1servicetypes);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            bool inuse = db.C1service.Where(a => a.idServiceType == id).Any();
+            if (!inuse)
+            {
+                db.C1servicetypes.Remove(c1servicetypes);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "You cannot delete this Activity as Clients are enrolled in it"); 
+            return View(c1servicetypes);
         }
 
         protected override void Dispose(bool disposing)

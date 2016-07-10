@@ -1,10 +1,8 @@
 namespace CommunityCounts.Models.Master
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ccmaster.1qcsr")]
     public partial class C1qcsr
@@ -14,8 +12,8 @@ namespace CommunityCounts.Models.Master
 
         public int idCategory { get; set; }
 
-        [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime")]
+        [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date Created")]
         public DateTime CreateDateTime { get; set; }

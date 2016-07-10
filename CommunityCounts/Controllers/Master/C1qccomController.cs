@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CommunityCounts.Models.Master;
+using CommunityCounts.Global_Methods;
 
 namespace CommunityCounts.Controllers
 {
@@ -18,7 +16,9 @@ namespace CommunityCounts.Controllers
         // GET: C1qccom
         public ActionResult Index()
         {
-            var c1qccom = db.C1qccom.Include(c => c.C1qccomtype).Include(c => c.regyear).OrderByDescending(o=>o.CreateDateTime);
+            int idYear = CS.getRegYearId(db);
+            var c1qccom = db.C1qccom.Include(c => c.C1qccomtype).Include(c => c.regyear).OrderByDescending(o=>o.CreateDateTime).Where(c=>c.idRegYear==idYear);
+            @ViewBag.RegYear = CS.getRegYear(db, false);
             return View(c1qccom.ToList());
         }
 
@@ -52,8 +52,7 @@ namespace CommunityCounts.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idQuickContactsComment,Comment,idCategory")] C1qccom c1qccom)
         {
-            var getRegYear = from a in db.regyears where (a.RegYear1 == "2015") select a; // fix registration year always as 2015 - will need changing!
-            c1qccom.idRegYear = getRegYear.First().idRegYear;
+            c1qccom.idRegYear = CS.getRegYearId(db);
             if (ModelState.IsValid)
             {
                 c1qccom.CreateDateTime = System.DateTime.Now;

@@ -1,11 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CommunityCounts.Models.Master
 {
+    public class clientcaseWorkDetailList
+    {
+        public DateTime CaseServiceDate { get; set; }
+        public DateTime CaseServiceEditDate { get; set; }
+        public string name { get; set; }
+        public string CaseServiceTime { get; set; }
+        public string CaseServiceNotes { get; set; }
+        public int idClientCaseServiceDetail { get; set; }
+    }
+    public class clientCaseWorkOverView
+    {
+        public DateTime CaseServiceDate { get; set; }
+        public DateTime CaseServiceEditDate { get; set; }
+        public string ServiceName { get; set; }
+        public string Email { get; set; }
+        public string CaseServiceNotes { get; set; }
+        public string CaseServiceTime { get; set; }
+    }
+    public class clientCaseWorkSelList
+    {
+        public int idClientCaseHeader { get; set; }
+        public int idServiceType { get; set; }
+        public string ServiceName { get; set; }
+        public bool isCaseWorked { get; set; }
+        public DateTime startedDate { get; set; }
+    }
+    public class clientCaseWorkList
+    {
+        [Display(Name ="Total No. of Case Worked Events")]
+        public int numDetailRecs { get; set; }
+        
+        [Display(Name ="Total amount of time spent")]
+        public TimeSpan totalTimeToDate { get; set; }
+        [Display(Name = "Total amount of time spent")]
+        public string totalTimeToDateFormatted { get; set; }
+        [Display(Name ="Activity")]
+        public string ServiceName { get; set; }
+        [Display(Name ="Last Staff")]
+        public string staffName { get; set; }
+        public bool isCaseWorked { get; set; }
+        public int idClientCaseDetail { get; set; }
+    }
+    public class clientNeedsList
+    {
+        public int idClientNeeds { get; set; }
+
+        public int idClient { get; set; }
+        [Display (Name = "Date that these Needs apply")]
+       
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime ClientNeedsDate { get; set; }
+        [Display(Name = "Notes on the Client Needs")]
+        [StringLength(65536)]
+        public string ClientNeedsNotes { get; set; }
+        [Display (Name = "Number of Needs")]
+        public int numOfNeeds { get; set; }
+    }
     public class caldatList
     {
         public string RegYear { get; set; }

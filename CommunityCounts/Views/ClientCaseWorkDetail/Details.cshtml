@@ -1,0 +1,67 @@
+﻿@model CommunityCounts.Models.Master.C1clientcaseservicedetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>C1clientcaseservicedetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C1clientcaseservice.idClientCaseDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C1clientcaseservice.idClientCaseDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseServiceTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaseServiceTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseServiceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaseServiceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseServiceNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaseServiceNotes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseServiceEditDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaseServiceEditDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idClientCaseServiceDetail }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

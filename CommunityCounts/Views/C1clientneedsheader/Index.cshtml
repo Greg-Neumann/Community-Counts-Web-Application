@@ -1,0 +1,48 @@
+﻿@model List<CommunityCounts.Models.Master.clientNeedsList>
+
+@{
+    ViewBag.Title = "Client Needs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Client Needs</h2>
+<h3>Client Name: @ViewBag.FirstName @ViewBag.LastName</h3>
+<p>
+    @Html.ActionLink("Back to List", "Index","C1client", new { SearchStringName = @ViewBag.idClient }, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("Create New", "Create", new { id = @ViewBag.idClient }, htmlAttributes: new { @class = "btn btn-warning btn-xs" })
+</p>
+<table class="table">
+    <tr>
+        <th width="150px">
+            Date that these Needs apply
+        </th>
+        <th width="80px">
+            Number of Needs
+        </th>
+        <th>
+            Notes on the Client Needs
+        </th>
+        <th width="250px"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientNeedsDate)
+        </td>
+        <td align="center">
+            @Html.DisplayFor(modelitem => item.numOfNeeds)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientNeedsNotes)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "DetailsNeeds", new { id = item.idClientNeeds }, htmlAttributes: new { @class = "btn btn-primary  btn-xs" })
+            @Html.ActionLink("Notes", "Notes", new { id = item.idClientNeeds }, htmlAttributes: new { @class = "btn btn-warning  btn-xs" })
+            @Html.ActionLink("Needs", "MarkNeeds", new { idClient = item.idClient, idClientNeeds=item.idClientNeeds }, htmlAttributes: new { @class = "btn btn-warning  btn-xs" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.idClientNeeds }, htmlAttributes: new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>

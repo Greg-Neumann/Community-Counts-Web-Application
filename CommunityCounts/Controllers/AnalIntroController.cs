@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace CommunityCounts.Controllers
 {
-    [Authorize]
+   
     public class AnalIntroController : Controller
     {
         // GET: AnalIntro
@@ -15,6 +11,10 @@ namespace CommunityCounts.Controllers
             return View();
         }
         public ActionResult Bespoke()
+        {
+            return View();
+        }
+        public ActionResult PivotChart()
         {
             return View();
         }

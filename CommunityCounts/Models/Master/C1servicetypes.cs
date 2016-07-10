@@ -4,7 +4,6 @@ namespace CommunityCounts.Models.Master
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ccmaster.1servicetypes")]
     public partial class C1servicetypes
@@ -16,6 +15,7 @@ namespace CommunityCounts.Models.Master
             C1schedules = new HashSet<C1schedules>();
             C1service = new HashSet<C1service>();
             C1surveys = new HashSet<C1surveys>();
+            C1clientcaseservice = new HashSet<C1clientcaseservice>();
         }
 
         [Key]
@@ -34,11 +34,11 @@ namespace CommunityCounts.Models.Master
         [Display(Name = "Funder")]
         public string FunderCode { get; set; }
 
-        [Display(Name = "Employment Tracked?")]
-        public bool EmploymentTracked { get; set; }
-
-        [Display(Name = "Biometric Tracked?")]
-        public bool BiometricTracked { get; set; }
+        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Ended Date")]
+        public DateTime? EndedDate { get; set; }
 
         public virtual ICollection<C1attendance> C1attendance { get; set; }
 
@@ -53,5 +53,6 @@ namespace CommunityCounts.Models.Master
         public virtual ICollection<C1surveys> C1surveys { get; set; }
 
         public virtual refdata refdata { get; set; }
+        public virtual ICollection<C1clientcaseservice> C1clientcaseservice { get; set; }
     }
 }

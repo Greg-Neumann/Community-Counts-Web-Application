@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Copy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Copy a client from current year to another year</h2>
+<h3>
+    Client : @ViewBag.Fullname
+</h3>
+<hr />
+@using (Html.BeginForm())
+{
+<div>
+    <br />
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    <div class="text-danger">@ViewBag.Msg</div>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="control-label col-md-1" for="idRegYear">Select Year :</label>
+        <div class="col-md-2">
+            @Html.DropDownList("idRegYear", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-4">
+            <input type="submit" value="Copy" class="btn btn-warning btn-xs" />
+        </div>
+    </div>
+</div>
+}
+
+
+

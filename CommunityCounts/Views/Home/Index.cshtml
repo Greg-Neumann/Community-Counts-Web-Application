@@ -4,8 +4,7 @@
 <div class="col-md-9">
     @if (@ViewBag.userHasNews)
     {
-     
-            <table class=" alert alert-dismissible alert-danger">
+        <table class=" alert alert-dismissible alert-danger">
             <tr>
                 <td>
                     <p style="font-size:x-large">You have news &nbsp;</p>
@@ -17,17 +16,29 @@
                     @Html.ActionLink("Read More", "ReadMore", null, htmlAttributes: new { @class = "btn btn-info  btn-sm" }) &nbsp;
                 </td>
             </tr>
-            </table>}
-            <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" />
-        </div>
-<div class="col-md-3">
-    <h3 class="text-primary">Community Counts tracks, and analyses, community member’s use of community services</h3>
-    <hr />
+        </table>
+    }
+    @if (@ViewBag.RegYear != null)
+    {
+        <p style="font-size:large" class="text-primary">
+            You are logged-on to work with registration year <strong>@ViewBag.RegYear</strong> (ending @ViewBag.RegYearDate) @Html.ActionLink("Change", "ChgYear", null, htmlAttributes: new { @class = "btn btn-danger  btn-sm" })
+        </p>
+    }
+    else
+    {
+        <p style="font-size:large"  class="text-primary">
+            Record, monitor and <em> analyse </em> your community services using Community Counts
+        </p>
+    }
+    <img src="~/Content/Community Counts graphics artwork 784px x 441px.jpg" class="img-rounded" style="width:95%" />
+</div>
+<div class="col-md-3>
+   <br /><br /><br />
     <p class="text-info">Contains OS data © Crown copyright</p>
     <p class="text-info">Contains Royal Mail data © Royal Mail copyright</p>
     <p class="text-info">Contains National Statistics data © Crown copyright</p>
-    <img src="~/Content/Images/Powered by OS Logo 92 x 84 px.png" title="Community Counts use Ordnance Survey CodePoint Data" class="img-rounded"  /><a href="https://www.ordnancesurvey.co.uk/business-and-government/products/code-point-open.html">CodePoint Open</a>
-<br />
+    <img src="~/Content/Images/Powered by OS Logo 92 x 84 px.png" title="Community Counts use Ordnance Survey CodePoint Data" class="img-rounded" /><a href="https://www.ordnancesurvey.co.uk/business-and-government/products/code-point-open.html">CodePoint Open</a>
+    <br />
     <br />
     <br />
 </div>
@@ -40,8 +51,7 @@
     <p><a href="http://www.sydni.org/">The SYDNI Centre</a> operates out of Cottage Square, Sydenham in Leamington Spa</p>
 </div>
 <div class="col-md-4">
-    <h2><a href="http://chainlillington.co.uk/crown.html">Crown routes</a></h2>
-    <p><a href="http://chainlillington.co.uk/crown.html">Crown routes</a> provides a number of services based in Lillington, Leamington Spa</p>
+    <h2><a href="http://chainlillington.co.uk/crown.html">Crown Routes</a></h2>
+    <p><a href="http://chainlillington.co.uk/crown.html">Crown Routes (The Chain)</a> provides a number of services based in Lillington, Leamington Spa</p>
 </div>
 <hr />
-

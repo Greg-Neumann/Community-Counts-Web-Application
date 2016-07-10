@@ -13,6 +13,7 @@
 <div>
     <hr />
     @Html.ActionLink("No - Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ServiceType)
@@ -37,21 +38,11 @@
             @Html.DisplayFor(model => model.refdata.RefCodeDesc)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EmploymentTracked)
+            @Html.DisplayNameFor(model => model.EndedDate)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.EmploymentTracked)
+            @Html.DisplayFor(model => model.EndedDate)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BiometricTracked)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BiometricTracked)
-        </dd>
-        
-
     </dl>
 
     @using (Html.BeginForm()) {
