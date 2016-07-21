@@ -270,6 +270,7 @@
     <Compile Include="Models\Master\C1surveys.cs" />
     <Compile Include="Models\Master\C1surveysq.cs" />
     <Compile Include="Models\Master\ccMaster.cs" />
+    <Compile Include="Models\Master\ccMaster.Views.cs" />
     <Compile Include="Models\Master\CCViewModels.cs" />
     <Compile Include="Models\Master\citylist.cs" />
     <Compile Include="Models\Master\county.cs" />
