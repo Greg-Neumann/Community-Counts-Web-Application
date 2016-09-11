@@ -35,6 +35,29 @@
         </th>
     </tr>
     <tr>
+        <td>11th September 2016</td>
+        <td>3.12</td>
+        <td>Documentation update.
+        <ul>
+            <li>
+                Define whole new Data Dictionary items <em>vClientNeeds</em> and <em>vClientcasework</em> which were released in version 3.0 on the 7th March 2016. 
+                See @Html.ActionLink("vClientCasework","vClientCasework","AnalIntro",null,null) and @Html.ActionLink("vClientNeeds", "vClientNeeds", "AnalIntro", null, null)
+            </li>
+            <li>
+                Extended the Data Dictionary for the following Analysis Engine objects to add the field <em>ClientIDPrev</em>:
+                <ul>
+                    <li>vClient</li>
+                    <li>vClientActivity</li>
+                    <li>vClientAttendance</li>
+                    <li>vClientCasework</li>
+                    <li>vClientNeeds</li>
+                </ul>
+                <em>ClientIDPrev</em> field extends the Analysis Engine to show whether a Client is a new Client (<em>ClientIDPrev</em> is blank) or a continued client from a previous year (<em>ClientIDPrev</em> is not blank)
+            </li>
+        </ul>
+        </td>
+    </tr>
+    <tr>
         <td>20th May 2016</td>
         <td>3.11</td>
         <td>Bug fix to stop crashes when length of text entered in Survey responses exceeds system limit - thanks Ann!</td>
