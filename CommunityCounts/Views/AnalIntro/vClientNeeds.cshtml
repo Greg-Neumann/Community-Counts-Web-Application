@@ -1,26 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Analysis - vClientAttendance";
+    ViewBag.Title = "Analysis - vClientNeeds";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Analysis - The Data Dictionary for vClientAttendance</h2>
+<h2>Analysis - The Data Dictionary for vClientNeeds</h2>
 <p>
     @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
 </p>
 <div class="alert alert-dismissible alert-warning">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <h4>Important!</h4>
-    <p>There is one vClientAttendance record for each marked attendance for each Client and each Activity. As a Client may enrol in multiple Activities and will have attended multiple sessions, there are multiple records for each Client.</p>
+    <p>There is one vClientNeeds record for each Need recorded against each client. As a Client may have more than 1 Need (and often does), there are multiple records for each Client.</p>
 </div>
 <table class="table table-bordered table-hover">
     <tr>
         <th>Data Dictionary item</th>
         <th>Brief description</th>
-    </tr>
-    <tr>
-        <td>
-            ActivityName
-        </td>
-        <td>The Activity Name in which the Client is enrolled </td>
     </tr>
     <tr>
         <td>AgeRange</td>
@@ -37,14 +31,6 @@
     <tr>
         <td>AttainmentTracked</td>
         <td>'0' means that this Client is not tracked for Attainment purposes, '1' means that the client is tracked for Attainment purposes</td>
-    </tr>
-    <tr>
-        <td>AttendanceCount</td>
-        <td>A count of the number of attendances for this Client for this ActivityName. This field is only populated if the Attendance marking either tally-counting or normal present/absent marking is </td>
-    </tr>
-    <tr>
-        <td>AttendedTime</td>
-        <td>The duration, in seconds, of any attendance for this Client for the ActivityName. This field is only populated if the Attendance marking is in Hours and Minutes</td>
     </tr>
     <tr>
         <td>Benefits</td>
@@ -91,6 +77,37 @@
         <td>The same values as on the Client registration form:<ul><li>'Yes'</li><li>'No'</li><li>'Prefer not to Say'</li></ul></td>
     </tr>
     <tr>
+        <td>ClientNeedsCategory</td>
+        <td>The Category assigned for this Need</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsDate</td>
+        <td>The calendar date that this Need was recorded</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsHalf</td>
+        <td>The half-year (service registration year, not calendar year) in which the client was recorded as having this Need. Example '2016H1'</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsNotes</td>
+        <td>The free-form text of the entered Notes against this Need for this Client.</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsQtr</td>
+        <td>The quarter-year (service registration year, not calendar year) in which the client was recorded as having this Need. Example '2016Q3'</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsYear</td>
+        <td>The year (service registration year, not calendar year) in which the client was recorded as having this Need. Example '2016'</td>
+    </tr>
+    <tr>
+        <td>ClientNeedsYearMonth</td>
+        <td>The year and month (service registration year, not calendar year) in which the client was recorded as having this Need. Example '2016-09Sep'</td>
+    </tr>
+    <tr>
+        <td>Disability</td>
+        <td>The same values as on the Client registration form:<ul><li>'Yes'</li><li>'No'</li><li>'Prefer not to Say'</li></ul></td>
+    </tr>
         <td>District</td>
         <td>The geographical - from Postcode data - <strong>District</strong> in which the client resides</td>
     </tr>
@@ -101,10 +118,6 @@
     <tr>
         <td>EthnicityOther</td>
         <td>The same value as on the Client registration form if one was entered. Can be any value</td>
-    </tr>
-    <tr>
-        <td>FunderCode</td>
-        <td>The Funder Code assigned to the Activity to which this attendance relates.</td>
     </tr>
     <tr>
         <td>Gender</td>
@@ -121,6 +134,10 @@
     <tr>
         <td>HousingStatus</td>
         <td>For the registered address of this Client, value to determine their ownership status of that property.  Examples include:<ul><li>'Owner Occupier'</li></ul></td>
+    </tr>
+    <tr>
+        <td>MemoryStickIssuedDate</td>
+        <td>The date that a personal storage device was issued to this Client</td>
     </tr>
     <tr>
         <td>Occupation</td>
@@ -147,42 +164,6 @@
         <td>The <strong>service year</strong> for which this client is registered. This is not (necessarily) the same as the calendar year if, for example, a service year starts on 1st April. In this case 1st April 2015 has the same registration year as 1st February 2016 (and would be '2015')</td>
     </tr>
     <tr>
-        <td>ResourceName</td>
-        <td>The resource used for / by the ActivityName. Typically this is a room name.</td>
-    </tr>
-    <tr>
-        <td>SessionDate</td>
-        <td>The Calendar date to which this Attendance (for this Client and ActivityName) applies.</td>
-    </tr>
-    <tr>
-        <td>SessionDateHalf</td>
-        <td>The half-year (service registration year, not calendar year) in which the client attended. Example '2015H2'</td>
-    </tr>
-    <tr>
-        <td>SessionDateQtr</td>
-        <td>The quarter-year (service registration year, not calendar year) in which the client attended. Example '2015Q2'</td>
-    </tr>
-    <tr>
-        <td>SessionDateYear</td>
-        <td>The year (service registration year, not calendar year) in which the client attended. Example '2015'</td>
-    </tr>
-    <tr>
-        <td>SessionDateYearMonth</td>
-        <td>The year and month (service registration year, not calendar year) in which the client attended. Example '2015-05May'</td>
-    </tr>
-    <tr>
-        <td>SessionTime</td>
-        <td>The time of day (24-hour clock) at which the session started to which the client attended.</td>
-    </tr>
-    <tr>
-        <td>SignInTime</td>
-        <td>The time of day (24-hour clock) when the client signed-in to the Session. This can be different to the <em>SessionTime</em> if the attendance type permits the recording of Hours &Aacute; minutes of attendance. Will be '00:00:00' otherwise.</td>
-    </tr>
-    <tr>
-        <td>SignOutTime</td>
-        <td>The time of day (24-hour clock) when the client signed-out of the Session. This can be different to the <em>SessionTime</em> if the attendance type permits the recording of Hours &Aacute; minutes of attendance. Will be '00:00:00' otherwise.</td>
-    </tr>
-    <tr>
         <td>TenantStatus</td>
         <td>If the <em>HousingStatus</em> field is that of 'Rented Accommodation', further information (as on the registration form) to indicate who their Landlord is. Example 'Waterloo'</td>
     </tr>
@@ -191,7 +172,11 @@
         <td>How the Client travelled to the Centre when registering. Example 'Car or Motorbike'</td>
     </tr>
     <tr>
+        <td>UnenrolledDate</td>
+        <td>The Calendar date when the client was unenrolled from this Activity. May not be present (as it is an optional field)</td>
+    </tr>
+    <tr>
         <td>Ward</td>
         <td>The geographical - from Postcode data - <strong>Ward</strong> in which the client resides</td>
     </tr>
-    </table)
+</table>

@@ -571,6 +571,8 @@
     <Content Include="Views\ClientBulkCopy\Year.cshtml" />
     <Content Include="Views\ClientBulkCopy\YearConfirm.cshtml" />
     <Content Include="Views\ClientBulkCopy\Copy.cshtml" />
+    <Content Include="Views\AnalIntro\vClientNeeds.cshtml" />
+    <Content Include="Views\AnalIntro\vClientCasework.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

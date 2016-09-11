@@ -34,6 +34,14 @@ namespace CommunityCounts.Controllers
         {
             return View();
         }
+        public ActionResult vClientNeeds()
+        {
+            return View();
+        }
+        public ActionResult vClientCasework()
+        {
+            return View();
+        }
         public ActionResult vBookings()
         {
             return View();

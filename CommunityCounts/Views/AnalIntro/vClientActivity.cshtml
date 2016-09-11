@@ -67,6 +67,18 @@
         <td>The unique system identifier for this client</td>
     </tr>
     <tr>
+        <td>ClientIDPrev</td>
+        <td>
+            The <strong>ClientID</strong> value for this <strong>same</strong> client in a previous year.
+            <br />Normally this is in the <strong>previous</strong> registration year but may not be necessarily so. This is because <em>ClientIDPrev</em> is set when a client <strong>from any year</strong> is copied forward to another
+            year Hence, <em>ClientIDPrev</em> may refer to any number of years ago but is definately this same client in a previous year to the current year.
+            <p>
+                You can use this value to determine if a client is a 'repeat' client or not in that it will have the value of 'blank' if this is a new registration in the current year and will not be blank (will contain a number) if this client
+                was previously registered.
+            </p>
+        </td>
+    </tr>
+    <tr>
         <td>Disability</td>
         <td>The same values as on the Client registration form:<ul><li>'Yes'</li><li>'No'</li><li>'Prefer not to Say'</li></ul></td>
     </tr>
