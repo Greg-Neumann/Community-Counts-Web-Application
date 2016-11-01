@@ -573,6 +573,7 @@
     <Content Include="Views\ClientBulkCopy\Copy.cshtml" />
     <Content Include="Views\AnalIntro\vClientNeeds.cshtml" />
     <Content Include="Views\AnalIntro\vClientCasework.cshtml" />
+    <Content Include="Views\AnalIntro\vcomment.cshtml" />
     <None Include="Views\Home\N01P01A.cshtml" />
   </ItemGroup>
   <ItemGroup>

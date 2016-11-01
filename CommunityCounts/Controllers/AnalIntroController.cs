@@ -54,6 +54,10 @@ namespace CommunityCounts.Controllers
         {
             return View();
         }
+        public ActionResult vcomment()
+        {
+            return View();
+        }
         public ActionResult vQCSR()
         {
             return View();

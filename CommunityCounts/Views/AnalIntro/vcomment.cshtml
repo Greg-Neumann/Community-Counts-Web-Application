@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Analysis - vcomment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Analysis - The Data Dictionary for vcomment</h2>
+<p>
+    @Html.ActionLink("Back to Data Dictionary", "DDIntro", "AnalIntro", null, htmlAttributes: new { @class = "btn btn-primary btn-xs" })
+</p>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4>Important!</h4>
+    <p>There is one vcomment record for each Quick Contact comment.</p>
+</div>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Data Dictionary item</th>
+        <th>Brief description</th>
+    </tr>
+    <tr>
+        <td>QCComCategory</td>
+        <td>The category (from <em>Setup : Comment Categories</em>)</td>
+    </tr>
+    <tr>
+        <td>QCCOMcomment</td>
+        <td>Free-form text - the comment entered into the online system</td>
+    </tr>
+    <tr>
+        <td>QCCOMCreateDateTime</td>
+        <td>The date and time that this Quick Comment record was entered into the system</td>
+    </tr>
+    <tr>
+        <td>QCCOMCreatedDateHalf</td>
+        <td>The half-year (service registration year, not calendar year) in which this record was first entered into the system. Example '2015H2'</td>
+    </tr>
+    <tr>
+        <td>QCCOMCreatedDateQtr</td>
+        <td>The quarter-year (service registration year, not calendar year) in which this record was first entered into the system. Example '2015Q3'</td>
+    </tr>
+    <tr>
+        <td>QCCOMCreatedDateYear</td>
+        <td>The service registration year (not calendar year) in which thiks record was first entered into the system. Example '2015'</td></td>
+    </tr>
+    <tr>
+        <td>QCCOMCreatedDateYearMonth</td>
+        <td>The year and month (service registration year, not calendar year) in which this record was first entered into the system. Example '2015-04Apr'</td></td>
+    </tr>
+    <tr>
+        <td>QCCOMRegistrationYear</td>
+        <td>The <strong>service year</strong> for which this client is registered. This is not (necessarily) the same as the calendar year if, for example, a service year starts on 1st April. In this case 1st April 2015 has the same registration year as 1st February 2016 (and would be '2015')</td>
+    </tr>
+    <tr>
+        <td>QCCOMRegYearEndDate</td>
+        <td>The last date in the <strong>RegistrationYear</strong></td>
+    </tr>
+    <tr>
+        <td>QCCOMRegYearStartDate</td>
+        <td>The first date in the <strong>RegistrationYear</strong></td>
+    </tr>
+    </table>
+
